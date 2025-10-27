@@ -1,1 +1,2 @@
-# Code-Lore
+# Code-Lore;
+# Server - Folder Structure;
