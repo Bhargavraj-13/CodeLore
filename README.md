@@ -1,6 +1,6 @@
 # Landing Page
 
-A modern, responsive landing page built for CodeLore, a learning platform where students understand concepts deeply and express their knowledge through clear explanations. This project demonstrates frontend architecture, component reusability, clean UI design, accessibility, performance optimization, and production-ready coding practices used across real-world development teams.
+This is a responsive landing page built with React, Vite, and TailwindCSS. It features a video background hero section, smooth-scrolling navigation, and multiple content sections organized into reusable components.
 
 ## Features
 ### 1. Hero Section with Video Background
