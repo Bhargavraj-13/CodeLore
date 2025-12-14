@@ -4,7 +4,7 @@ import User from "../models/User";
 export const protect = async (req, res, next) => {
   let token;
 
-  // 1️⃣ Check for token (Header or Cookie)
+  // Check for token (Header or Cookie)
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
@@ -12,10 +12,10 @@ export const protect = async (req, res, next) => {
     try {
       token = req.headers.authorization.split(" ")[1];
 
-      // 2️⃣ Verify token
+      // Verify token
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-      // 3️⃣ Attach user info (without password) to request
+      // Attach user info (without password) to request
       req.user = await User.findById(decoded.id).select("-password");
 
       next(); // Continue to controller
