@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema(
     journeys: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Journey",
+        ref: "Journey"
       },
     ],
 
@@ -36,6 +36,12 @@ const userSchema = new mongoose.Schema(
       type: Map,
       of: Number,
       default: {},
+    },
+
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user",
     },
   },
   { timestamps: true }
