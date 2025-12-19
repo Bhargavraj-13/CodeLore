@@ -90,3 +90,15 @@ export const logoutUser = (req, res) => {
   res.clearCookie("token");
   res.status(200).json({ success: true, message: "Logged out successfully" });
 };
+
+// --- Get current user (verify token) ---
+export const getMe = async (req, res) => {
+  try {
+    res.status(200).json({
+      success: true,
+      user: req.user,
+    });
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
