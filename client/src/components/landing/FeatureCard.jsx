@@ -1,3 +1,5 @@
+// Component for a single feature card on the landing page
+
 function FeatureCard({ subtitle, title, description }) {
   return (
     <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/15 shadow-sm transition-transform duration-200 hover:-translate-y-1 hover:bg-white/15">

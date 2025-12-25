@@ -1,6 +1,8 @@
+// Code for the login form component
+
 import { useState } from "react";
 
-function LoginForm({ onSubmit, loading, serverError }) {
+function LoginForm({ onSubmit, serverError }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [localError, setLocalError] = useState(null);

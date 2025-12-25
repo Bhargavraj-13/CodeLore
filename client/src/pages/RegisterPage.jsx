@@ -1,8 +1,9 @@
-// src/pages/RegisterPage.jsx
+// Register page component handling user registration
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthCard, RegisterForm } from '../components/auth/index.js';
-import useAuth from '../hooks/useAuth.js';
+import { AuthCard, RegisterForm } from '../components/auth/index.jsx';
+import { useAuth } from "../components/auth/AuthContext";
 
 function RegisterPage() {
   const navigate = typeof useNavigate === 'function' ? useNavigate() : null;
@@ -13,7 +14,7 @@ function RegisterPage() {
     setFormError(null);
     const res = await auth.register({ username, email, password });
     if (res.ok) {
-      const redirectTo = '/';
+      const redirectTo = '/home';
       if (navigate) navigate(redirectTo);
       else window.location.href = redirectTo;
     } else {

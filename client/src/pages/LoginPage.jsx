@@ -1,19 +1,21 @@
-// src/pages/LoginPage.jsx
+// Login page component handling user authentication
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthCard, LoginForm } from '../components/auth/index.js';
-import useAuth from '../hooks/useAuth.js';
+import { AuthCard, LoginForm } from '../components/auth/index.jsx';
+import { useAuth } from "../components/auth/AuthContext";
 
 function LoginPage() {
-  const navigate = typeof useNavigate === 'function' ? useNavigate() : null;
+  const navigate = useNavigate();
   const auth = useAuth();
   const [formError, setFormError] = useState(null);
 
   const handleSubmit = async ({ email, password }) => {
+    console.log("Submitting Login:", email, password);
     setFormError(null);
     const res = await auth.login({ email, password });
     if (res.ok) {
-      const redirectTo = '/';
+      const redirectTo = '/home';
       if (navigate) navigate(redirectTo);
       else window.location.href = redirectTo;
     } else {

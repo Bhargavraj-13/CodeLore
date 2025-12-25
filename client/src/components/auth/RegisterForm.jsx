@@ -1,3 +1,5 @@
+// Code for the registration form component
+
 import { useState } from "react";
 
 function RegisterForm({ onSubmit, loading, serverError }) {

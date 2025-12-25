@@ -1,3 +1,5 @@
+// Component for the footer section of the application
+
 function AppFooter() {
   return (
     <footer className="px-6 md:px-10 py-5 border-t border-white/10 bg-slate-950/60 backdrop-blur-md text-xs text-slate-300 flex flex-col sm:flex-row items-center justify-between gap-2">
