@@ -1,4 +1,6 @@
-import FeatureCard from '../ui/FeatureCard.jsx';
+// Component to display a grid of feature cards on the landing page
+
+import FeatureCard from './FeatureCard.jsx';
 
 function FeatureGrid({ items }) {
   return (

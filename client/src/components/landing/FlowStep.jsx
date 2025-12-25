@@ -1,3 +1,5 @@
+// Component for a single step in the "How it works" section
+
 function FlowStep({ index, title, description, isLast }) {
   return (
     <div className="flex gap-4 items-start">

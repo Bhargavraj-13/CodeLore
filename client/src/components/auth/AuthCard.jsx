@@ -1,3 +1,5 @@
+// Displays login and register forms within a styled card
+
 function AuthCard({ children }) {
   return (
     <div className="min-h-screen bg-slate-950 text-white flex items-center justify-center px-6 md:px-10">

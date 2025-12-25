@@ -1,3 +1,5 @@
+// Displays the main introductory section of the landing page with branding and call-to-action buttons.
+
 import { useNavigate } from 'react-router-dom'; 
 import backgroundVideo from '../../assets/videos/bg_video.mp4';
 
@@ -5,11 +7,14 @@ function HeroSection() {
   const navigate = useNavigate();
 
   const handleGetStarted = () => {
-    navigate('/login'); // Redirect to Login page
+    navigate('/login'); 
   };
 
   const handleSeeHowItWorks = () => {
-    navigate('/content'); // Redirect to Content page
+    const section = document.getElementById('how-it-works');
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   return (

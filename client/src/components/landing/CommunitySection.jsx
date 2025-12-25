@@ -1,4 +1,6 @@
-function CommunitySection() {
+// Component consisting of the community section on the landing page
+
+function CommunitySection({ items }) {
   return (
     <section
       id="community"
@@ -11,40 +13,21 @@ function CommunitySection() {
 
         <p className="text-sm text-slate-100/90 leading-relaxed">
           CodeLore is not about leaderboard screenshots or who solved the hardest problem.
-          It's about students leaving behind clear, honest explanations of how concepts
-          finally made sense to them, so the next person doesn't have to struggle alone.
+          It's about students leaving behind clear, honest explanations…
         </p>
 
         <div className="grid gap-4 sm:grid-cols-3 text-sm">
-          <div className="rounded-xl border border-slate-700/80 bg-slate-950/70 p-4 space-y-2">
-            <p className="text-xs font-semibold text-teal-300 uppercase tracking-[0.16em]">
-              Real voices
-            </p>
-            <p className="text-slate-100/90">
-              Read explanations written by students at different levels, not just one
-              “official” version.
-            </p>
-          </div>
-
-          <div className="rounded-xl border border-slate-700/80 bg-slate-950/70 p-4 space-y-2">
-            <p className="text-xs font-semibold text-teal-300 uppercase tracking-[0.16em]">
-              Find your style
-            </p>
-            <p className="text-slate-100/90">
-              Some people like analogies, some like visuals, some like step-by-step logic.
-              Filter and save what works for you.
-            </p>
-          </div>
-
-          <div className="rounded-xl border border-slate-700/80 bg-slate-950/70 p-4 space-y-2">
-            <p className="text-xs font-semibold text-teal-300 uppercase tracking-[0.16em]">
-              Give back
-            </p>
-            <p className="text-slate-100/90">
-              Your explanation might be the one that finally clicks for someone else. You're
-              not just learning, you're teaching too.
-            </p>
-          </div>
+          {items.map((point, idx) => (
+            <div
+              key={idx}
+              className="rounded-xl border border-slate-700/80 bg-slate-950/70 p-4 space-y-2"
+            >
+              <p className="text-xs font-semibold text-teal-300 uppercase tracking-[0.16em]">
+                {point.title}
+              </p>
+              <p className="text-slate-100/90">{point.description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

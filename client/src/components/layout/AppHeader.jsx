@@ -1,18 +1,8 @@
-import Logo from '../ui/Logo.jsx'; 
-import { useNavigate } from "react-router-dom";
+// Component for the header section of the application
 
-const NAV_ITEMS = [
-  { label: 'Features', targetId: 'features' },
-  { label: 'How it works', targetId: 'how-it-works' },
-  { label: 'Community', targetId: 'community' },
-];
-
-function scrollToSection(id) {
-  const section = document.getElementById(id);
-  if (section) {
-    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-}
+import Logo from './Logo.jsx';
+import profileIcon from '../../assets/images/Profile.png';
+import { useNavigate } from 'react-router-dom';
 
 function AppHeader() {
   const navigate = useNavigate();
@@ -20,34 +10,25 @@ function AppHeader() {
   return (
     <header className="sticky top-0 z-40 bg-slate-950/80 backdrop-blur border-b border-white/10">
       <div className="flex w-full items-center justify-between px-6 md:px-10 py-3">
-        <button
-          type="button"
-          onClick={() => scrollToSection('hero')}
-          className="flex items-center gap-2"
-        >
+        {/* Logo */}
+        <button type="button" onClick={() => navigate('/home')} className="flex items-center gap-2">
           <Logo />
         </button>
 
-        <nav className="hidden md:flex items-center gap-6 text-sm text-slate-200">
-          {NAV_ITEMS.map((item) => (
-            <button
-              key={item.targetId}
-              type="button"
-              onClick={() => scrollToSection(item.targetId)}
-              className="hover:text-teal-300 transition-colors"
-            >
-              {item.label}
-            </button>
-          ))}
-        </nav>
-
-        <button
-          type="button"
-          onClick={() => navigate('/login')}
-          className="hidden sm:inline-flex items-center justify-center rounded-lg bg-teal-400 px-4 py-2 text-xs font-semibold text-slate-950 shadow-sm hover:bg-teal-300 transition-colors"
-        >
-          Login
-        </button>
+        {/* Profile Icon */}
+        <div className="flex items-center gap-4 text-sm text-slate-200">
+          <button
+            type="button"
+            onClick={() => navigate('/profile')}
+            className="flex items-center justify-center"
+          >
+            <img
+              src={profileIcon}
+              alt="Profile"
+              className="w-8 h-8 rounded-full object-cover cursor-pointer hover:opacity-80 transition"
+            />
+          </button>
+        </div>
       </div>
     </header>
   );

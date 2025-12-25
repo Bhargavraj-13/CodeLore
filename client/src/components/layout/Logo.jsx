@@ -1,6 +1,5 @@
 import logoImage from '../../assets/images/Logo.jpeg';
 
-
 function Logo() {
   return (
     <div className="flex items-center gap-2">

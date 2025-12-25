@@ -1,4 +1,6 @@
-import FlowStep from '../ui/FlowStep.jsx';
+// Component for the "How it works" section on the landing page
+
+import FlowStep from './FlowStep.jsx';
 
 function FlowSection({ steps }) {
   return (
