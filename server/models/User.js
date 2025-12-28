@@ -25,17 +25,34 @@ const userSchema = new mongoose.Schema(
       select: false,
     },
 
-    journeys: [
+    topics: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Journey"
+        topicId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Topic",
+          required: true,
+        },
+
+        quizScore: {
+          type: Number,
+          default: null, // quiz not attempted
+        },
+
+        codingSolvedCount: {
+          type: Number,
+          default: 0,
+        },
+
+        lastAccessedAt: {
+          type: Date,
+          default: Date.now,
+        },
       },
     ],
 
-    progress: {
-      type: Map,
-      of: Number,
-      default: {},
+    profilePic: {
+      type: String,
+      default: null,
     },
 
     role: {

@@ -4,28 +4,31 @@ import User from "../models/User.js";
 export const protect = async (req, res, next) => {
   let token;
 
-  // Check for token (Header or Cookie)
+  // 1️⃣ Get token from header OR cookie
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
   ) {
-    try {
-      token = req.headers.authorization.split(" ")[1];
-
-      // Verify token
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-      // Attach user info (without password) to request
-      req.user = await User.findById(decoded.id).select("-password");
-
-      next(); // Continue to controller
-    } catch (error) {
-      console.error("Token verification failed:", error.message);
-      return res.status(401).json({ message: "Not authorized, token invalid" });
-    }
+    token = req.headers.authorization.split(" ")[1];
+  } else if (req.cookies && req.cookies.token) {
+    token = req.cookies.token;
   }
 
+  // 2️⃣ No token found
   if (!token) {
     return res.status(401).json({ message: "Not authorized, no token provided" });
+  }
+
+  try {
+    // 3️⃣ Verify token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    // 4️⃣ Attach user to request
+    req.user = await User.findById(decoded.id).select("-password");
+
+    next();
+  } catch (error) {
+    console.error("Token verification failed:", error.message);
+    return res.status(401).json({ message: "Not authorized, token invalid" });
   }
 };
