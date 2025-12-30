@@ -1,4 +1,4 @@
-// Code for the registration form component
+// Code for the registration form 
 
 import { useState } from "react";
 

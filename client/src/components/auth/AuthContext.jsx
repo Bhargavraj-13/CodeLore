@@ -1,13 +1,31 @@
-//Connects authentication frontend with backend
+// Connects authentication frontend with backend
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import api from "../../lib/api.jsx";
 
 const AuthContext = createContext(null);
 
-export function AuthProvider({ children }) {
+function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  // Restore session on refresh
+  useEffect(() => {
+    async function loadUser() {
+      try {
+        const res = await api.get("/api/auth/me");
+        if (res.data?.success) {
+          setUser(res.data.user);
+        }
+      } catch {
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadUser();
+  }, []);
 
   // Login
   const login = async ({ email, password }) => {
@@ -19,7 +37,6 @@ export function AuthProvider({ children }) {
         setUser(res.data.user);
         return { ok: true };
       }
-      return { ok: false, message: res.data?.message || "Login failed" };
     } catch (err) {
       return {
         ok: false,
@@ -44,7 +61,6 @@ export function AuthProvider({ children }) {
         setUser(res.data.user);
         return { ok: true };
       }
-      return { ok: false, message: res.data?.message || "Registration failed" };
     } catch (err) {
       return {
         ok: false,
@@ -55,7 +71,7 @@ export function AuthProvider({ children }) {
     }
   };
 
-  // LogOut
+  // Logout
   const logout = async () => {
     await api.get("/api/auth/logout");
     setUser(null);
@@ -63,19 +79,14 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{
-        user,
-        loading,
-        login,
-        register,
-        logout,
-      }}
-    >
+      value={{ user, loading, login, register, logout, setUser }}>
       {children}
     </AuthContext.Provider>
   );
 }
 
-export function useAuth() {
-  return useContext(AuthContext); 
-}   
+function useAuth() {
+  return useContext(AuthContext);
+}
+
+export { AuthProvider, useAuth };
