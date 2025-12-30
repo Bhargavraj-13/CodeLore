@@ -1,4 +1,4 @@
-// Code for the login form component
+// Code for the login form
 
 import { useState } from "react";
 

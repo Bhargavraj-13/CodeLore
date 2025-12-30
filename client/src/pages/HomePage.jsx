@@ -1,8 +1,8 @@
 // Home page component displaying topics and search functionality
 
 import { useEffect, useState, useCallback } from 'react';
-import AppHeader from '../components/layout/AppHeader.jsx';
-import AppFooter from '../components/layout/AppFooter.jsx';
+// import AppHeader from '../components/layout/AppHeader.jsx';
+// import AppFooter from '../components/layout/AppFooter.jsx';
 import { SearchBar, TopicGrid } from '../components/home';
 import api from '../lib/api.jsx';
 import { useAuth } from "../components/auth/AuthContext";
@@ -56,8 +56,7 @@ function HomePage() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-white flex flex-col">
-      <AppHeader user={user} />
-
+      {/*<AppHeader user={user} />*/}
       <main className="flex-1 px-6 md:px-10 py-10">
         <div className="max-w-7xl mx-auto">
 
@@ -80,7 +79,7 @@ function HomePage() {
         </div>
       </main>
 
-      <AppFooter />
+      {/* <AppFooter /> */}
     </div>
   );
 }
