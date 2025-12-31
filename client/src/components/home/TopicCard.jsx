@@ -54,7 +54,7 @@ function TopicCard({ topic }) {
         </span>
 
     <Link
-        to={`/topics/${topic._id}`}
+        to={`/topics/${topic.contentKey}`}
         className="text-sm font-medium text-teal-300 hover:text-teal-200">
         Start Learning →
       </Link>
