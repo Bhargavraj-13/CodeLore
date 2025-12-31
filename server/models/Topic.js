@@ -20,7 +20,13 @@ const topicSchema = new mongoose.Schema(
       enum: ["Beginner", "Intermediate", "Advanced"],
       required: true,
     },
-    
+
+    contentKey: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+
     thumbnail: {
       type: String,
       default: ""

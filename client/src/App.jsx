@@ -6,6 +6,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute.jsx';
 import HomePage from './pages/HomePage.jsx';
 import ProfilePage from "./pages/ProfilePage.jsx";
 import AppLayout from './components/layout/AppLayout.jsx';
+import TopicPage from './pages/TopicPage.jsx';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
                       </AppLayout>
                     </ProtectedRoute>}/>
       <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>}  />
+      <Route path="/topics/:topicId" element={<ProtectedRoute><TopicPage /></ProtectedRoute>} />
     </Routes>
   )
 }
