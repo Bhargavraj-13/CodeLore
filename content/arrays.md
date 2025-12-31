@@ -2,7 +2,7 @@
 
 ---
 
-## 1. Topic Overview
+## Topic Overview
 
 Arrays are used when we need to store many related values together and access them using positions.
 
@@ -21,7 +21,7 @@ This topic covers:
 
 ---
 
-## 2. Why Arrays Exist
+## Why Arrays Exist
 
 Kaya the Lion and Biru the Monkey are asked to help Mala the Elephant.
 
@@ -60,7 +60,7 @@ That structure is called an **array**.
 
 ---
 
-## 3. Core Idea of Arrays
+## Core Idea of Arrays
 
 An array:
 
@@ -83,7 +83,7 @@ Indexes:  0   1   2   3
 
 ---
 
-## 4. Understanding Indexing
+## Understanding Indexing
 
 Mala the Elephant asks:
 
@@ -106,7 +106,7 @@ Kaya the Lion realizes:
 
 ---
 
-## 5. Traversal
+## Traversal
 
 Traversal means visiting every element one by one.
 
@@ -137,9 +137,9 @@ Traversal always:
 
 ---
 
-## 6. Basic Operations on Arrays
+## Basic Operations on Arrays
 
-### 6.1 Accessing an Element
+### Accessing an Element
 
 Mala asks for fruits from one specific tree.
 
@@ -168,7 +168,7 @@ array[2] = 10
 
 ---
 
-### 6.3 Inserting an Element
+### Inserting an Element
 
 A new tree is added in between.
 
@@ -187,7 +187,7 @@ This takes time, especially for large arrays.
 
 ---
 
-### 6.4 Deleting an Element
+### Deleting an Element
 
 One tree is removed.
 
@@ -206,7 +206,7 @@ Again, shifting makes this operation slow.
 
 ---
 
-## 7. Time Cost
+## Time Cost
 
 | Operation       | Cost            |
 | --------------- | --------------- |
@@ -220,7 +220,7 @@ Again, shifting makes this operation slow.
 
 ---
 
-## 8. Common Mistakes
+## Common Mistakes
 
 * using the wrong index
 * accessing outside bounds
@@ -231,7 +231,7 @@ Most array bugs come from index mistakes.
 
 ---
 
-## 9. When to Use Arrays
+## When to Use Arrays
 
 Use arrays when:
 
@@ -246,27 +246,21 @@ Avoid arrays when:
 
 ---
 
-## 10. Syntax Learning Resources
+## Syntax Learning Resources
 
 After understanding the idea, Tavi the Pigeon brings sources for writing arrays in real code.
 
-### General
+[General](https://www.geeksforgeeks.org/array-data-structure/)
 
-[https://www.geeksforgeeks.org/array-data-structure/](https://www.geeksforgeeks.org/array-data-structure/)
+[C++](https://www.learncpp.com/cpp-tutorial/arrays/)
 
-### C / C++
+[Python Arrays](https://www.programiz.com/python-programming/arrays)
 
-[https://www.learncpp.com/cpp-tutorial/arrays/](https://www.learncpp.com/cpp-tutorial/arrays/)
-[https://www.learncpp.com/cpp-tutorial/stdvector/](https://www.learncpp.com/cpp-tutorial/stdvector/)
-
-### Python
-
-[https://www.programiz.com/python-programming/arrays](https://www.programiz.com/python-programming/arrays)
-[https://www.programiz.com/python-programming/list](https://www.programiz.com/python-programming/list)
+[Python List](https://www.programiz.com/python-programming/list)
 
 ---
 
-## 11. Summary
+## Summary
 
 * arrays store related values together
 * elements are accessed using indexes

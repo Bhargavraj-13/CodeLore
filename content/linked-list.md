@@ -1,28 +1,34 @@
-Linked_Lists
+# Linked_Lists
 
-1. Topic Overview
+## Topic Overview
+
 Linked Lists are used when:
-data needs to be connected, not stored together
-size changes frequently
-inserting or deleting elements should be easy
-Unlike arrays, linked lists:
-do not store data in one continuous block
-use links to move from one element to the next
-This topic covers:
-why linked lists exist
-singly linked lists
-doubly linked lists
-circular linked lists
+- data needs to be connected, not stored together
+- size changes frequently
+- inserting or deleting elements should be easy
 
-2. Why Linked Lists Exist?
+Unlike arrays, linked lists:
+- do not store data in one continuous block
+- use links to move from one element to the next
+
+This topic covers:
+- why linked lists exist
+- singly linked lists
+- doubly linked lists
+- circular linked lists
+
+## Why Linked Lists Exist?
+
 Kaya the Lion and Biru the Monkey are helping Veko the Wolf, who manages a patrol route.
 Veko explains:
 Veko the Wolf:
 “My patrol points keep changing.”
 “Sometimes a new point is added.”
 “Sometimes one is removed.”
+
 Kaya draws the patrol points in a straight list, like an array.
-[ A | B | C | D ]
+    
+    [ A | B | C | D ]
 
 Veko shakes his head.
 Veko the Wolf:
@@ -37,22 +43,27 @@ Biru the Monkey:
 “You connect data instead.”
 That idea leads to linked lists.
 
-3. Core Idea of Linked Lists
+## Core Idea of Linked Lists
+
 A linked list is made of nodes.
 Each node contains:
 data
 a link to another node
 Instead of indexes, we move using references.
+
 Simple idea:
-[data | next] → [data | next] → [data | null]
+    
+    [data | next] → [data | next] → [data | null]
 
 Key points:
-nodes are not stored together
-traversal is required to reach elements
-insertion and deletion are easier than arrays
+- nodes are not stored together
+- traversal is required to reach elements
+- insertion and deletion are easier than arrays
 
-4. Singly Linked List
-4.1 What It Is?
+## Singly Linked List
+
+### What It Is?
+
 Veko shows Kaya a simple patrol route.
 Veko the Wolf:
 “Each point only knows the next point.”
@@ -62,31 +73,38 @@ its data
 the next node
 It does not know what comes before it.
 
-4.2 Dry Run (Traversal)
+### Dry Run
+
 Route:
-A → B → C → D → null
+
+    A → B → C → D → null
 
 Steps:
-start at A
-move to B
-move to C
-move to D
-stop when null is reached
-Traversal always starts from the head.
 
-4.3 Insertion Example
+    start at A
+    move to B
+    move to C
+    move to D
+    stop when null is reached
+    Traversal always starts from the head.
+
+### Insertion Example
+
 To insert X after B:
-point B.next to X
-point X.next to C
-No shifting required.
+    point B.next to X
+    point X.next to C
+    No shifting required.
 
-4.4 Limitations
-cannot move backward
-finding a node takes time
-extra memory needed for links
+### Limitations
 
-5. Doubly Linked List
-5.1 Why It Exists?
+    cannot move backward
+    finding a node takes time
+    extra memory needed for links
+
+## Doubly Linked List
+
+### Why It Exists?
+
 Veko now says:
 Veko the Wolf:
 “Sometimes I need to move forward.”
@@ -99,25 +117,29 @@ Biru the Monkey:
 “Then each node must know both directions.”
 That creates a doubly linked list.
 
-5.2 Structure
+### Structure
+
 Each node has:
-data
-link to next node
-link to previous node
-null ← [prev | data | next] ↔ [prev | data | next] → null
+- data
+- link to next node
+- link to previous node
+    null ← [prev | data | next] ↔ [prev | data | next] → null
 
 
-5.3 Benefits
-easy forward traversal
-easy backward traversal
-deletion is simpler (no need to track previous node manually)
+### Benefits
 
-5.4 Trade-Off
-extra memory for an additional pointer
+- easy forward traversal
+- easy backward traversal
+- deletion is simpler (no need to track previous node manually)
+
+### Trade-Off
+
+- extra memory for an additional pointer
 slightly more complex logic
 
-6. Circular Linked List
-6.1 Why It Exists?
+## Circular Linked List
+
+### Why It Exists?
 Veko shows Kaya the night patrol route.
 Veko the Wolf:
 “When the last point is reached,
@@ -128,84 +150,74 @@ Kaya the Lion:
 “So the last node should point back to the first.”
 That forms a circular linked list.
 
-6.2 Structure
-A → B → C → D
-↑             ↓
-← ← ← ← ← ← ←
+### Structure
 
-Key idea:
-last node does not point to null
-it points back to the head
+    A → B → C → D
+    ↑             ↓
+    ← ← ← ← ← ← ←
 
-6.3 Where It’s Used
+#### Key idea:
+
+    last node does not point to null
+    it points back to the head
+
+### Where It’s Used
 round-robin scheduling
 continuous cycles
 looping tasks
 
-7. Comparison of Linked List Types
-Type
-Can Move Forward
-Can Move Backward
-Has End
-Singly
-Yes
-No
-Yes
-Doubly
-Yes
-Yes
-Yes
-Circular
-Yes
-Depends
-No
+### Comparison of Linked List Types
+
+| Type     | Can Move Forward | Can Move Backward | Has End |
+|----------|------------------|-------------------|---------|
+| Singly   | Yes              | No                | Yes     |
+| Doubly   | Yes              | Yes               | Yes     |
+| Circular | Yes              | Depends           | No      |
 
 
-8. Common Mistakes
-losing the head pointer
-incorrect link updates
-infinite loops in circular lists
-forgetting to handle empty lists
-Most linked list bugs come from pointer mistakes.
+### Common Mistakes
+- losing the head pointer
+- incorrect link updates
+- infinite loops in circular lists
+- forgetting to handle empty lists
+- Most linked list bugs come from pointer mistakes.
 
-9. When to Use Linked Lists
+### When to Use Linked Lists
 Use linked lists when:
-insertions and deletions are frequent
-size changes often
-memory does not need to be contiguous
+- insertions and deletions are frequent
+- size changes often
+- memory does not need to be contiguous
 Avoid linked lists when:
-random access is required
-cache performance matters
-indexing is important
+- random access is required
+- cache performance matters
+- indexing is important
 
-10. Pseudocode (Basic Traversal)
-current = head
+### Pseudocode
 
-WHILE current is not null:
-    PROCESS current.data
-    current = current.next
+    current = head
 
-This logic works for:
-singly linked list
-doubly linked list
-(Circular lists need a stopping condition.)
+    WHILE current is not null:
+        PROCESS current.data
+        current = current.next
 
-11. Syntax Learning Resources
+    This logic works for:
+    singly linked list
+    doubly linked list
+    (Circular lists need a stopping condition.)
+
+## Syntax Learning Resources
 After understanding the idea, Tavi the Pigeon arrives, sounding upbeat.
 Tavi the Pigeon:
 “Linked lists look scary, but they’re just connections.”
 “Learn the syntax slowly.”
-General
-https://www.geeksforgeeks.org/data-structures/linked-list/
-C / C++
-https://www.learncpp.com/cpp-tutorial/linked-lists/
-https://en.cppreference.com/w/cpp/container/list
-Python
-https://www.programiz.com/python-programming/linked-list
-https://www.geeksforgeeks.org/linked-list-in-python/
+[General](https://www.geeksforgeeks.org/data-structures/linked-list/)
 
-12. Summary
-linked lists store data using links
-no indexing, traversal is required
-singly, doubly, and circular lists solve different needs
-insert/delete is easier than arrays
+[C++](https://www.learncpp.com/cpp-tutorial/linked-lists/)
+
+[Python](https://www.programiz.com/python-programming/linked-list)
+
+## Summary
+- linked lists store data using links
+- no indexing, traversal is required
+- singly, doubly, and circular lists solve different needs
+- insert/delete is easier than arrays
