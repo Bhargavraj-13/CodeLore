@@ -11,19 +11,15 @@ export const markTopicAccessed = async (req, res) => {
 
     const user = await User.findById(userId);
 
-    // Check if topic already exists in user's list
+    // FIX: ObjectId-safe comparison
     const existingTopic = user.topics.find(
-      (t) => t.topicId.toString() === topicId
+      (t) => t.topicId.equals(topicId)
     );
 
     if (existingTopic) {
-      // Update last accessed time
       existingTopic.lastAccessedAt = new Date();
     } else {
-      // Add new topic
-      user.topics.push({
-        topicId,
-      });
+      user.topics.push({ topicId });
     }
 
     await user.save();

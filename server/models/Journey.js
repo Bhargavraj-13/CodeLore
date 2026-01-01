@@ -24,11 +24,12 @@ const journeySchema = new mongoose.Schema(
       trim: true,
     },
 
-    // future-safe fields (NOT used now)
+    /* future-safe fields (NOT used now)
     upvotes: {
       type: Number,
       default: 0,
     },
+    */
 
     isEdited: {
       type: Boolean,
