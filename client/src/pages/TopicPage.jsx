@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import AppHeader from '../components/layout/AppHeader.jsx';
 import api from '../lib/api.jsx';
 import ReactMarkdown from 'react-markdown';
 
@@ -7,38 +8,44 @@ function TopicPage() {
   const { topicId } = useParams();
 
   const [content, setContent] = useState('');
-  const [difficulty, setDifficulty] = useState('medium');
+  const [activeTab, setActiveTab] = useState('content');
+
+  const [journeys, setJourneys] = useState([]);
+  const [journeysLoading, setJourneysLoading] = useState(false);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Difficulty → color mapping
-  const difficultyColor = {
-    beginner: 'text-teal-300',
-    intermediate: 'text-yellow-300',
-    advanced: 'text-red-400',
-    medium: 'text-yellow-300',
-  }[difficulty];
-
   useEffect(() => {
-    async function loadTopic() {
+    async function loadContent() {
       try {
-        // fetch markdown content
         const res = await api.get(`/api/topics/${topicId}/content`);
         setContent(res.data.content);
-
-        // OPTIONAL: fetch topic metadata if you have it
-        // const meta = await api.get(`/api/topics/${topicId}`);
-        // setDifficulty(meta.data.difficulty);
-      } catch (err) {
-        console.error('Error loading topic:', err);
+      } catch {
         setError('Unable to load topic content.');
       } finally {
         setLoading(false);
       }
     }
 
-    loadTopic();
+    loadContent();
   }, [topicId]);
+
+  useEffect(() => {
+    if (activeTab !== 'journeys') return;
+
+    async function loadJourneys() {
+      try {
+        setJourneysLoading(true);
+        const res = await api.get(`/api/journeys/topic/${topicId}`);
+        setJourneys(res.data.journeys || []);
+      } finally {
+        setJourneysLoading(false);
+      }
+    }
+
+    loadJourneys();
+  }, [activeTab, topicId]);
 
   if (loading) {
     return (
@@ -50,85 +57,101 @@ function TopicPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-slate-950 text-white flex items-center justify-center text-red-400">
+      <div className="min-h-screen bg-slate-950 text-red-400 flex items-center justify-center">
         {error}
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white px-6 md:px-10 py-10">
-      <div className="max-w-4xl mx-auto leading-relaxed space-y-6">
+    <div className="min-h-screen bg-slate-950 text-white flex flex-col">
+      <AppHeader />
 
-        <ReactMarkdown
-          components={{
-            h1: ({ children }) => (
-              <>
-                <h1 className={`text-3xl font-bold ${difficultyColor} mt-10`}>
-                  {children}
-                </h1>
-                <hr className="my-6 border-white/10" />
-              </>
-            ),
+      <main className="flex-1 px-6 md:px-10 py-10">
+        <div className="max-w-5xl mx-auto">
 
-            h2: ({ children }) => (
-              <>
-                <h2 className="text-2xl font-semibold text-white mt-8">
-                  {children}
-                </h2>
-                <hr className="my-5 border-white/10" />
-              </>
-            ),
+          {/* ===== Chrome-style Tabs ===== */}
+          <div className="flex justify-center">
+            <div className="flex gap-2 w-fit relative z-10">
 
-            h3: ({ children }) => (
-              <h3 className="text-xl font-semibold text-slate-200 mt-6">
-                {children}
-              </h3>
-            ),
+              <button
+                onClick={() => setActiveTab('content')}
+                className={`px-5 py-2 text-sm font-medium rounded-t-xl
+                  ${
+                    activeTab === 'content'
+                      ? 'bg-slate-950 text-white border border-white/10 border-b-0'
+                      : 'text-slate-400 border border-white/10 hover:text-slate-200'
+                  }`}
+              >
+                Content
+              </button>
 
-            p: ({ children }) => (
-              <p className="text-slate-300 leading-relaxed">
-                {children}
-              </p>
-            ),
+              <button
+                onClick={() => setActiveTab('journeys')}
+                className={`px-5 py-2 text-sm font-medium rounded-t-xl
+                  ${
+                    activeTab === 'journeys'
+                      ? 'bg-slate-950 text-white border border-white/10 border-b-0'
+                      : 'text-slate-400 border border-white/10 hover:text-slate-200'
+                  }`}
+              >
+                Journeys
+              </button>
+            </div>
+          </div>
 
-            ul: ({ children }) => (
-              <ul className="list-disc ml-6 space-y-2 text-slate-300">
-                {children}
-              </ul>
-            ),
+          {/* ===== Content Box ===== */}
+          <div className="border border-white/10 rounded-xl rounded-t-none p-6 bg-slate-950">
 
-            ol: ({ children }) => (
-              <ol className="list-decimal ml-6 space-y-2 text-slate-300">
-                {children}
-              </ol>
-            ),
+            {activeTab === 'content' && (
+              <ReactMarkdown
+                components={{
+                  h1: ({ children }) => (
+                    <div className="mt-10 mb-8">
+                      <h1 className="text-3xl font-semibold mb-4">{children}</h1>
+                      <hr className="border-white/10" />
+                    </div>
+                  ),
+                  h2: ({ children }) => (
+                    <div className="mt-8 mb-6">
+                      <h2 className="text-2xl font-semibold mb-3">{children}</h2>
+                      <hr className="border-white/10" />
+                    </div>
+                  ),
+                  p: ({ children }) => (
+                    <p className="text-slate-300 leading-relaxed mb-4">{children}</p>
+                  ),
+                  ul: ({ children }) => (
+                    <ul className="list-disc ml-6 space-y-2 text-slate-300">{children}</ul>
+                  ),
+                  li: ({ children }) => <li className="ml-2">{children}</li>,
+                }}
+              >
+                {content}
+              </ReactMarkdown>
+            )}
 
-            a: ({ ...props }) => (
-              <a
-                {...props}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-teal-300 hover:underline"
-              />
-            ),
+            {activeTab === 'journeys' && (
+              <div className="space-y-6">
+                {journeysLoading && <p className="text-slate-400">Loading journeys…</p>}
+                {!journeysLoading && journeys.length === 0 && (
+                  <p className="text-slate-400">No journeys yet for this topic.</p>
+                )}
+                {journeys.map((j) => (
+                  <div
+                    key={j.id}
+                    className="border border-white/10 rounded-lg p-4 bg-slate-900"
+                  >
+                    <p className="text-slate-300 mb-2">{j.content}</p>
+                    <div className="text-xs text-slate-500">— {j.author}</div>
+                  </div>
+                ))}
+              </div>
+            )}
 
-            code: ({ inline, children }) =>
-              inline ? (
-                <code className="bg-slate-800 px-1.5 py-0.5 rounded text-teal-300 text-sm">
-                  {children}
-                </code>
-              ) : (
-                <pre className="bg-slate-900 border border-white/10 rounded-lg p-4 overflow-x-auto text-sm text-slate-200">
-                  <code>{children}</code>
-                </pre>
-              ),
-          }}
-        >
-          {content}
-        </ReactMarkdown>
-
-      </div>
+          </div>
+        </div>
+      </main>
     </div>
   );
 }
