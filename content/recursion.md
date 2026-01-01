@@ -37,12 +37,15 @@ Biru the Monkey:
 ## Core Idea of Recursion
 
 Recursion always has two parts:
+
 Base case
-the simplest version of the problem
-where we stop
+    the simplest version of the problem
+    where we stop
+
 Recursive case
-the part where the problem calls itself
-with a smaller input
+    the part where the problem calls itself
+    with a smaller input
+
 If either of these is missing, recursion fails.
 
 ## Simple Recursion Example
