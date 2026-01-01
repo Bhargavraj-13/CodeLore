@@ -8,16 +8,16 @@ Arrays are used when we need to store many related values together and access th
 
 Instead of handling many separate variables, arrays help us:
 
-* keep data together
-* maintain order
-* access any value quickly
+* Keep data together
+* Maintain order
+* Access any value quickly
 
 This topic covers:
 
-* why arrays exist
-* indexing
-* traversal
-* basic operations
+* Why arrays exist
+* Indexing
+* Traversal
+* Basic Operations  
 
 ---
 

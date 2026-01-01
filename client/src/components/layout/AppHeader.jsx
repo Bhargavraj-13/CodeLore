@@ -57,66 +57,72 @@ function AppHeader({ showProfile = true }) {
         </div>
       </header>
 
-      {/* FULL-HEIGHT MENU */}
-      {open && (
-        <aside
-          className="
-            fixed left-0 top-16
-            h-[calc(100vh-64px)]
-            w-52
-            bg-slate-950
-            border-r border-white/10
-            z-30
-            flex flex-col
-          "
-        >
-          {/* Menu items */}
-          <nav className="flex flex-col px-4 py-6 text-sm text-slate-200 space-y-2">
-            <button
-              onClick={() => {
-                navigate('/home');
-                setOpen(false);
-              }}
-              className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-slate-800 transition"
-            >
-              <img src={homeIcon} alt="" className="w-5 h-5 opacity-80" />
-              <span>Home</span>
-            </button>
-
-            <button
-              onClick={() => {
-                navigate('/profile');
-                setOpen(false);
-              }}
-              className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-slate-800 transition"
-            >
-              <img src={profileIcon} alt="" className="w-5 h-5 opacity-80" />
-              <span>Profile</span>
-            </button>
-          </nav>
-
-          {/* Push logout to bottom */}
-          <div className="flex-1" />
-
-          {/* Logout */}
-          <div className="px-4 pb-6">
-            <button
-              onClick={() => {
-                logout();
-                navigate('/login');
+      {/* SLIDING MENU */}
+      <aside
+        className={`
+          fixed left-0 top-16
+          h-[calc(100vh-64px)]
+          w-58
+          bg-slate-950
+          border-r border-white/10
+          z-30
+          flex flex-col
+          transition-all duration-300 ease-out
+          ${open ? 'translate-x-0 opacity-100 shadow-xl' : '-translate-x-full opacity-0'}
+        `}
+      >
+        {/* Menu items */}
+        <nav className="flex flex-col px-4 py-6 text-sm text-slate-200 space-y-2">
+          <button
+            onClick={() => {
+              navigate('/home');
+              setOpen(false);
             }}
-              className="w-full flex items-center gap-3 px-3 py-2 border border-white/10 rounded-md text-sm text-slate-200 hover:bg-red-900/30 hover:border-red-500/40 hover:text-red-400 transition">
-    <img
-      src={logoutIcon}
-      alt="Logout"
-      className="w-5 h-5 opacity-80"
-    />
-    <span>Logout</span>
-  </button>
-</div>
+            className="flex items-center gap-3 pl-8 py-2 rounded-md hover:bg-slate-800 transition"
+          >
+            <img src={homeIcon} alt="" className="w-5 h-5 opacity-80" />
+            <span>Home</span>
+          </button>
 
-        </aside>
-      )}
+          <button
+            onClick={() => {
+              navigate('/profile');
+              setOpen(false);
+            }}
+            className="flex items-center gap-3 pl-8 py-2 rounded-md hover:bg-slate-800 transition"
+          >
+            <img src={profileIcon} alt="" className="w-5 h-5 opacity-80" />
+            <span>Profile</span>
+          </button>
+        </nav>
+
+        {/* Push logout to bottom */}
+        <div className="flex-1" />
+
+        {/* Logout */}
+        <div className="px-4 pb-6">
+          <button
+            onClick={() => {
+              logout();
+              navigate('/login');
+            }}
+            className="
+              w-full flex items-center gap-3 px-3 pl-12 py-2
+              border border-white/10 rounded-md
+              text-sm text-slate-200
+              hover:bg-red-900/30 hover:border-red-500/40 hover:text-red-400
+              transition
+            "
+          >
+            <img
+              src={logoutIcon}
+              alt="Logout"
+              className="w-5 h-5 opacity-80"
+            />
+            <span>Logout</span>
+          </button>
+        </div>
+      </aside>
     </>
   );
 }
