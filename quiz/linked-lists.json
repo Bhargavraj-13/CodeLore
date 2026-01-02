@@ -1,0 +1,119 @@
+{
+  "topic": "Linked Lists",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Veko the Wolf manages a patrol route\nwhere points are added and removed often.\n\nKaya the Lion first thinks of using an array.\n\nWhy does Biru the Monkey suggest\na linked list instead?",
+      "options": [
+        "Linked lists use less memory",
+        "Linked lists allow easy insertion and deletion",
+        "Linked lists sort data automatically",
+        "Linked lists provide random access"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 2,
+      "question": "Kaya the Lion learns that\nlinked lists are made of nodes.\n\nWhat does each node usually contain?",
+      "options": [
+        "Only data",
+        "Only an index",
+        "Data and a link to another node",
+        "Multiple arrays"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 3,
+      "question": "Biru the Monkey explains\nsingly linked lists.\n\nWhat information does each node store?",
+      "options": [
+        "Data and previous node",
+        "Data and both next and previous nodes",
+        "Data and next node only",
+        "Only the head node stores links"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 4,
+      "question": "Kaya the Lion tries to move backward\nin a singly linked list.\n\nWhy is this not possible?",
+      "options": [
+        "The list is circular",
+        "Nodes do not store previous links",
+        "The head is lost",
+        "Traversal is random"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 5,
+      "question": "Veko the Wolf now needs to\nmove forward and backward\nalong the route.\n\nWhich type of linked list\nsolves this problem?",
+      "options": [
+        "Singly linked list",
+        "Circular linked list",
+        "Doubly linked list",
+        "Array list"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 6,
+      "question": "Biru the Monkey introduces\na circular linked list.\n\nWhat makes it different?",
+      "options": [
+        "The first node points to null",
+        "The last node points back to the head",
+        "It stores data in sorted order",
+        "It has multiple heads"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 7,
+      "question": "Kaya the Lion traverses a linked list.\n\nWhen should traversal stop\nin a singly linked list?",
+      "options": [
+        "When the value is zero",
+        "When a node repeats",
+        "When the next pointer is null",
+        "When the head is reached again"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 8,
+      "question": "Kaya the Lion writes logic\nto traverse a linked list.\n\nOne line is missing.\n\nWhich option completes the logic?",
+      "code": "```\ncurrent = head\n\nWHILE current is not null:\n    PROCESS current.data\n    _________\n```",
+      "options": [
+        "current = head",
+        "current = current.next",
+        "BREAK",
+        "RESET current"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 9,
+      "question": "Kaya the Lion inserts a new node\nbetween two existing nodes.\n\nWhich links must be updated?",
+      "code": "```\nnew.next = current.next\n_________\n```",
+      "options": [
+        "current.next = new",
+        "head = new",
+        "new.prev = current",
+        "current = new"
+      ],
+      "correctOption": 0
+    },
+    {
+      "id": 10,
+      "question": "Biru the Monkey warns about\ncircular linked lists.\n\nWhat mistake can cause\nan infinite loop?",
+      "options": [
+        "Using a head pointer",
+        "Forgetting a stopping condition",
+        "Using a doubly linked list",
+        "Inserting at the end"
+      ],
+      "correctOption": 1
+    }
+  ]
+}
+
+

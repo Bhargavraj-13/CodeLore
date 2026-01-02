@@ -1,0 +1,119 @@
+{
+  "topic": "Stacks & Queues",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Mala the Elephant stacks wooden crates\none on top of another.\n\nWhen she needs a crate,\nshe always takes the top one.\n\nWhat concept does this represent?",
+      "options": [
+        "Queue (FIFO)",
+        "Stack (LIFO)",
+        "Linked List",
+        "Tree"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 2,
+      "question": "Kaya the Lion notices that\nthe last crate placed\nis the first one removed.\n\nWhich rule describes this behavior?",
+      "options": [
+        "FIFO",
+        "LILO",
+        "LIFO",
+        "FILO"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 3,
+      "question": "Kurma the Tortoise manages\na line of animals waiting for water.\n\nThe first animal in line\ndrinks first.\n\nWhat data structure matches this?",
+      "options": [
+        "Stack",
+        "Queue",
+        "Tree",
+        "Array"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 4,
+      "question": "Biru the Monkey explains\nthat stacks are useful\nfor undo operations.\n\nWhy is a stack suitable here?",
+      "options": [
+        "Because the first action is undone first",
+        "Because the latest action is undone first",
+        "Because actions are undone randomly",
+        "Because stacks allow sorting"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 5,
+      "question": "Kaya the Lion compares\nstacks and queues.\n\nWhat is the key difference?",
+      "options": [
+        "Stacks use more memory",
+        "Queues allow random access",
+        "Stacks follow LIFO, queues follow FIFO",
+        "Queues cannot be implemented with arrays"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 6,
+      "question": "Biru the Monkey warns Kaya\nabout popping from an empty stack.\n\nWhat is this situation called?",
+      "options": [
+        "Overflow",
+        "Underflow",
+        "Deadlock",
+        "Crash"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 7,
+      "question": "Kurma the Tortoise removes\nan animal from the front of the line.\n\nWhat queue operation is this?",
+      "options": [
+        "Enqueue",
+        "Push",
+        "Pop",
+        "Dequeue"
+      ],
+      "correctOption": 3
+    },
+    {
+      "id": 8,
+      "question": "Kaya the Lion writes stack logic.\n\nOne line is missing.\n\nWhich option completes it?",
+      "code": "```\nPUSH(10)\nPUSH(20)\n\nvalue = _________\n```",
+      "options": [
+        "POP()",
+        "PUSH()",
+        "ENQUEUE()",
+        "DEQUEUE()"
+      ],
+      "correctOption": 0
+    },
+    {
+      "id": 9,
+      "question": "Kaya the Lion writes queue logic.\n\nOne line is missing.\n\nWhich option completes it?",
+      "code": "```\nENQUEUE(10)\nENQUEUE(20)\n\nvalue = _________\n```",
+      "options": [
+        "POP()",
+        "PUSH()",
+        "DEQUEUE()",
+        "PEEK_STACK()"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 10,
+      "question": "Biru the Monkey reviews usage cases.\n\nWhich problem is best solved\nusing a queue?",
+      "options": [
+        "Undo last action",
+        "Function call tracking",
+        "Processing tasks in arrival order",
+        "Reversing a string"
+      ],
+      "correctOption": 2
+    }
+  ]
+}
+
+

@@ -1,0 +1,120 @@
+{
+  "topic": "Arrays",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Mala the Elephant collects fruit counts\nfrom many trees.\n\nKaya the Lion tries to remember\nall the numbers separately.\n\nWhy does Biru the Monkey suggest\nusing an array?",
+      "options": [
+        "Arrays automatically sort numbers",
+        "Arrays store related values together",
+        "Arrays remove duplicate values",
+        "Arrays reduce memory usage to zero"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 2,
+      "question": "Kaya the Lion stores fruit counts\nin an array.\n\nWhy is accessing an element\nby index considered fast?",
+      "options": [
+        "Because the array is always small",
+        "Because elements are stored randomly",
+        "Because the position is directly known",
+        "Because loops are not required"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 3,
+      "question": "Biru the Monkey warns Kaya the Lion\nabout indexing mistakes.\n\nIn most arrays, what is the index\nof the first element?",
+      "options": [
+        "1",
+        "0",
+        "-1",
+        "Depends on the value stored"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 4,
+      "question": "Mala the Elephant asks for\nthe third fruit count.\n\nWhich index should Kaya the Lion use?",
+      "options": [
+        "Index 3",
+        "Index 2",
+        "Index 1",
+        "Index depends on array size"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 5,
+      "question": "Kaya the Lion wants to check\nall elements in an array.\n\nWhat does traversal mean\nin this context?",
+      "options": [
+        "Accessing one random element",
+        "Sorting the array",
+        "Visiting each element one by one",
+        "Deleting elements"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 6,
+      "question": "Biru the Monkey explains that\ninserting an element in the middle\nof an array is slow.\n\nWhy?",
+      "options": [
+        "Because arrays cannot grow",
+        "Because elements must be shifted",
+        "Because indexing stops working",
+        "Because memory is cleared"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 7,
+      "question": "Kaya the Lion compares arrays\nwith linked lists.\n\nWhich situation is best suited\nfor arrays?",
+      "options": [
+        "Frequent insertions and deletions",
+        "When order does not matter",
+        "Fast access using index",
+        "Unknown size of data"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 8,
+      "question": "Kaya the Lion wants to traverse\nan array of size n.\n\nOne line is missing.\n\nWhich option completes the logic?",
+      "code": "```\nSET i = 0\n\nWHILE i < n:\n    PROCESS array[i]\n    _________\n```",
+      "options": [
+        "i = i - 1",
+        "i = i + 1",
+        "RESET i",
+        "BREAK"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 9,
+      "question": "Mala the Elephant realizes\na fruit count was wrong.\n\nWhich operation updates\na value in an array?",
+      "code": "```\narray[index] = _________\n```",
+      "options": [
+        "index",
+        "newValue",
+        "array",
+        "size"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 10,
+      "question": "Kaya the Lion wants to access\nthe last element of an array.\n\nWhich index should be used?",
+      "code": "```\nlastElement = array[ _________ ]\n```",
+      "options": [
+        "size",
+        "size + 1",
+        "size - 1",
+        "0"
+      ],
+      "correctOption": 2
+    }
+  ]
+}
+
+
