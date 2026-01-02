@@ -1,0 +1,120 @@
+{
+  "topic": "Backtracking",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Tavi the Pigeon places three different chillies\non the ground.\n\nHe wants to eat them in every possible order.\n\nWhy does Biru the Monkey say\nbacktracking is needed here?",
+      "options": [
+        "Because only one order is required",
+        "Because all possible choices must be explored",
+        "Because the chillies must be sorted",
+        "Because loops are faster"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 2,
+      "question": "Kaya the Lion starts forming one order\nof chillies.\n\nAfter finishing it, Biru asks him\nto undo the last choice.\n\nWhy is undoing important in backtracking?",
+      "options": [
+        "To reduce memory usage",
+        "To try a different choice",
+        "To stop recursion",
+        "To speed up sorting"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 3,
+      "question": "Biru the Monkey explains that\nbacktracking depends on recursion.\n\nWhat role does recursion play here?",
+      "options": [
+        "It removes the need for choices",
+        "It handles breaking the problem\ninto smaller parts",
+        "It sorts the options automatically",
+        "It replaces loops completely"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 4,
+      "question": "Kaya the Lion notices that\na complete chilli order is formed.\n\nWhat should happen at this point?",
+      "options": [
+        "Undo the last choice immediately",
+        "Output the current order",
+        "Restart from the beginning",
+        "Stop the entire process"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 5,
+      "question": "Biru the Monkey warns Kaya that\nforgetting to backtrack causes errors.\n\nWhat kind of problem may occur?",
+      "options": [
+        "Faster execution",
+        "Missing valid solutions",
+        "Automatic duplication removal",
+        "Better memory usage"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 6,
+      "question": "Kaya the Lion compares recursion\nand backtracking.\n\nWhat is the key difference?",
+      "options": [
+        "Recursion breaks problems,\nbacktracking undoes choices",
+        "Backtracking avoids recursion",
+        "Recursion always uses loops",
+        "Backtracking works without base cases"
+      ],
+      "correctOption": 0
+    },
+    {
+      "id": 7,
+      "question": "Tavi the Pigeon asks when\nbacktracking should be used.\n\nWhich situation fits best?",
+      "options": [
+        "When only one solution is needed",
+        "When all possible solutions are required",
+        "When data is already sorted",
+        "When indexes are needed"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 8,
+      "question": "Kaya the Lion writes backtracking logic.\n\nOne line is missing.\n\nWhich option completes it?",
+      "code": "```\nFOR each choice in options:\n    ADD choice to current\n    solve(remaining options)\n    _________\n```",
+      "options": [
+        "BREAK",
+        "REMOVE choice from current",
+        "RETURN current",
+        "SORT options"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 9,
+      "question": "Kaya the Lion reaches a point\nwhere no options remain.\n\nWhat does this indicate?",
+      "code": "```\nIF remaining is empty:\n    _________\n```",
+      "options": [
+        "CALL solve again",
+        "OUTPUT current solution",
+        "REMOVE last choice",
+        "STOP recursion forever"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 10,
+      "question": "Biru the Monkey reviews the logic.\n\nWhich line represents\nthe backtracking step?",
+      "code": "```\n_________\n```",
+      "options": [
+        "ADD choice to current",
+        "solve(remaining)",
+        "REMOVE choice from current",
+        "IF base case"
+      ],
+      "correctOption": 2
+    }
+  ]
+}
+
+

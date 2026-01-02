@@ -1,0 +1,120 @@
+{
+  "topic": "Dynamic Programming",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Kaya the Lion tries to find the\ncheapest path across jungle checkpoints.\n\nHe keeps solving the same sub-paths again.\n\nWhy does Biru the Monkey suggest\nusing dynamic programming?",
+      "options": [
+        "To avoid using recursion",
+        "To remember and reuse past results",
+        "To sort the checkpoint costs",
+        "To explore all possible paths"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 2,
+      "question": "Biru the Monkey explains that\nDP works only when a problem\nhas a certain structure.\n\nWhich property is required?",
+      "options": [
+        "Random subproblems",
+        "Overlapping subproblems",
+        "Independent subproblems",
+        "Unordered data"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 3,
+      "question": "Kaya the Lion notices that\nthe best solution to a big problem\ndepends on smaller solutions.\n\nWhat is this property called?",
+      "options": [
+        "Greedy choice",
+        "Optimal substructure",
+        "Binary division",
+        "Backtracking condition"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 4,
+      "question": "Biru the Monkey compares recursion\nand dynamic programming.\n\nWhat is the key improvement in DP?",
+      "options": [
+        "DP removes base cases",
+        "DP stores results of subproblems",
+        "DP avoids conditions",
+        "DP uses loops only"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 5,
+      "question": "Kaya the Lion learns there are\ntwo common DP approaches.\n\nWhich option correctly lists them?",
+      "options": [
+        "Greedy and backtracking",
+        "DFS and BFS",
+        "Top-down and bottom-up",
+        "Binary and linear"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 6,
+      "question": "Biru the Monkey says that\nmemoization belongs to\nwhich DP approach?",
+      "options": [
+        "Bottom-up",
+        "Top-down",
+        "Greedy",
+        "Iterative only"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 7,
+      "question": "Kaya the Lion uses DP to\navoid recalculating values.\n\nWhat happens to time complexity\nin most DP solutions?",
+      "options": [
+        "It becomes worse",
+        "It stays the same",
+        "It improves significantly",
+        "It becomes constant"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 8,
+      "question": "Kaya the Lion builds a DP table.\n\nOne line is missing.\n\nWhich option completes the logic?",
+      "code": "```\ndp[0] = cost[0]\ndp[1] = cost[1]\n\nFOR i from 2 to n-1:\n    _________\n```",
+      "options": [
+        "dp[i] = cost[i]",
+        "dp[i] = cost[i] + MIN(dp[i-1], dp[i-2])",
+        "dp[i] = dp[i-1]",
+        "dp[i] = MAX(cost)"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 9,
+      "question": "Kaya the Lion checks when\na DP solution can start.\n\nWhich values are usually\nset first?",
+      "code": "```\n_________\n```",
+      "options": [
+        "All dp values",
+        "Base cases",
+        "Last index only",
+        "Random values"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 10,
+      "question": "Biru the Monkey reviews Kaya's DP.\n\nWhich line shows reuse\nof stored results?",
+      "code": "```\nvalue = _________\n```",
+      "options": [
+        "solve(n)",
+        "dp[n]",
+        "recurse(n)",
+        "calculate(n)"
+      ],
+      "correctOption": 1
+    }
+  ]
+}
+
+

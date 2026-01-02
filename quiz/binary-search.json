@@ -1,0 +1,120 @@
+{
+  "topic": "Binary Search",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Aro the Eagle keeps watch post numbers\nin sorted order.\n\nKaya the Lion wants to find\npost number 16 quickly.\n\nWhy does Biru the Monkey suggest\nbinary search instead of checking\none by one?",
+      "options": [
+        "Because binary search works on any list",
+        "Because binary search skips random elements",
+        "Because binary search reduces the search space",
+        "Because binary search always checks the first element"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 2,
+      "question": "Kaya the Lion tries to use\nbinary search on an unsorted list.\n\nWhat is most likely to happen?",
+      "options": [
+        "The element will always be found",
+        "The search will still work but slower",
+        "The result may be incorrect",
+        "The list will get sorted automatically"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 3,
+      "question": "Biru the Monkey explains the first step\nof binary search.\n\nWhat is checked first?",
+      "options": [
+        "The first element",
+        "The last element",
+        "The middle element",
+        "A random element"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 4,
+      "question": "Kaya the Lion compares the target value\nwith the middle element.\n\nIf the target is greater,\nwhat should he do next?",
+      "options": [
+        "Search the left half",
+        "Search the right half",
+        "Stop immediately",
+        "Restart from the beginning"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 5,
+      "question": "Biru the Monkey says binary search\nkeeps reducing the problem size.\n\nWhat happens to the search space\nafter each comparison?",
+      "options": [
+        "It doubles in size",
+        "It remains the same",
+        "It is reduced to half",
+        "It becomes random"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 6,
+      "question": "Kaya the Lion notices that binary search\nstops when low becomes greater than high.\n\nWhat does this situation mean?",
+      "options": [
+        "The element was found",
+        "The list is empty",
+        "The element does not exist",
+        "The list is not sorted"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 7,
+      "question": "Aro the Eagle asks when binary search\nis a bad choice.\n\nWhich situation makes binary search\nunsuitable?",
+      "options": [
+        "When the list is sorted",
+        "When fast searching is needed",
+        "When the list is unsorted",
+        "When the list is large"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 8,
+      "question": "Kaya the Lion writes binary search logic.\n\nOne line is missing.\n\nWhich option completes the logic?",
+      "code": "```\nSET low = 0\nSET high = n - 1\n\nWHILE low <= high:\n    mid = (low + high) / 2\n\n    IF array[mid] == target:\n        FOUND\n    ELSE IF target > array[mid]:\n        _________\n    ELSE:\n        high = mid - 1\n```",
+      "options": [
+        "high = mid + 1",
+        "low = mid + 1",
+        "low = low + 1",
+        "BREAK"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 9,
+      "question": "Kaya the Lion continues\nbinary search.\n\nOne line is missing.\n\nWhich option completes the logic?",
+      "code": "```\nELSE:\n    _________\n```",
+      "options": [
+        "low = mid - 1",
+        "high = mid + 1",
+        "high = mid - 1",
+        "low = low + 1"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 10,
+      "question": "Aro the Eagle wants to calculate\nthe middle index safely.\n\nWhich expression best represents it?",
+      "code": "```\nmid = _________\n```",
+      "options": [
+        "(low + high) / 2",
+        "low + high",
+        "high - low",
+        "low * high"
+      ],
+      "correctOption": 0
+    }
+  ]
+}
+
+

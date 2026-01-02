@@ -10,6 +10,7 @@ import quizProgressRoutes from "./routes/quizProgressRoutes.js";
 import codingProgressRoutes from "./routes/codingProgressRoutes.js";
 import journeyRoutes from "./routes/journeyRoutes.js";
 import topicContentRoutes from "./routes/topicContentRoutes.js";
+import quizRoutes from "./routes/quizRoutes.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
@@ -42,6 +43,7 @@ app.use("/api/quiz-progress", quizProgressRoutes);
 app.use("/api/coding-progress", codingProgressRoutes);
 app.use("/api/journey", journeyRoutes);
 app.use("/api/topics", topicContentRoutes);
+app.use("/api/quizzes", quizRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 3000;

@@ -1,0 +1,120 @@
+{
+  "topic": "Recursion",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Kaya the Lion faces a tall rock wall.\n\nHe realizes the wall is made of\nmany smaller steps.\n\nWhy does Biru the Monkey say\nrecursion fits this situation?",
+      "options": [
+        "Because recursion avoids conditions",
+        "Because recursion solves a problem\nby solving smaller versions of it",
+        "Because recursion runs faster than loops",
+        "Because recursion works without a base case"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 2,
+      "question": "Biru the Monkey explains that\nevery recursive function must stop.\n\nWhat ensures that recursion\nwill not run forever?",
+      "options": [
+        "A loop inside the function",
+        "A base case",
+        "A global variable",
+        "A return statement only"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 3,
+      "question": "Kaya the Lion breaks a problem\ninto smaller versions of itself.\n\nWhat is this part of recursion called?",
+      "options": [
+        "Base case",
+        "Recursive case",
+        "Loop condition",
+        "Exit point"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 4,
+      "question": "Kaya the Lion reaches the\nsimplest version of the problem.\n\nWhat happens at this point?",
+      "options": [
+        "The function calls itself again",
+        "The program crashes",
+        "The base case is triggered",
+        "The loop restarts"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 5,
+      "question": "Biru the Monkey warns Kaya that\nrecursion without reducing the problem\nis dangerous.\n\nWhy?",
+      "options": [
+        "It may skip useful work",
+        "It may never reach the base case",
+        "It uses no memory",
+        "It becomes iterative"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 6,
+      "question": "Kaya the Lion uses recursion\nto count down from a number.\n\nWhen does the recursive call\nstart returning values?",
+      "options": [
+        "Before the base case",
+        "After the base case is reached",
+        "At the first function call",
+        "Only when an error occurs"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 7,
+      "question": "Biru the Monkey explains that\nrecursion uses extra memory.\n\nWhat structure stores\nrecursive function calls?",
+      "options": [
+        "Queue",
+        "Heap",
+        "Call stack",
+        "Array"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 8,
+      "question": "Kaya the Lion writes a recursive function.\n\nOne line is missing.\n\nWhich option correctly completes it?",
+      "code": "```\nFUNCTION countDown(n):\n    IF n == 0:\n        RETURN\n\n    PRINT n\n    _________\n```",
+      "options": [
+        "countDown(n)",
+        "countDown(n - 1)",
+        "RETURN n",
+        "BREAK"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 9,
+      "question": "Kaya the Lion writes a base case.\n\nWhich condition correctly\nrepresents a base case?",
+      "code": "```\nIF _________:\n    RETURN\n```",
+      "options": [
+        "n > 0",
+        "n < 0",
+        "n == 0",
+        "n != 0"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 10,
+      "question": "Biru the Monkey checks Kaya's recursion.\n\nWhich line ensures the problem\nbecomes smaller each time?",
+      "code": "```\ncountDown( _________ )\n```",
+      "options": [
+        "n",
+        "n + 1",
+        "n - 1",
+        "n * 2"
+      ],
+      "correctOption": 2
+    }
+  ]
+}
+
+

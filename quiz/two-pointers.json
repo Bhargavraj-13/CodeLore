@@ -1,0 +1,119 @@
+{
+  "topic": "Two Pointers",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Kurma the Tortoise guards a bridge\nwith stones numbered in sorted order.\n\nKaya the Lion needs to check\nif two stones add up to a target.\n\nWhy does Biru the Monkey suggest\nthe two pointers technique?",
+      "options": [
+        "It checks all pairs randomly",
+        "It reduces unnecessary comparisons",
+        "It works on unsorted data",
+        "It replaces sorting"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 2,
+      "question": "Kaya the Lion places one pointer\nat the start and one at the end.\n\nWhat does moving the right pointer left\nusually achieve?",
+      "options": [
+        "Increases the sum",
+        "Decreases the sum",
+        "Resets the search",
+        "Sorts the array"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 3,
+      "question": "Biru the Monkey reminds Kaya that\nleft–right two pointers work best\nunder a certain condition.\n\nWhat is that condition?",
+      "options": [
+        "The data must be sorted",
+        "The data must be random",
+        "The data must be circular",
+        "The data must be small"
+      ],
+      "correctOption": 0
+    },
+    {
+      "id": 4,
+      "question": "Kaya the Lion compares two numbers\nusing left and right pointers.\n\nIf the current sum is smaller\nthan the target, what should he do?",
+      "options": [
+        "Move the right pointer left",
+        "Move the left pointer right",
+        "Stop immediately",
+        "Restart the process"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 5,
+      "question": "Biru the Monkey explains\nsliding window problems.\n\nWhat is the key idea\nbehind sliding window?",
+      "options": [
+        "Recalculate everything each time",
+        "Maintain and move a fixed range",
+        "Sort the window repeatedly",
+        "Use recursion"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 6,
+      "question": "Kaya the Lion wants the\nmaximum sum of k consecutive values.\n\nWhy is sliding window better\nthan brute force?",
+      "options": [
+        "It avoids nested loops",
+        "It uses recursion",
+        "It changes the array",
+        "It removes elements"
+      ],
+      "correctOption": 0
+    },
+    {
+      "id": 7,
+      "question": "Biru the Monkey explains that\nsliding window is a form\nof two pointers.\n\nWhat moves in this approach?",
+      "options": [
+        "Only one pointer",
+        "Both ends of the window",
+        "Random indexes",
+        "The entire array"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 8,
+      "question": "Kaya the Lion writes\nleft–right pointer logic.\n\nOne line is missing.\n\nWhich option completes it?",
+      "code": "```\nleft = 0\nright = n - 1\n\nWHILE left < right:\n    sum = array[left] + array[right]\n    IF sum < target:\n        _________\n    ELSE:\n        right = right - 1\n```",
+      "options": [
+        "left = left + 1",
+        "right = right + 1",
+        "BREAK",
+        "RESET left"
+      ],
+      "correctOption": 0
+    },
+    {
+      "id": 9,
+      "question": "Kaya the Lion slides a window\nof size k.\n\nOne line is missing.\n\nWhich option completes the logic?",
+      "code": "```\nwindowSum = windowSum\n            - array[i-k]\n            + _________\n```",
+      "options": [
+        "array[i]",
+        "array[k]",
+        "windowSum",
+        "array[0]"
+      ],
+      "correctOption": 0
+    },
+    {
+      "id": 10,
+      "question": "Biru the Monkey reviews the solution.\n\nWhich problem type is best\nsolved using sliding window?",
+      "options": [
+        "Tree traversal",
+        "Pair sum in sorted array",
+        "Subarray or substring range problems",
+        "Graph shortest path"
+      ],
+      "correctOption": 2
+    }
+  ]
+}
+
+

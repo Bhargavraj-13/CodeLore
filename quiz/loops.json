@@ -1,0 +1,120 @@
+{
+  "topic": "Loops",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Kaya the Lion is checking stones on a path.\n\nThe task is the same every time.\nOnly the stone number changes.\n\nWhy does Biru the Monkey suggest using a loop?",
+      "options": [
+        "To check all stones at the same time",
+        "To avoid repeating the same instructions manually",
+        "To sort the stones automatically",
+        "To skip checking some stones"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 2,
+      "question": "Kaya the Lion writes a loop.\n\nHe forgets to move to the next stone.\n\nWhat is most likely to happen?",
+      "options": [
+        "The loop will stop immediately",
+        "The loop will skip some stones",
+        "The loop will run forever",
+        "The loop will run only once"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 3,
+      "question": "Biru the Monkey explains that every loop needs a condition.\n\nWhat is the main purpose of this condition?",
+      "options": [
+        "To decide where the loop starts",
+        "To decide when the loop should stop",
+        "To decide how fast the loop runs",
+        "To decide which language is used"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 4,
+      "question": "Kaya the Lion wants to repeat a task.\n\nBut the task should run only if a condition is true\nbefore starting.\n\nWhich loop fits this need?",
+      "options": [
+        "for loop",
+        "do-while loop",
+        "while loop",
+        "infinite loop"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 5,
+      "question": "Sera the Snake forces Kaya the Lion\nto check at least one stone\nbefore deciding to continue.\n\nWhich loop guarantees this behavior?",
+      "options": [
+        "for loop",
+        "while loop",
+        "do-while loop",
+        "nested loop"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 6,
+      "question": "Kaya the Lion knows exactly\nhow many stones are on the path.\n\nWhich loop is usually the cleanest choice?",
+      "options": [
+        "while loop",
+        "do-while loop",
+        "for loop",
+        "infinite loop"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 7,
+      "question": "Biru the Monkey warns Kaya the Lion.\n\nA loop without a proper stopping condition\ncan be dangerous.\n\nWhy?",
+      "options": [
+        "It may run slower",
+        "It may not compile",
+        "It may never stop running",
+        "It may skip all work"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 8,
+      "question": "Kaya the Lion wants to check stones\nnumbered from 1 to 5 using a loop.\n\nOne line is missing.\n\nWhich option correctly completes the logic?",
+      "code": "```\nSET stone = 1\n\nWHILE stone <= 5:\n    CHECK stone\n    _________\n```",
+      "options": [
+        "stone = stone - 1",
+        "stone = stone + 1",
+        "CHECK stone again",
+        "BREAK"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 9,
+      "question": "Kaya the Lion uses a do-while loop.\n\nThe loop must run at least once.\n\nOne line is missing.\n\nWhich option correctly completes the logic?",
+      "code": "```\nSET stone = 1\n\nDO:\n    CHECK stone\n    _________\nWHILE stone <= 5\n```",
+      "options": [
+        "stone = stone + 1",
+        "stone = stone * 2",
+        "RESET stone",
+        "STOP"
+      ],
+      "correctOption": 0
+    },
+    {
+      "id": 10,
+      "question": "Kaya the Lion wants to use a for-style loop.\n\nThe loop should check stones\nfrom 1 to 5.\n\nWhich line best represents the loop setup?",
+      "code": "```\n_________:\n    CHECK stone\n```",
+      "options": [
+        "FOR stone = 1 TO 5",
+        "WHILE stone == 5",
+        "DO stone = 1",
+        "REPEAT stone"
+      ],
+      "correctOption": 0
+    }
+  ]
+}
+
+

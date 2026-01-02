@@ -1,0 +1,120 @@
+{
+  "topic": "Strings",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Aro the Eagle sends messages\nacross the jungle.\n\nKaya the Lion notices that\neach message is a sequence\nof characters.\n\nWhy does Biru the Monkey say\nthis should be treated as a string?",
+      "options": [
+        "Because strings only store numbers",
+        "Because strings store characters in order",
+        "Because strings remove spaces automatically",
+        "Because strings are faster than arrays"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 2,
+      "question": "Kaya the Lion compares\nan array of numbers\nwith a string of characters.\n\nWhat is a key difference\nbetween them?",
+      "options": [
+        "Arrays are mutable, strings are always numbers",
+        "Strings store characters, arrays store only text",
+        "Strings are sequences of characters",
+        "Arrays cannot be traversed"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 3,
+      "question": "Biru the Monkey warns Kaya\nto be careful with indexing.\n\nHow is indexing in strings\nusually handled?",
+      "options": [
+        "Indexing starts from 1",
+        "Indexing starts from the last character",
+        "Indexing starts from 0",
+        "Indexing depends on the language"
+      ],
+      "correctOption": 2
+    },
+    {
+      "id": 4,
+      "question": "Kaya the Lion wants to read\na message character by character.\n\nWhat does string traversal mean?",
+      "options": [
+        "Sorting the characters",
+        "Visiting each character one by one",
+        "Reversing the string",
+        "Deleting characters"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 5,
+      "question": "Aro the Eagle asks Kaya\nif the message reads the same\nfrom both ends.\n\nWhat type of problem is this?",
+      "options": [
+        "Sorting problem",
+        "Palindrome check",
+        "Searching problem",
+        "Insertion problem"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 6,
+      "question": "Biru the Monkey explains that\nstrings often require comparison.\n\nWhat does comparing two strings\nusually involve?",
+      "options": [
+        "Checking memory addresses",
+        "Checking character sequences",
+        "Checking string sizes only",
+        "Checking index positions"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 7,
+      "question": "Kaya the Lion tries to change\none character in a string.\n\nBiru warns that this may not\nbe allowed directly.\n\nWhy?",
+      "options": [
+        "Strings cannot be printed",
+        "Strings are immutable in many languages",
+        "Strings do not allow indexing",
+        "Strings only store digits"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 8,
+      "question": "Kaya the Lion wants to traverse\na string of length n.\n\nOne line is missing.\n\nWhich option completes the logic?",
+      "code": "```\nSET i = 0\n\nWHILE i < length:\n    PROCESS string[i]\n    _________\n```",
+      "options": [
+        "i = i - 1",
+        "i = i + 1",
+        "RESET i",
+        "BREAK"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 9,
+      "question": "Aro the Eagle wants the\nfirst character of a message.\n\nWhich line correctly accesses it?",
+      "code": "```\nfirstChar = string[ _________ ]\n```",
+      "options": [
+        "1",
+        "0",
+        "length",
+        "length - 1"
+      ],
+      "correctOption": 1
+    },
+    {
+      "id": 10,
+      "question": "Kaya the Lion wants to check\nwhether two strings are equal.\n\nWhich operation best represents\nthis comparison?",
+      "code": "```\nIF string1 _________ string2:\n    MATCH\n```",
+      "options": [
+        "=",
+        "==",
+        "!=",
+        "+"
+      ],
+      "correctOption": 1
+    }
+  ]
+}
+
+
