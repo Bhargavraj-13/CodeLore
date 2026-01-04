@@ -50,7 +50,9 @@ export const submitQuiz = async (req, res) => {
 
     const results = quiz.questions.map((q) => {
       const selected = answers[q.id];
-      const isCorrect = selected === q.correctOptionIndex;
+      const hasAnswered = answers.hasOwnProperty(q.id);
+
+      const isCorrect = hasAnswered && answers[q.id] === q.correctOption;
 
       if (isCorrect) correctCount++;
 
@@ -59,7 +61,7 @@ export const submitQuiz = async (req, res) => {
         question: q.question,
         options: q.options,
         selectedOptionIndex: selected ?? null,
-        correctOptionIndex: q.correctOptionIndex,
+        correctOption: q.correctOption,
         isCorrect,
       };
     });
