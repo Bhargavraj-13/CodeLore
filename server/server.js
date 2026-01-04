@@ -43,7 +43,7 @@ app.use("/api/quiz-progress", quizProgressRoutes);
 app.use("/api/coding-progress", codingProgressRoutes);
 app.use("/api/journey", journeyRoutes);
 app.use("/api/topics", topicContentRoutes);
-app.use("/api/quizzes", quizRoutes);
+app.use("/api/quiz", quizRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 3000;

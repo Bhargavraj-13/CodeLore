@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 
 // Map topicId -> quiz file
 const quizMap = {
@@ -17,6 +18,9 @@ const quizMap = {
   trees: "trees.json",
 };
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 export const loadQuizByTopic = (topicId) => {
   const fileName = quizMap[topicId];
 
@@ -24,13 +28,22 @@ export const loadQuizByTopic = (topicId) => {
     throw new Error("QUIZ_NOT_FOUND");
   }
 
-  const quizPath = path.join(process.cwd(), "..", "quiz", fileName);
+  // Always resolve from this file's location
+  const quizPath = path.resolve(
+    __dirname,
+    "../../quiz",
+    fileName
+  );
 
   if (!fs.existsSync(quizPath)) {
     throw new Error("QUIZ_FILE_MISSING");
   }
 
-  const rawData = fs.readFileSync(quizPath, "utf-8");
-
-  return JSON.parse(rawData);
+  try {
+    const rawData = fs.readFileSync(quizPath, "utf-8");
+    return JSON.parse(rawData);
+  } catch (err) {
+    console.error("Quiz JSON Parse Error:", err);
+    throw new Error("QUIZ_FILE_MISSING");
+  }
 };

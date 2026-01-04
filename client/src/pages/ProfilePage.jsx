@@ -1,3 +1,5 @@
+// Renders the user profile page with personal details, stats, and topic progress.
+
 import { useEffect, useState } from 'react';
 import AppHeader from '../components/layout/AppHeader.jsx';
 import AppFooter from '../components/layout/AppFooter.jsx';

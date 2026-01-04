@@ -1,21 +1,23 @@
+// Displays topic content along with related quizzes and journeys.
+
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import AppHeader from '../components/layout/AppHeader.jsx';
 import api from '../lib/api.jsx';
 import ReactMarkdown from 'react-markdown';
+import { JourneysTab } from '../components/journey';
 
 function TopicPage() {
   const { topicId } = useParams();
+  const navigate = useNavigate();
 
   const [content, setContent] = useState('');
   const [activeTab, setActiveTab] = useState('content');
 
-  const [journeys, setJourneys] = useState([]);
-  const [journeysLoading, setJourneysLoading] = useState(false);
-
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Load topic content
   useEffect(() => {
     async function loadContent() {
       try {
@@ -30,22 +32,6 @@ function TopicPage() {
 
     loadContent();
   }, [topicId]);
-
-  useEffect(() => {
-    if (activeTab !== 'journeys') return;
-
-    async function loadJourneys() {
-      try {
-        setJourneysLoading(true);
-        const res = await api.get(`/api/journeys/topic/${topicId}`);
-        setJourneys(res.data.journeys || []);
-      } finally {
-        setJourneysLoading(false);
-      }
-    }
-
-    loadJourneys();
-  }, [activeTab, topicId]);
 
   if (loading) {
     return (
@@ -97,6 +83,7 @@ function TopicPage() {
               >
                 Journeys
               </button>
+
             </div>
           </div>
 
@@ -107,24 +94,45 @@ function TopicPage() {
               <ReactMarkdown
                 components={{
                   h1: ({ children }) => (
-                    <div className="mt-10 mb-8">
-                      <h1 className="text-3xl font-semibold mb-4">{children}</h1>
-                      <hr className="border-white/10" />
-                    </div>
-                  ),
+  <div className="mt-10 mb-8">
+    <div className="flex items-center justify-between gap-4">
+      <h1 className="text-3xl font-semibold">{children}</h1>
+
+      <button
+        onClick={() => navigate(`/quiz/${topicId}`)}
+        className="px-4 py-2 text-sm font-medium
+                   bg-teal-500/90 hover:bg-teal-500
+                   text-slate-900 rounded-md"
+      >
+        Start Quiz
+      </button>
+    </div>
+
+    <hr className="border-white/10 mt-4" />
+  </div>
+),
+
                   h2: ({ children }) => (
                     <div className="mt-8 mb-6">
-                      <h2 className="text-2xl font-semibold mb-3">{children}</h2>
+                      <h2 className="text-2xl font-semibold mb-3">
+                        {children}
+                      </h2>
                       <hr className="border-white/10" />
                     </div>
                   ),
                   p: ({ children }) => (
-                    <p className="text-slate-300 leading-relaxed mb-4">{children}</p>
+                    <p className="text-slate-300 leading-relaxed mb-4">
+                      {children}
+                    </p>
                   ),
                   ul: ({ children }) => (
-                    <ul className="list-disc ml-6 space-y-2 text-slate-300">{children}</ul>
+                    <ul className="list-disc ml-6 space-y-2 text-slate-300">
+                      {children}
+                    </ul>
                   ),
-                  li: ({ children }) => <li className="ml-2">{children}</li>,
+                  li: ({ children }) => (
+                    <li className="ml-2">{children}</li>
+                  ),
                 }}
               >
                 {content}
@@ -132,21 +140,10 @@ function TopicPage() {
             )}
 
             {activeTab === 'journeys' && (
-              <div className="space-y-6">
-                {journeysLoading && <p className="text-slate-400">Loading journeys…</p>}
-                {!journeysLoading && journeys.length === 0 && (
-                  <p className="text-slate-400">No journeys yet for this topic.</p>
-                )}
-                {journeys.map((j) => (
-                  <div
-                    key={j.id}
-                    className="border border-white/10 rounded-lg p-4 bg-slate-900"
-                  >
-                    <p className="text-slate-300 mb-2">{j.content}</p>
-                    <div className="text-xs text-slate-500">— {j.author}</div>
-                  </div>
-                ))}
-              </div>
+              <JourneysTab
+                topicId={topicId}
+                active={activeTab === 'journeys'}
+              />
             )}
 
           </div>
