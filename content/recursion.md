@@ -100,11 +100,9 @@ and results come back on the way up.
 
 ## Why Recursion Doesn’t Go Forever
 
-Kaya asks:
 Kaya the Lion:
 “What stops this from running forever?”
-Biru answers:
-Biru the Monkey:
+Biru Monkey:
 “Every call must move closer to the base case.”
 “If it doesn’t, you fall into an infinite loop.”
 
