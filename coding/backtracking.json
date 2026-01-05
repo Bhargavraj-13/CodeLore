@@ -1,0 +1,56 @@
+{
+  "id": "backtracking",
+  "topic": "backtracking",
+  "title": "Generate All Subsets",
+  "difficulty": "intermediate",
+
+  "problemStatement": "Given an array of distinct integers, return all possible subsets. The solution set must not contain duplicate subsets.",
+
+  "inputDescription": "An array of distinct integers",
+  "outputDescription": "A list of all possible subsets",
+
+  "constraints": {
+    "n": "0 ≤ n ≤ 10",
+    "values": "-10 ≤ nums[i] ≤ 10"
+  },
+
+  "evaluation": {
+    "type": "function",
+    "expectedFunction": {
+      "python": "subsets",
+      "cpp": "subsets"
+    },
+    "outputType": "list"
+  },
+
+  "testCases": {
+    "public": [
+      {
+        "input": [1, 2, 3],
+        "output": [
+          [],
+          [1],
+          [2],
+          [3],
+          [1,2],
+          [1,3],
+          [2,3],
+          [1,2,3]
+        ]
+      }
+    ],
+    "private": [
+      { "input": [], "output": [[]] },
+      { "input": [1], "output": [[], [1]] },
+      { "input": [1,2], "output": [[], [1], [2], [1,2]] },
+      { "input": [-1], "output": [[], [-1]] },
+      { "input": [0], "output": [[], [0]] },
+      { "input": [1,2,3,4], "output": "16 subsets" },
+      { "input": [5,6,7], "output": "8 subsets" },
+      { "input": [10], "output": [[], [10]] },
+      { "input": [-2,-1], "output": [[], [-2], [-1], [-2,-1]] }
+    ]
+  },
+
+  "notes": "Order of subsets does not matter."
+}

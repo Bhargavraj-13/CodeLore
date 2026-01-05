@@ -1,0 +1,46 @@
+{
+  "id": "recursion",
+  "topic": "recursion",
+  "title": "Check Palindrome Using Recursion",
+  "difficulty": "intermediate",
+
+  "problemStatement": "Given a string, check whether it is a palindrome using recursion. A palindrome reads the same forwards and backwards.",
+
+  "inputDescription": "A string",
+  "outputDescription": "Boolean value indicating whether the string is a palindrome",
+
+  "constraints": {
+    "length": "0 ≤ string length ≤ 1000"
+  },
+
+  "evaluation": {
+    "type": "function",
+    "expectedFunction": {
+      "python": "isPalindrome",
+      "cpp": "isPalindrome"
+    },
+    "outputType": "boolean"
+  },
+
+  "testCases": {
+    "public": [
+      {
+        "input": "racecar",
+        "output": true
+      }
+    ],
+    "private": [
+      { "input": "", "output": true },
+      { "input": "a", "output": true },
+      { "input": "abba", "output": true },
+      { "input": "abc", "output": false },
+      { "input": "madam", "output": true },
+      { "input": "step on no pets", "output": false },
+      { "input": "level", "output": true },
+      { "input": "hello", "output": false },
+      { "input": "noon", "output": true }
+    ]
+  },
+
+  "notes": "Do not use loops. Comparison should be character-based."
+}

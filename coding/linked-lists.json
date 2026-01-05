@@ -1,0 +1,50 @@
+{
+  "id": "linked-lists",
+  "topic": "linked-lists",
+  "title": "Detect Cycle in Linked List",
+  "difficulty": "intermediate",
+
+  "problemStatement": "Given the head of a singly linked list, determine whether the linked list has a cycle in it. A cycle exists if a node can be revisited by continuously following the next pointer.",
+
+  "inputDescription": "Head of a singly linked list",
+  "outputDescription": "Boolean value indicating whether a cycle exists",
+
+  "constraints": {
+    "n": "0 ≤ number of nodes ≤ 100000",
+    "values": "-100000 ≤ node.val ≤ 100000"
+  },
+
+  "evaluation": {
+    "type": "function",
+    "expectedFunction": {
+      "python": "hasCycle",
+      "cpp": "hasCycle"
+    },
+    "outputType": "boolean"
+  },
+
+  "testCases": {
+    "public": [
+      {
+        "input": {
+          "list": [3,2,0,-4],
+          "pos": 1
+        },
+        "output": true
+      }
+    ],
+    "private": [
+      { "input": { "list": [1,2], "pos": 0 }, "output": true },
+      { "input": { "list": [1], "pos": -1 }, "output": false },
+      { "input": { "list": [], "pos": -1 }, "output": false },
+      { "input": { "list": [1,2,3,4,5], "pos": -1 }, "output": false },
+      { "input": { "list": [1,2,3], "pos": 2 }, "output": true },
+      { "input": { "list": [10], "pos": 0 }, "output": true },
+      { "input": { "list": [1,2,3,4], "pos": 1 }, "output": true },
+      { "input": { "list": [5,6,7], "pos": -1 }, "output": false },
+      { "input": { "list": [9,9,9], "pos": 0 }, "output": true }
+    ]
+  },
+
+  "notes": "Use O(1) extra space. Do not modify the list."
+}

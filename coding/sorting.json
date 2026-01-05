@@ -1,0 +1,46 @@
+{
+  "id": "sorting",
+  "topic": "sorting",
+  "title": "Sort Colors",
+  "difficulty": "intermediate",
+
+  "problemStatement": "Given an array containing only 0s, 1s, and 2s, sort the array in-place so that all 0s come first, followed by 1s, then 2s.",
+
+  "inputDescription": "An array consisting only of values 0, 1, and 2",
+  "outputDescription": "The same array sorted in ascending order",
+
+  "constraints": {
+    "n": "1 ≤ n ≤ 100000"
+  },
+
+  "evaluation": {
+    "type": "function",
+    "expectedFunction": {
+      "python": "sortColors",
+      "cpp": "sortColors"
+    },
+    "outputType": "array"
+  },
+
+  "testCases": {
+    "public": [
+      {
+        "input": [2,0,2,1,1,0],
+        "output": [0,0,1,1,2,2]
+      }
+    ],
+    "private": [
+      { "input": [0], "output": [0] },
+      { "input": [1], "output": [1] },
+      { "input": [2], "output": [2] },
+      { "input": [2,2,1,1,0,0], "output": [0,0,1,1,2,2] },
+      { "input": [1,0,1,0,2], "output": [0,0,1,1,2] },
+      { "input": [0,1,2], "output": [0,1,2] },
+      { "input": [2,1,0], "output": [0,1,2] },
+      { "input": [1,2,0,1,2,0], "output": [0,0,1,1,2,2] },
+      { "input": [0,0,0], "output": [0,0,0] }
+    ]
+  },
+
+  "notes": "Solve in one pass using constant extra space."
+}
