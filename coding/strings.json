@@ -1,0 +1,46 @@
+{
+  "id": "strings",
+  "topic": "strings",
+  "title": "Longest Substring Without Repeating Characters",
+  "difficulty": "intermediate",
+
+  "problemStatement": "Given a string, find the length of the longest substring without repeating characters.",
+
+  "inputDescription": "A string",
+  "outputDescription": "Length of the longest substring without repeating characters",
+
+  "constraints": {
+    "length": "0 ≤ string length ≤ 100000"
+  },
+
+  "evaluation": {
+    "type": "function",
+    "expectedFunction": {
+      "python": "lengthOfLongestSubstring",
+      "cpp": "lengthOfLongestSubstring"
+    },
+    "outputType": "integer"
+  },
+
+  "testCases": {
+    "public": [
+      {
+        "input": "abcabcbb",
+        "output": 3
+      }
+    ],
+    "private": [
+      { "input": "", "output": 0 },
+      { "input": "bbbbb", "output": 1 },
+      { "input": "pwwkew", "output": 3 },
+      { "input": "abcdef", "output": 6 },
+      { "input": "abba", "output": 2 },
+      { "input": "aab", "output": 2 },
+      { "input": "dvdf", "output": 3 },
+      { "input": "anviaj", "output": 5 },
+      { "input": "tmmzuxt", "output": 5 }
+    ]
+  },
+
+  "notes": "Sliding window approach expected."
+}

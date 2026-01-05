@@ -1,0 +1,47 @@
+{
+  "id": "trees",
+  "topic": "trees",
+  "title": "Maximum Depth of Binary Tree",
+  "difficulty": "intermediate",
+
+  "problemStatement": "Given the root of a binary tree, return its maximum depth. The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.",
+
+  "inputDescription": "Root of a binary tree",
+  "outputDescription": "An integer representing the maximum depth",
+
+  "constraints": {
+    "n": "0 ≤ number of nodes ≤ 100000",
+    "values": "-100000 ≤ node.val ≤ 100000"
+  },
+
+  "evaluation": {
+    "type": "function",
+    "expectedFunction": {
+      "python": "maxDepth",
+      "cpp": "maxDepth"
+    },
+    "outputType": "integer"
+  },
+
+  "testCases": {
+    "public": [
+      {
+        "input": [3,9,20,null,null,15,7],
+        "output": 3
+      }
+    ],
+    "private": [
+      { "input": [], "output": 0 },
+      { "input": [1], "output": 1 },
+      { "input": [1,2], "output": 2 },
+      { "input": [1,null,2], "output": 2 },
+      { "input": [1,2,3,4], "output": 4 },
+      { "input": [1,2,null,3,null,4], "output": 4 },
+      { "input": [10,5,15,null,null,6,20], "output": 3 },
+      { "input": [1,null,null], "output": 1 },
+      { "input": [0], "output": 1 }
+    ]
+  },
+
+  "notes": "Both recursive and iterative solutions are acceptable."
+}

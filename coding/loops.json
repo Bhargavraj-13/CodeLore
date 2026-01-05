@@ -1,0 +1,46 @@
+{
+  "id": "loops",
+  "topic": "loops",
+  "title": "Count Digits with Even Frequency",
+  "difficulty": "intermediate",
+
+  "problemStatement": "Given a non-negative integer n, count how many digits in the number appear an even number of times.",
+
+  "inputDescription": "A non-negative integer",
+  "outputDescription": "Count of digits appearing an even number of times",
+
+  "constraints": {
+    "n": "0 ≤ n ≤ 10^18"
+  },
+
+  "evaluation": {
+    "type": "function",
+    "expectedFunction": {
+      "python": "countEvenFrequencyDigits",
+      "cpp": "countEvenFrequencyDigits"
+    },
+    "outputType": "integer"
+  },
+
+  "testCases": {
+    "public": [
+      {
+        "input": 122333,
+        "output": 2
+      }
+    ],
+    "private": [
+      { "input": 0, "output": 1 },
+      { "input": 11, "output": 1 },
+      { "input": 1212, "output": 2 },
+      { "input": 12345, "output": 0 },
+      { "input": 4444, "output": 1 },
+      { "input": 1001, "output": 2 },
+      { "input": 999999, "output": 1 },
+      { "input": 101010, "output": 2 },
+      { "input": 9876543210, "output": 0 }
+    ]
+  },
+
+  "notes": "Leading zeros should not be considered."
+}

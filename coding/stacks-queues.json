@@ -1,0 +1,46 @@
+{
+  "id": "stacks-queues",
+  "topic": "stacks-queues",
+  "title": "Valid Parentheses",
+  "difficulty": "intermediate",
+
+  "problemStatement": "Given a string containing only parentheses characters '(', ')', '{', '}', '[', ']', determine if the input string is valid.",
+
+  "inputDescription": "A string of parentheses characters",
+  "outputDescription": "Boolean indicating whether the string is valid",
+
+  "constraints": {
+    "length": "0 ≤ string length ≤ 100000"
+  },
+
+  "evaluation": {
+    "type": "function",
+    "expectedFunction": {
+      "python": "isValid",
+      "cpp": "isValid"
+    },
+    "outputType": "boolean"
+  },
+
+  "testCases": {
+    "public": [
+      {
+        "input": "()[]{}",
+        "output": true
+      }
+    ],
+    "private": [
+      { "input": "", "output": true },
+      { "input": "()", "output": true },
+      { "input": "(]", "output": false },
+      { "input": "([)]", "output": false },
+      { "input": "{[]}", "output": true },
+      { "input": "(((", "output": false },
+      { "input": ")))", "output": false },
+      { "input": "()(()", "output": false },
+      { "input": "[{()}]", "output": true }
+    ]
+  },
+
+  "notes": "Use a stack to match opening and closing brackets."
+}
