@@ -1,0 +1,26 @@
+{
+  "id": "two-pointers-2",
+  "topicId": "two-pointers",
+  "title": "Check If Array Is Palindrome",
+  "difficulty": "Easy",
+
+  "description": "Given an array of integers, check if it is a palindrome using the two-pointer technique.",
+
+  "starterCode": {
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) {\n        cin >> arr[i];\n    }\n\n    // write your code here\n\n    return 0;\n}",
+    "python": "# write your code here\n"
+  },
+
+  "testCases": [
+    { "input": "5\n1 2 3 2 1\n", "expectedOutput": "true" },
+    { "input": "4\n1 2 2 1\n", "expectedOutput": "true" },
+    { "input": "3\n1 2 3\n", "expectedOutput": "false" },
+    { "input": "1\n5\n", "expectedOutput": "true" },
+    { "input": "0\n", "expectedOutput": "true" },
+    { "input": "2\n7 7\n", "expectedOutput": "true" },
+    { "input": "2\n7 8\n", "expectedOutput": "false" },
+    { "input": "6\n1 2 3 3 2 1\n", "expectedOutput": "true" },
+    { "input": "5\n1 2 3 4 1\n", "expectedOutput": "false" },
+    { "input": "3\n9 8 9\n", "expectedOutput": "true" }
+  ]
+}

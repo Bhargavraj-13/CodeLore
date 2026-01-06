@@ -1,0 +1,26 @@
+{
+  "id": "loops-1",
+  "topicId": "loops",
+  "title": "Print Numbers from 1 to N",
+  "difficulty": "Easy",
+
+  "description": "Given an integer N, print all numbers from 1 to N separated by spaces using a loop.",
+
+  "starterCode": {
+    "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n\n    // write your code here\n\n    return 0;\n}",
+    "python": "# write your code here\n"
+  },
+
+  "testCases": [
+    { "input": "0\n", "expectedOutput": "" },
+    { "input": "1\n", "expectedOutput": "1" },
+    { "input": "2\n", "expectedOutput": "1 2" },
+    { "input": "3\n", "expectedOutput": "1 2 3" },
+    { "input": "5\n", "expectedOutput": "1 2 3 4 5" },
+    { "input": "7\n", "expectedOutput": "1 2 3 4 5 6 7" },
+    { "input": "10\n", "expectedOutput": "1 2 3 4 5 6 7 8 9 10" },
+    { "input": "4\n", "expectedOutput": "1 2 3 4" },
+    { "input": "6\n", "expectedOutput": "1 2 3 4 5 6" },
+    { "input": "8\n", "expectedOutput": "1 2 3 4 5 6 7 8" }
+  ]
+}

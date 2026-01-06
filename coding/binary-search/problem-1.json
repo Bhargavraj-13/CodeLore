@@ -1,0 +1,26 @@
+{
+  "id": "backtracking-3",
+  "topicId": "backtracking",
+  "title": "Generate Subsets Count",
+  "difficulty": "Easy",
+
+  "description": "Given a string S, generate all possible subsets using backtracking and print the total number of subsets.",
+
+  "starterCode": {
+    "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s;\n    cin >> s;\n\n    // write your code here\n\n    return 0;\n}",
+    "python": "# write your code here\n"
+  },
+
+  "testCases": [
+    { "input": "a\n", "expectedOutput": "2" },
+    { "input": "ab\n", "expectedOutput": "4" },
+    { "input": "abc\n", "expectedOutput": "8" },
+    { "input": "abcd\n", "expectedOutput": "16" },
+    { "input": "\n", "expectedOutput": "1" },
+    { "input": "x\n", "expectedOutput": "2" },
+    { "input": "xy\n", "expectedOutput": "4" },
+    { "input": "xyz\n", "expectedOutput": "8" },
+    { "input": "hello\n", "expectedOutput": "32" },
+    { "input": "test\n", "expectedOutput": "16" }
+  ]
+}
