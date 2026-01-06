@@ -1,50 +1,84 @@
 {
-  "id": "linked-lists",
+  "filename": "linked-lists.json",
   "topic": "linked-lists",
-  "title": "Detect Cycle in Linked List",
-  "difficulty": "intermediate",
-
-  "problemStatement": "Given the head of a singly linked list, determine whether the linked list has a cycle in it. A cycle exists if a node can be revisited by continuously following the next pointer.",
-
-  "inputDescription": "Head of a singly linked list",
-  "outputDescription": "Boolean value indicating whether a cycle exists",
-
-  "constraints": {
-    "n": "0 ≤ number of nodes ≤ 100000",
-    "values": "-100000 ≤ node.val ≤ 100000"
-  },
-
-  "evaluation": {
-    "type": "function",
-    "expectedFunction": {
-      "python": "hasCycle",
-      "cpp": "hasCycle"
-    },
-    "outputType": "boolean"
-  },
-
-  "testCases": {
-    "public": [
-      {
-        "input": {
-          "list": [3,2,0,-4],
-          "pos": 1
+  "questions": [
+    {
+      "id": 1,
+      "title": "Traverse a Singly Linked List",
+      "difficulty": "easy",
+      "problemStatement": "Given the head of a singly linked list, return an array containing all node values in the order they appear.",
+      "evaluation": {
+        "type": "function",
+        "expectedFunction": {
+          "python": "traverseList",
+          "cpp": "traverseList"
         },
-        "output": true
-      }
-    ],
-    "private": [
-      { "input": { "list": [1,2], "pos": 0 }, "output": true },
-      { "input": { "list": [1], "pos": -1 }, "output": false },
-      { "input": { "list": [], "pos": -1 }, "output": false },
-      { "input": { "list": [1,2,3,4,5], "pos": -1 }, "output": false },
-      { "input": { "list": [1,2,3], "pos": 2 }, "output": true },
-      { "input": { "list": [10], "pos": 0 }, "output": true },
-      { "input": { "list": [1,2,3,4], "pos": 1 }, "output": true },
-      { "input": { "list": [5,6,7], "pos": -1 }, "output": false },
-      { "input": { "list": [9,9,9], "pos": 0 }, "output": true }
-    ]
-  },
-
-  "notes": "Use O(1) extra space. Do not modify the list."
+        "outputType": "array"
+      },
+      "testCases": [
+        { "input": [1, 2, 3, 4], "output": [1, 2, 3, 4] },
+        { "input": [], "output": [] },
+        { "input": [5], "output": [5] },
+        { "input": [10, 20], "output": [10, 20] },
+        { "input": [-1, -2, -3], "output": [-1, -2, -3] },
+        { "input": [0, 0, 0], "output": [0, 0, 0] },
+        { "input": [7, 8, 9, 10], "output": [7, 8, 9, 10] },
+        { "input": [100], "output": [100] },
+        { "input": [1, 1, 1, 1], "output": [1, 1, 1, 1] },
+        { "input": [3, 5, 7], "output": [3, 5, 7] }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Insert Node at End",
+      "difficulty": "intermediate",
+      "problemStatement": "Given the head of a singly linked list and a value, insert a new node with the given value at the end of the list and return the head.",
+      "evaluation": {
+        "type": "function",
+        "expectedFunction": {
+          "python": "insertAtEnd",
+          "cpp": "insertAtEnd"
+        },
+        "outputType": "linked-list"
+      },
+      "testCases": [
+        { "input": { "list": [], "value": 1 }, "output": [1] },
+        { "input": { "list": [1], "value": 2 }, "output": [1, 2] },
+        { "input": { "list": [1, 2], "value": 3 }, "output": [1, 2, 3] },
+        { "input": { "list": [5, 6], "value": 4 }, "output": [5, 6, 4] },
+        { "input": { "list": [-1], "value": -2 }, "output": [-1, -2] },
+        { "input": { "list": [0], "value": 0 }, "output": [0, 0] },
+        { "input": { "list": [1, 1], "value": 1 }, "output": [1, 1, 1] },
+        { "input": { "list": [10, 20, 30], "value": 40 }, "output": [10, 20, 30, 40] },
+        { "input": { "list": [7], "value": 8 }, "output": [7, 8] },
+        { "input": { "list": [3, 4, 5], "value": 6 }, "output": [3, 4, 5, 6] }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Detect Cycle in Linked List",
+      "difficulty": "intermediate",
+      "problemStatement": "Given the head of a linked list, determine whether the list contains a cycle. A cycle exists if a node can be revisited by continuously following the next pointer.",
+      "evaluation": {
+        "type": "function",
+        "expectedFunction": {
+          "python": "hasCycle",
+          "cpp": "hasCycle"
+        },
+        "outputType": "boolean"
+      },
+      "testCases": [
+        { "input": { "list": [3, 2, 0, -4], "pos": 1 }, "output": true },
+        { "input": { "list": [1, 2], "pos": 0 }, "output": true },
+        { "input": { "list": [1], "pos": -1 }, "output": false },
+        { "input": { "list": [], "pos": -1 }, "output": false },
+        { "input": { "list": [1, 2, 3, 4], "pos": -1 }, "output": false },
+        { "input": { "list": [1, 2, 3], "pos": 2 }, "output": true },
+        { "input": { "list": [10], "pos": 0 }, "output": true },
+        { "input": { "list": [5, 6, 7], "pos": -1 }, "output": false },
+        { "input": { "list": [9, 9, 9], "pos": 0 }, "output": true },
+        { "input": { "list": [1, 2, 3, 4, 5], "pos": 3 }, "output": true }
+      ]
+    }
+  ]
 }

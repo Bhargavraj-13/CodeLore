@@ -1,46 +1,84 @@
 {
-  "id": "sorting",
+  "filename": "sorting.json",
   "topic": "sorting",
-  "title": "Sort Colors",
-  "difficulty": "intermediate",
-
-  "problemStatement": "Given an array containing only 0s, 1s, and 2s, sort the array in-place so that all 0s come first, followed by 1s, then 2s.",
-
-  "inputDescription": "An array consisting only of values 0, 1, and 2",
-  "outputDescription": "The same array sorted in ascending order",
-
-  "constraints": {
-    "n": "1 ≤ n ≤ 100000"
-  },
-
-  "evaluation": {
-    "type": "function",
-    "expectedFunction": {
-      "python": "sortColors",
-      "cpp": "sortColors"
+  "questions": [
+    {
+      "id": 1,
+      "title": "Sort an Array in Ascending Order",
+      "difficulty": "easy",
+      "problemStatement": "Given an array of integers, sort the array in ascending order and return the sorted array. You may use any basic sorting logic.",
+      "evaluation": {
+        "type": "function",
+        "expectedFunction": {
+          "python": "sortArray",
+          "cpp": "sortArray"
+        },
+        "outputType": "array"
+      },
+      "testCases": [
+        { "input": [7, 3, 9, 2, 6], "output": [2, 3, 6, 7, 9] },
+        { "input": [], "output": [] },
+        { "input": [1], "output": [1] },
+        { "input": [5, 4, 3, 2, 1], "output": [1, 2, 3, 4, 5] },
+        { "input": [1, 2, 3, 4], "output": [1, 2, 3, 4] },
+        { "input": [-1, -5, -3], "output": [-5, -3, -1] },
+        { "input": [0, 0, 0], "output": [0, 0, 0] },
+        { "input": [10, -10], "output": [-10, 10] },
+        { "input": [100, 50, 1000], "output": [50, 100, 1000] },
+        { "input": [3, 3, 2, 1], "output": [1, 2, 3, 3] }
+      ]
     },
-    "outputType": "array"
-  },
-
-  "testCases": {
-    "public": [
-      {
-        "input": [2,0,2,1,1,0],
-        "output": [0,0,1,1,2,2]
-      }
-    ],
-    "private": [
-      { "input": [0], "output": [0] },
-      { "input": [1], "output": [1] },
-      { "input": [2], "output": [2] },
-      { "input": [2,2,1,1,0,0], "output": [0,0,1,1,2,2] },
-      { "input": [1,0,1,0,2], "output": [0,0,1,1,2] },
-      { "input": [0,1,2], "output": [0,1,2] },
-      { "input": [2,1,0], "output": [0,1,2] },
-      { "input": [1,2,0,1,2,0], "output": [0,0,1,1,2,2] },
-      { "input": [0,0,0], "output": [0,0,0] }
-    ]
-  },
-
-  "notes": "Solve in one pass using constant extra space."
+    {
+      "id": 2,
+      "title": "Check if Array is Already Sorted",
+      "difficulty": "easy-intermediate",
+      "problemStatement": "Given an array of integers, check whether it is already sorted in ascending order. Return true if sorted, otherwise false.",
+      "evaluation": {
+        "type": "function",
+        "expectedFunction": {
+          "python": "isSorted",
+          "cpp": "isSorted"
+        },
+        "outputType": "boolean"
+      },
+      "testCases": [
+        { "input": [1, 2, 3, 4], "output": true },
+        { "input": [], "output": true },
+        { "input": [5], "output": true },
+        { "input": [1, 1, 2, 2], "output": true },
+        { "input": [3, 2, 1], "output": false },
+        { "input": [1, 3, 2], "output": false },
+        { "input": [-5, -3, -1], "output": true },
+        { "input": [-1, -3, -5], "output": false },
+        { "input": [0, 0, 1], "output": true },
+        { "input": [2, 2, 1], "output": false }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Sort Array Using Insertion Logic",
+      "difficulty": "intermediate",
+      "problemStatement": "Given an array of integers, sort the array in ascending order using insertion-style logic.",
+      "evaluation": {
+        "type": "function",
+        "expectedFunction": {
+          "python": "insertionSort",
+          "cpp": "insertionSort"
+        },
+        "outputType": "array"
+      },
+      "testCases": [
+        { "input": [7, 3, 9, 2, 6], "output": [2, 3, 6, 7, 9] },
+        { "input": [1], "output": [1] },
+        { "input": [], "output": [] },
+        { "input": [5, 4, 3, 2, 1], "output": [1, 2, 3, 4, 5] },
+        { "input": [1, 2, 3, 4], "output": [1, 2, 3, 4] },
+        { "input": [2, 1], "output": [1, 2] },
+        { "input": [-1, -5, -3], "output": [-5, -3, -1] },
+        { "input": [0, 0, 0], "output": [0, 0, 0] },
+        { "input": [10, -10], "output": [-10, 10] },
+        { "input": [3, 3, 2, 1], "output": [1, 2, 3, 3] }
+      ]
+    }
+  ]
 }

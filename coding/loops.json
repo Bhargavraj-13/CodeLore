@@ -1,46 +1,84 @@
 {
-  "id": "loops",
+  "filename": "loops.json",
   "topic": "loops",
-  "title": "Count Digits with Even Frequency",
-  "difficulty": "intermediate",
-
-  "problemStatement": "Given a non-negative integer n, count how many digits in the number appear an even number of times.",
-
-  "inputDescription": "A non-negative integer",
-  "outputDescription": "Count of digits appearing an even number of times",
-
-  "constraints": {
-    "n": "0 ≤ n ≤ 10^18"
-  },
-
-  "evaluation": {
-    "type": "function",
-    "expectedFunction": {
-      "python": "countEvenFrequencyDigits",
-      "cpp": "countEvenFrequencyDigits"
+  "questions": [
+    {
+      "id": 1,
+      "title": "Print Numbers from 1 to N",
+      "difficulty": "easy",
+      "problemStatement": "Given an integer N, return an array containing numbers from 1 to N in increasing order.",
+      "evaluation": {
+        "type": "function",
+        "expectedFunction": {
+          "python": "printNumbers",
+          "cpp": "printNumbers"
+        },
+        "outputType": "array"
+      },
+      "testCases": [
+        { "input": 5, "output": [1, 2, 3, 4, 5] },
+        { "input": 1, "output": [1] },
+        { "input": 0, "output": [] },
+        { "input": 2, "output": [1, 2] },
+        { "input": 10, "output": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] },
+        { "input": -1, "output": [] },
+        { "input": 3, "output": [1, 2, 3] },
+        { "input": 100, "output": "1 to 100" },
+        { "input": 7, "output": [1, 2, 3, 4, 5, 6, 7] },
+        { "input": 50, "output": "1 to 50" }
+      ]
     },
-    "outputType": "integer"
-  },
-
-  "testCases": {
-    "public": [
-      {
-        "input": 122333,
-        "output": 2
-      }
-    ],
-    "private": [
-      { "input": 0, "output": 1 },
-      { "input": 11, "output": 1 },
-      { "input": 1212, "output": 2 },
-      { "input": 12345, "output": 0 },
-      { "input": 4444, "output": 1 },
-      { "input": 1001, "output": 2 },
-      { "input": 999999, "output": 1 },
-      { "input": 101010, "output": 2 },
-      { "input": 9876543210, "output": 0 }
-    ]
-  },
-
-  "notes": "Leading zeros should not be considered."
+    {
+      "id": 2,
+      "title": "Sum of All Elements in an Array",
+      "difficulty": "easy-intermediate",
+      "problemStatement": "Given an array of integers, calculate and return the sum of all its elements using a loop.",
+      "evaluation": {
+        "type": "function",
+        "expectedFunction": {
+          "python": "sumArray",
+          "cpp": "sumArray"
+        },
+        "outputType": "integer"
+      },
+      "testCases": [
+        { "input": [1, 2, 3, 4], "output": 10 },
+        { "input": [], "output": 0 },
+        { "input": [5], "output": 5 },
+        { "input": [-1, -2, -3], "output": -6 },
+        { "input": [0, 0, 0], "output": 0 },
+        { "input": [10, -10], "output": 0 },
+        { "input": [100, 200, 300], "output": 600 },
+        { "input": [1, 1, 1, 1, 1], "output": 5 },
+        { "input": [-5], "output": -5 },
+        { "input": [7, 3, 2], "output": 12 }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Count Digits in a Number",
+      "difficulty": "intermediate",
+      "problemStatement": "Given an integer N, count how many digits it contains. N can be positive, negative, or zero.",
+      "evaluation": {
+        "type": "function",
+        "expectedFunction": {
+          "python": "countDigits",
+          "cpp": "countDigits"
+        },
+        "outputType": "integer"
+      },
+      "testCases": [
+        { "input": 12345, "output": 5 },
+        { "input": 0, "output": 1 },
+        { "input": -123, "output": 3 },
+        { "input": 7, "output": 1 },
+        { "input": 10, "output": 2 },
+        { "input": -1, "output": 1 },
+        { "input": 1000, "output": 4 },
+        { "input": 999999, "output": 6 },
+        { "input": -10000, "output": 5 },
+        { "input": 50, "output": 2 }
+      ]
+    }
+  ]
 }
