@@ -1,0 +1,26 @@
+{
+  "id": "sorting-3",
+  "topicId": "sorting",
+  "title": "Check if Array is Sorted",
+  "difficulty": "Easy",
+
+  "description": "Given an array of integers, check whether it is already sorted in ascending order. Print true or false.",
+
+  "starterCode": {
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) {\n        cin >> arr[i];\n    }\n\n    // write your code here\n\n    return 0;\n}",
+    "python": "# write your code here\n"
+  },
+
+  "testCases": [
+    { "input": "5\n1 2 3 4 5\n", "expectedOutput": "true" },
+    { "input": "3\n1 3 2\n", "expectedOutput": "false" },
+    { "input": "1\n10\n", "expectedOutput": "true" },
+    { "input": "4\n4 4 4 4\n", "expectedOutput": "true" },
+    { "input": "5\n-3 -2 -1 0 1\n", "expectedOutput": "true" },
+    { "input": "5\n5 4 3 2 1\n", "expectedOutput": "false" },
+    { "input": "2\n1 2\n", "expectedOutput": "true" },
+    { "input": "2\n2 1\n", "expectedOutput": "false" },
+    { "input": "6\n1 2 2 3 3 4\n", "expectedOutput": "true" },
+    { "input": "3\n1 1 0\n", "expectedOutput": "false" }
+  ]
+}

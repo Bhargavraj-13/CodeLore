@@ -1,0 +1,26 @@
+{
+  "id": "two-pointers-1",
+  "topicId": "two-pointers",
+  "title": "Check Pair With Given Sum",
+  "difficulty": "Easy",
+
+  "description": "Given a sorted array and a target value, check if there exists a pair of elements whose sum equals the target.",
+
+  "starterCode": {
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n, target;\n    cin >> n;\n\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) {\n        cin >> arr[i];\n    }\n\n    cin >> target;\n\n    // write your code here\n\n    return 0;\n}",
+    "python": "# write your code here\n"
+  },
+
+  "testCases": [
+    { "input": "5\n1 2 3 4 5\n9\n", "expectedOutput": "true" },
+    { "input": "5\n1 2 3 4 5\n10\n", "expectedOutput": "false" },
+    { "input": "4\n1 1 1 1\n2\n", "expectedOutput": "true" },
+    { "input": "3\n2 4 6\n8\n", "expectedOutput": "true" },
+    { "input": "3\n2 4 6\n5\n", "expectedOutput": "false" },
+    { "input": "1\n5\n5\n", "expectedOutput": "false" },
+    { "input": "0\n\n5\n", "expectedOutput": "false" },
+    { "input": "5\n-5 -2 0 3 7\n1\n", "expectedOutput": "true" },
+    { "input": "5\n-5 -2 0 3 7\n-7\n", "expectedOutput": "true" },
+    { "input": "2\n1 9\n10\n", "expectedOutput": "true" }
+  ]
+}

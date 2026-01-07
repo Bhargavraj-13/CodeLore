@@ -1,0 +1,26 @@
+{
+  "id": "backtracking-1",
+  "topicId": "backtracking",
+  "title": "Generate Binary Strings of Length N",
+  "difficulty": "Easy",
+
+  "description": "Given an integer N, generate all binary strings of length N. Print the total count of such strings.",
+
+  "starterCode": {
+    "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n\n    // write your code here\n\n    return 0;\n}",
+    "python": "# write your code here\n"
+  },
+
+  "testCases": [
+    { "input": "0\n", "expectedOutput": "1" },
+    { "input": "1\n", "expectedOutput": "2" },
+    { "input": "2\n", "expectedOutput": "4" },
+    { "input": "3\n", "expectedOutput": "8" },
+    { "input": "4\n", "expectedOutput": "16" },
+    { "input": "5\n", "expectedOutput": "32" },
+    { "input": "6\n", "expectedOutput": "64" },
+    { "input": "7\n", "expectedOutput": "128" },
+    { "input": "8\n", "expectedOutput": "256" },
+    { "input": "9\n", "expectedOutput": "512" }
+  ]
+}

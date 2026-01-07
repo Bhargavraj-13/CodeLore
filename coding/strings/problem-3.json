@@ -1,0 +1,26 @@
+{
+  "id": "strings-3",
+  "topicId": "strings",
+  "title": "Reverse a String",
+  "difficulty": "Easy",
+
+  "description": "Given a string, print the reversed string.",
+
+  "starterCode": {
+    "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s;\n    getline(cin, s);\n\n    // write your code here\n\n    return 0;\n}",
+    "python": "# write your code here\n"
+  },
+
+  "testCases": [
+    { "input": "hello\n", "expectedOutput": "olleh" },
+    { "input": "JUNGLE\n", "expectedOutput": "ELGNUJ" },
+    { "input": "a\n", "expectedOutput": "a" },
+    { "input": "\n", "expectedOutput": "" },
+    { "input": "abc def\n", "expectedOutput": "fed cba" },
+    { "input": "12345\n", "expectedOutput": "54321" },
+    { "input": "level\n", "expectedOutput": "level" },
+    { "input": "A B C\n", "expectedOutput": "C B A" },
+    { "input": "coding\n", "expectedOutput": "gnidoc" },
+    { "input": "racecar\n", "expectedOutput": "racecar" }
+  ]
+}

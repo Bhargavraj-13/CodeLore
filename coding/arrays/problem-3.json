@@ -1,0 +1,26 @@
+{
+  "id": "arrays-3",
+  "topicId": "arrays",
+  "title": "Count Even Numbers",
+  "difficulty": "Easy",
+
+  "description": "Given an array of integers, count how many elements are even.",
+
+  "starterCode": {
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) {\n        cin >> arr[i];\n    }\n\n    // write your code here\n\n    return 0;\n}",
+    "python": "# write your code here\n"
+  },
+
+  "testCases": [
+    { "input": "5\n1 2 3 4 5\n", "expectedOutput": "2" },
+    { "input": "3\n10 20 30\n", "expectedOutput": "3" },
+    { "input": "4\n1 3 5 7\n", "expectedOutput": "0" },
+    { "input": "1\n2\n", "expectedOutput": "1" },
+    { "input": "5\n0 0 0 0 0\n", "expectedOutput": "5" },
+    { "input": "2\n-2 -4\n", "expectedOutput": "2" },
+    { "input": "3\n-1 -2 -3\n", "expectedOutput": "1" },
+    { "input": "6\n1 2 3 6 8 9\n", "expectedOutput": "3" },
+    { "input": "0\n\n", "expectedOutput": "0" },
+    { "input": "1\n1\n", "expectedOutput": "0" }
+  ]
+}
