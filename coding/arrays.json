@@ -55,7 +55,7 @@
       ]
     },
     {
-  "id": 1,
+  "id": 3,
   "title": "Access Element at Given Index",
   "difficulty": "easy",
   "problemStatement": "Given an array and an index, return the element at that index. If the index is out of bounds, return -1.",
