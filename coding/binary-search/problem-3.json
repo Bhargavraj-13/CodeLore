@@ -3,7 +3,6 @@
   "topicId": "binary-search",
   "title": "Count Occurrences of Target",
   "difficulty": "Easy",
-
   "description": "Given a sorted array and a target value, count how many times the target appears in the array.",
 
   "starterCode": {
@@ -11,9 +10,12 @@
     "python": "# write your code here\n"
   },
 
-  "testCases": [
+  "sampleTestCases": [
     { "input": "5\n1 2 2 2 3\n2\n", "expectedOutput": "3" },
-    { "input": "5\n1 2 3 4 5\n2\n", "expectedOutput": "1" },
+    { "input": "5\n1 2 3 4 5\n2\n", "expectedOutput": "1" }
+  ],
+
+  "testCases": [
     { "input": "5\n1 2 3 4 5\n6\n", "expectedOutput": "0" },
     { "input": "1\n10\n10\n", "expectedOutput": "1" },
     { "input": "1\n10\n5\n", "expectedOutput": "0" },

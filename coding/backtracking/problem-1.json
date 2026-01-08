@@ -3,7 +3,6 @@
   "topicId": "backtracking",
   "title": "Generate Binary Strings of Length N",
   "difficulty": "Easy",
-
   "description": "Given an integer N, generate all binary strings of length N. Print the total count of such strings.",
 
   "starterCode": {
@@ -11,9 +10,12 @@
     "python": "# write your code here\n"
   },
 
-  "testCases": [
+  "sampleTestCases": [
     { "input": "0\n", "expectedOutput": "1" },
-    { "input": "1\n", "expectedOutput": "2" },
+    { "input": "1\n", "expectedOutput": "2" }
+  ],
+
+  "testCases": [
     { "input": "2\n", "expectedOutput": "4" },
     { "input": "3\n", "expectedOutput": "8" },
     { "input": "4\n", "expectedOutput": "16" },

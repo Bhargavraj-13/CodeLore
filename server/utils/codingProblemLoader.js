@@ -1,10 +1,9 @@
 import fs from "fs";
 import path from "path";
 
-// Root folder where coding problems live
 const CODING_ROOT = path.join(process.cwd(), "..", "coding");
 
-// Load all problems for a given topicId
+// Load all coding problems for a given topic
 export const loadProblemsByTopic = (topicId) => {
   const topicPath = path.join(CODING_ROOT, topicId);
 
@@ -12,9 +11,9 @@ export const loadProblemsByTopic = (topicId) => {
     throw new Error("TOPIC_NOT_FOUND");
   }
 
-  const files = fs.readdirSync(topicPath).filter((f) =>
-    f.endsWith(".json")
-  );
+  const files = fs
+    .readdirSync(topicPath)
+    .filter((f) => f.endsWith(".json"));
 
   return files.map((file) => {
     const filePath = path.join(topicPath, file);
@@ -23,13 +22,18 @@ export const loadProblemsByTopic = (topicId) => {
   });
 };
 
-// Load a single problem by its unique problemId
+// Load a specific coding problem by its ID
 export const loadProblemById = (problemId) => {
   const topics = fs.readdirSync(CODING_ROOT);
 
   for (const topic of topics) {
     const topicPath = path.join(CODING_ROOT, topic);
-    const files = fs.readdirSync(topicPath);
+
+    if (!fs.statSync(topicPath).isDirectory()) continue;
+
+    const files = fs
+      .readdirSync(topicPath)
+      .filter((f) => f.endsWith(".json"));
 
     for (const file of files) {
       const filePath = path.join(topicPath, file);

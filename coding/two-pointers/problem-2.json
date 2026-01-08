@@ -3,7 +3,6 @@
   "topicId": "two-pointers",
   "title": "Check If Array Is Palindrome",
   "difficulty": "Easy",
-
   "description": "Given an array of integers, check if it is a palindrome using the two-pointer technique.",
 
   "starterCode": {
@@ -11,10 +10,13 @@
     "python": "# write your code here\n"
   },
 
-  "testCases": [
+  "sampleTestCases": [
     { "input": "5\n1 2 3 2 1\n", "expectedOutput": "true" },
+    { "input": "3\n1 2 3\n", "expectedOutput": "false" }
+  ],
+
+  "testCases": [
     { "input": "4\n1 2 2 1\n", "expectedOutput": "true" },
-    { "input": "3\n1 2 3\n", "expectedOutput": "false" },
     { "input": "1\n5\n", "expectedOutput": "true" },
     { "input": "0\n", "expectedOutput": "true" },
     { "input": "2\n7 7\n", "expectedOutput": "true" },

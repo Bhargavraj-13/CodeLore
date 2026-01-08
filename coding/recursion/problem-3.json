@@ -3,7 +3,6 @@
   "topicId": "recursion",
   "title": "Check Palindrome String",
   "difficulty": "Easy",
-
   "description": "Given a string, check whether it is a palindrome using recursion. Print true or false.",
 
   "starterCode": {
@@ -11,12 +10,15 @@
     "python": "# write your code here\n"
   },
 
+  "sampleTestCases": [
+    { "input": "aba\n", "expectedOutput": "true" },
+    { "input": "abc\n", "expectedOutput": "false" }
+  ],
+
   "testCases": [
     { "input": "a\n", "expectedOutput": "true" },
     { "input": "aa\n", "expectedOutput": "true" },
-    { "input": "aba\n", "expectedOutput": "true" },
     { "input": "abba\n", "expectedOutput": "true" },
-    { "input": "abc\n", "expectedOutput": "false" },
     { "input": "abcd\n", "expectedOutput": "false" },
     { "input": "racecar\n", "expectedOutput": "true" },
     { "input": "level\n", "expectedOutput": "true" },

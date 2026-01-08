@@ -3,7 +3,6 @@
   "topicId": "strings",
   "title": "Count Characters in String",
   "difficulty": "Easy",
-
   "description": "Given a string, print the total number of characters in it.",
 
   "starterCode": {
@@ -11,12 +10,15 @@
     "python": "# write your code here\n"
   },
 
-  "testCases": [
+  "sampleTestCases": [
     { "input": "hello\n", "expectedOutput": "5" },
+    { "input": "abc def\n", "expectedOutput": "7" }
+  ],
+
+  "testCases": [
     { "input": "JUNGLE\n", "expectedOutput": "6" },
     { "input": "a\n", "expectedOutput": "1" },
     { "input": "\n", "expectedOutput": "0" },
-    { "input": "abc def\n", "expectedOutput": "7" },
     { "input": "12345\n", "expectedOutput": "5" },
     { "input": "hello world\n", "expectedOutput": "11" },
     { "input": " \n", "expectedOutput": "1" },

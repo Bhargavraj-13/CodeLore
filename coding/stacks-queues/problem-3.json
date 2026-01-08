@@ -3,7 +3,6 @@
   "topicId": "stacks-queues",
   "title": "Check Stack or Queue Output",
   "difficulty": "Easy",
-
   "description": "Given an array, print the first element and the last element. Use stack logic to get the last element and queue logic to get the first.",
 
   "starterCode": {
@@ -11,10 +10,13 @@
     "python": "# write your code here\n"
   },
 
-  "testCases": [
+  "sampleTestCases": [
     { "input": "5\n1 2 3 4 5\n", "expectedOutput": "1 5" },
+    { "input": "1\n7\n", "expectedOutput": "7 7" }
+  ],
+
+  "testCases": [
     { "input": "3\n10 20 30\n", "expectedOutput": "10 30" },
-    { "input": "1\n7\n", "expectedOutput": "7 7" },
     { "input": "4\n4 4 4 4\n", "expectedOutput": "4 4" },
     { "input": "5\n-1 -2 -3 -4 -5\n", "expectedOutput": "-1 -5" },
     { "input": "2\n100 200\n", "expectedOutput": "100 200" },

@@ -1,26 +1,28 @@
 {
-  "id": "linked-lists-1",
+  "id": "linked-lists-2",
   "topicId": "linked-lists",
-  "title": "Count Nodes in Linked List",
+  "title": "Search Value in Linked List",
   "difficulty": "Easy",
-
-  "description": "Given the number of nodes in a linked list followed by the node values, count and print the total number of nodes.",
+  "description": "Given a linked list and a value X, check whether X exists in the linked list. Print true or false.",
 
   "starterCode": {
-    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n\n    vector<int> values(n);\n    for (int i = 0; i < n; i++) cin >> values[i];\n\n    // write your code here\n\n    return 0;\n}",
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n\n    vector<int> values(n);\n    for (int i = 0; i < n; i++) cin >> values[i];\n\n    int x;\n    cin >> x;\n\n    // write your code here\n\n    return 0;\n}",
     "python": "# write your code here\n"
   },
 
+  "sampleTestCases": [
+    { "input": "3\n1 2 3\n2\n", "expectedOutput": "true" },
+    { "input": "3\n1 2 3\n4\n", "expectedOutput": "false" }
+  ],
+
   "testCases": [
-    { "input": "0\n", "expectedOutput": "0" },
-    { "input": "1\n10\n", "expectedOutput": "1" },
-    { "input": "3\n1 2 3\n", "expectedOutput": "3" },
-    { "input": "5\n5 4 3 2 1\n", "expectedOutput": "5" },
-    { "input": "2\n100 200\n", "expectedOutput": "2" },
-    { "input": "4\n0 0 0 0\n", "expectedOutput": "4" },
-    { "input": "6\n1 1 1 1 1 1\n", "expectedOutput": "6" },
-    { "input": "7\n9 8 7 6 5 4 3\n", "expectedOutput": "7" },
-    { "input": "10\n1 2 3 4 5 6 7 8 9 10\n", "expectedOutput": "10" },
-    { "input": "8\n2 4 6 8 10 12 14 16\n", "expectedOutput": "8" }
+    { "input": "0\n\n5\n", "expectedOutput": "false" },
+    { "input": "1\n10\n10\n", "expectedOutput": "true" },
+    { "input": "1\n10\n5\n", "expectedOutput": "false" },
+    { "input": "5\n5 4 3 2 1\n3\n", "expectedOutput": "true" },
+    { "input": "5\n5 4 3 2 1\n6\n", "expectedOutput": "false" },
+    { "input": "4\n0 0 0 0\n0\n", "expectedOutput": "true" },
+    { "input": "6\n1 2 3 4 5 6\n6\n", "expectedOutput": "true" },
+    { "input": "6\n1 2 3 4 5 6\n7\n", "expectedOutput": "false" }
   ]
 }

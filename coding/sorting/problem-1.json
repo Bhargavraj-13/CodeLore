@@ -1,26 +1,28 @@
 {
-  "id": "recursion-3",
-  "topicId": "recursion",
-  "title": "Check Palindrome String",
+  "id": "sorting-1",
+  "topicId": "sorting",
+  "title": "Sort Array in Ascending Order",
   "difficulty": "Easy",
-
-  "description": "Given a string, check whether it is a palindrome using recursion. Print true or false.",
+  "description": "Given an array of integers, sort the array in ascending order and print the result.",
 
   "starterCode": {
-    "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s;\n    cin >> s;\n\n    // write your code here\n\n    return 0;\n}",
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) {\n        cin >> arr[i];\n    }\n\n    // write your code here\n\n    return 0;\n}",
     "python": "# write your code here\n"
   },
 
+  "sampleTestCases": [
+    { "input": "5\n5 3 1 4 2\n", "expectedOutput": "1 2 3 4 5" },
+    { "input": "3\n10 5 0\n", "expectedOutput": "0 5 10" }
+  ],
+
   "testCases": [
-    { "input": "a\n", "expectedOutput": "true" },
-    { "input": "aa\n", "expectedOutput": "true" },
-    { "input": "aba\n", "expectedOutput": "true" },
-    { "input": "abba\n", "expectedOutput": "true" },
-    { "input": "abc\n", "expectedOutput": "false" },
-    { "input": "abcd\n", "expectedOutput": "false" },
-    { "input": "racecar\n", "expectedOutput": "true" },
-    { "input": "level\n", "expectedOutput": "true" },
-    { "input": "hello\n", "expectedOutput": "false" },
-    { "input": "z\n", "expectedOutput": "true" }
+    { "input": "1\n7\n", "expectedOutput": "7" },
+    { "input": "4\n4 4 4 4\n", "expectedOutput": "4 4 4 4" },
+    { "input": "5\n-1 -3 2 0 1\n", "expectedOutput": "-3 -1 0 1 2" },
+    { "input": "6\n9 8 7 6 5 4\n", "expectedOutput": "4 5 6 7 8 9" },
+    { "input": "2\n100 1\n", "expectedOutput": "1 100" },
+    { "input": "3\n3 2 1\n", "expectedOutput": "1 2 3" },
+    { "input": "5\n0 0 0 0 0\n", "expectedOutput": "0 0 0 0 0" },
+    { "input": "4\n1 3 2 3\n", "expectedOutput": "1 2 3 3" }
   ]
 }

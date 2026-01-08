@@ -3,7 +3,6 @@
   "topicId": "arrays",
   "title": "Sum of Array Elements",
   "difficulty": "Easy",
-
   "description": "Given an array of integers, return the sum of all elements.",
 
   "starterCode": {
@@ -11,9 +10,12 @@
     "python": "# write your code here\n"
   },
 
-  "testCases": [
+  "sampleTestCases": [
     { "input": "5\n1 2 3 4 5\n", "expectedOutput": "15" },
-    { "input": "3\n10 20 30\n", "expectedOutput": "60" },
+    { "input": "3\n10 20 30\n", "expectedOutput": "60" }
+  ],
+
+  "testCases": [
     { "input": "0\n\n", "expectedOutput": "0" },
     { "input": "1\n7\n", "expectedOutput": "7" },
     { "input": "4\n-1 -2 -3 -4\n", "expectedOutput": "-10" },

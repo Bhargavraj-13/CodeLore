@@ -18,39 +18,40 @@ const userSchema = new mongoose.Schema(
       match: [/\S+@\S+\.\S+/, "Please enter a valid email address"],
     },
 
-    password: {
-      type: String,
-      required: [true, "Password is required"],
-      minlength: [6, "Password must be at least 6 characters long"],
-      select: false,
-    },
+password: {
+  type: String,
+  required: [true, "Password is required"],
+  minlength: [6, "Password must be at least 6 characters long"],
+  select: false,
+},
 
-    topics: [
-      {
-        topicId: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Topic",
-          required: true,
-        },
+topicId: {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: "Topic",
+  required: true,
+},
 
-        quizScore: {
-          type: Number,
-          default: null, // quiz not attempted
-        },
+quizScore: {
+  type: Number,
+  default: null,
+},
 
-        codingSolvedCount: {
-          type: Number,
-          default: 0,
-        },
+codingSolvedCount: {
+  type: Number,
+  default: 0,
+},
 
-        lastAccessedAt: {
-          type: Date,
-          default: Date.now,
-        },
-      },
-    ],
+solvedProblems: {
+  type: [String], // store problemId
+  default: [],
+},
 
-    profilePic: {
+lastAccessedAt: {
+  type: Date,
+  default: Date.now,
+},
+
+profilePic: {
       type: String,
       default: null,
     },

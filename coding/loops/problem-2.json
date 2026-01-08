@@ -3,7 +3,6 @@
   "topicId": "loops",
   "title": "Sum of First N Natural Numbers",
   "difficulty": "Easy",
-
   "description": "Given an integer N, calculate and print the sum of the first N natural numbers.",
 
   "starterCode": {
@@ -11,11 +10,14 @@
     "python": "# write your code here\n"
   },
 
+  "sampleTestCases": [
+    { "input": "1\n", "expectedOutput": "1" },
+    { "input": "3\n", "expectedOutput": "6" }
+  ],
+
   "testCases": [
     { "input": "0\n", "expectedOutput": "0" },
-    { "input": "1\n", "expectedOutput": "1" },
     { "input": "2\n", "expectedOutput": "3" },
-    { "input": "3\n", "expectedOutput": "6" },
     { "input": "5\n", "expectedOutput": "15" },
     { "input": "10\n", "expectedOutput": "55" },
     { "input": "7\n", "expectedOutput": "28" },

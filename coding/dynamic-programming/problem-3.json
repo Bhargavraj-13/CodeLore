@@ -3,7 +3,6 @@
   "topicId": "dynamic-programming",
   "title": "Minimum Cost to Reach End",
   "difficulty": "Easy",
-
   "description": "Given an array where each element represents the cost at that index, you can move either one step or two steps forward. Print the minimum total cost required to reach the last index.",
 
   "starterCode": {
@@ -11,9 +10,12 @@
     "python": "# write your code here\n"
   },
 
-  "testCases": [
+  "sampleTestCases": [
     { "input": "5\n1 3 1 5 1\n", "expectedOutput": "3" },
-    { "input": "3\n1 2 3\n", "expectedOutput": "3" },
+    { "input": "3\n1 2 3\n", "expectedOutput": "3" }
+  ],
+
+  "testCases": [
     { "input": "1\n10\n", "expectedOutput": "10" },
     { "input": "2\n10 15\n", "expectedOutput": "15" },
     { "input": "3\n0 0 0\n", "expectedOutput": "0" },

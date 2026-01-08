@@ -3,7 +3,6 @@
   "topicId": "stacks-queues",
   "title": "Queue Enqueue and Dequeue",
   "difficulty": "Easy",
-
   "description": "Given a sequence of integers, enqueue all elements into a queue and then dequeue and print them in order.",
 
   "starterCode": {
@@ -11,9 +10,12 @@
     "python": "# write your code here\n"
   },
 
-  "testCases": [
+  "sampleTestCases": [
     { "input": "5\n1 2 3 4 5\n", "expectedOutput": "1 2 3 4 5" },
-    { "input": "3\n10 20 30\n", "expectedOutput": "10 20 30" },
+    { "input": "3\n10 20 30\n", "expectedOutput": "10 20 30" }
+  ],
+
+  "testCases": [
     { "input": "1\n7\n", "expectedOutput": "7" },
     { "input": "4\n4 4 4 4\n", "expectedOutput": "4 4 4 4" },
     { "input": "5\n-1 -2 -3 -4 -5\n", "expectedOutput": "-1 -2 -3 -4 -5" },

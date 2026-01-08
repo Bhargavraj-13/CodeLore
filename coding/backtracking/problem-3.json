@@ -3,7 +3,6 @@
   "topicId": "backtracking",
   "title": "Generate Subsets Count",
   "difficulty": "Easy",
-
   "description": "Given a string S, generate all possible subsets using backtracking and print the total number of subsets.",
 
   "starterCode": {
@@ -11,9 +10,12 @@
     "python": "# write your code here\n"
   },
 
-  "testCases": [
+  "sampleTestCases": [
     { "input": "a\n", "expectedOutput": "2" },
-    { "input": "ab\n", "expectedOutput": "4" },
+    { "input": "ab\n", "expectedOutput": "4" }
+  ],
+
+  "testCases": [
     { "input": "abc\n", "expectedOutput": "8" },
     { "input": "abcd\n", "expectedOutput": "16" },
     { "input": "\n", "expectedOutput": "1" },
