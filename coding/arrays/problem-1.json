@@ -1,0 +1,28 @@
+{
+  "id": "arrays-1",
+  "topicId": "arrays",
+  "title": "Sum of Array Elements",
+  "difficulty": "Easy",
+  "description": "Given an array of integers, return the sum of all elements.",
+
+  "starterCode": {
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) {\n        cin >> arr[i];\n    }\n\n    // write your code here\n\n    return 0;\n}",
+    "python": "# write your code here\n"
+  },
+
+  "sampleTestCases": [
+    { "input": "5\n1 2 3 4 5\n", "expectedOutput": "15" },
+    { "input": "3\n10 20 30\n", "expectedOutput": "60" }
+  ],
+
+  "testCases": [
+    { "input": "0\n\n", "expectedOutput": "0" },
+    { "input": "1\n7\n", "expectedOutput": "7" },
+    { "input": "4\n-1 -2 -3 -4\n", "expectedOutput": "-10" },
+    { "input": "5\n0 0 0 0 0\n", "expectedOutput": "0" },
+    { "input": "2\n100 -100\n", "expectedOutput": "0" },
+    { "input": "6\n1 1 1 1 1 1\n", "expectedOutput": "6" },
+    { "input": "3\n5 0 5\n", "expectedOutput": "10" },
+    { "input": "1\n0\n", "expectedOutput": "0" }
+  ]
+}

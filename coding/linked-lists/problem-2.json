@@ -1,0 +1,28 @@
+{
+  "id": "linked-lists-2",
+  "topicId": "linked-lists",
+  "title": "Search Value in Linked List",
+  "difficulty": "Easy",
+  "description": "Given a linked list and a value X, check whether X exists in the linked list. Print true or false.",
+
+  "starterCode": {
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n\n    vector<int> values(n);\n    for (int i = 0; i < n; i++) cin >> values[i];\n\n    int x;\n    cin >> x;\n\n    // write your code here\n\n    return 0;\n}",
+    "python": "# write your code here\n"
+  },
+
+  "sampleTestCases": [
+    { "input": "3\n1 2 3\n2\n", "expectedOutput": "true" },
+    { "input": "3\n1 2 3\n4\n", "expectedOutput": "false" }
+  ],
+
+  "testCases": [
+    { "input": "0\n\n5\n", "expectedOutput": "false" },
+    { "input": "1\n10\n10\n", "expectedOutput": "true" },
+    { "input": "1\n10\n5\n", "expectedOutput": "false" },
+    { "input": "5\n5 4 3 2 1\n3\n", "expectedOutput": "true" },
+    { "input": "5\n5 4 3 2 1\n6\n", "expectedOutput": "false" },
+    { "input": "4\n0 0 0 0\n0\n", "expectedOutput": "true" },
+    { "input": "6\n1 2 3 4 5 6\n6\n", "expectedOutput": "true" },
+    { "input": "6\n1 2 3 4 5 6\n7\n", "expectedOutput": "false" }
+  ]
+}

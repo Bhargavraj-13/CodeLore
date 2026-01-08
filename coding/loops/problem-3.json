@@ -1,0 +1,28 @@
+{
+  "id": "loops-3",
+  "topicId": "loops",
+  "title": "Count Digits of a Number",
+  "difficulty": "Easy",
+  "description": "Given a non-negative integer N, count and print the number of digits in N.",
+
+  "starterCode": {
+    "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    long long n;\n    cin >> n;\n\n    // write your code here\n\n    return 0;\n}",
+    "python": "# write your code here\n"
+  },
+
+  "sampleTestCases": [
+    { "input": "0\n", "expectedOutput": "1" },
+    { "input": "123\n", "expectedOutput": "3" }
+  ],
+
+  "testCases": [
+    { "input": "5\n", "expectedOutput": "1" },
+    { "input": "10\n", "expectedOutput": "2" },
+    { "input": "1000\n", "expectedOutput": "4" },
+    { "input": "99999\n", "expectedOutput": "5" },
+    { "input": "7\n", "expectedOutput": "1" },
+    { "input": "42\n", "expectedOutput": "2" },
+    { "input": "1000000\n", "expectedOutput": "7" },
+    { "input": "808\n", "expectedOutput": "3" }
+  ]
+}

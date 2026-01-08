@@ -1,0 +1,28 @@
+{
+  "id": "sorting-2",
+  "topicId": "sorting",
+  "title": "Sort Array in Descending Order",
+  "difficulty": "Easy",
+  "description": "Given an array of integers, sort the array in descending order and print the result.",
+
+  "starterCode": {
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) {\n        cin >> arr[i];\n    }\n\n    // write your code here\n\n    return 0;\n}",
+    "python": "# write your code here\n"
+  },
+
+  "sampleTestCases": [
+    { "input": "5\n1 2 3 4 5\n", "expectedOutput": "5 4 3 2 1" },
+    { "input": "3\n0 -1 -2\n", "expectedOutput": "0 -1 -2" }
+  ],
+
+  "testCases": [
+    { "input": "1\n10\n", "expectedOutput": "10" },
+    { "input": "4\n4 4 4 4\n", "expectedOutput": "4 4 4 4" },
+    { "input": "5\n5 3 9 1 2\n", "expectedOutput": "9 5 3 2 1" },
+    { "input": "2\n7 3\n", "expectedOutput": "7 3" },
+    { "input": "6\n1 6 2 5 3 4\n", "expectedOutput": "6 5 4 3 2 1" },
+    { "input": "3\n-1 -2 -3\n", "expectedOutput": "-1 -2 -3" },
+    { "input": "5\n0 1 0 1 0\n", "expectedOutput": "1 1 0 0 0" },
+    { "input": "4\n8 6 7 5\n", "expectedOutput": "8 7 6 5" }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "strings-2",
+  "topicId": "strings",
+  "title": "Count Vowels in String",
+  "difficulty": "Easy",
+  "description": "Given a string, count and print the number of vowels (a, e, i, o, u). Case insensitive.",
+
+  "starterCode": {
+    "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s;\n    getline(cin, s);\n\n    // write your code here\n\n    return 0;\n}",
+    "python": "# write your code here\n"
+  },
+
+  "sampleTestCases": [
+    { "input": "hello\n", "expectedOutput": "2" },
+    { "input": "AEIOU\n", "expectedOutput": "5" }
+  ],
+
+  "testCases": [
+    { "input": "JUNGLE\n", "expectedOutput": "2" },
+    { "input": "bcdfg\n", "expectedOutput": "0" },
+    { "input": "a\n", "expectedOutput": "1" },
+    { "input": "\n", "expectedOutput": "0" },
+    { "input": "programming\n", "expectedOutput": "3" },
+    { "input": "Umbrella\n", "expectedOutput": "3" },
+    { "input": "sky\n", "expectedOutput": "0" },
+    { "input": "education\n", "expectedOutput": "5" }
+  ]
+}

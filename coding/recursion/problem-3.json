@@ -1,0 +1,28 @@
+{
+  "id": "recursion-3",
+  "topicId": "recursion",
+  "title": "Check Palindrome String",
+  "difficulty": "Easy",
+  "description": "Given a string, check whether it is a palindrome using recursion. Print true or false.",
+
+  "starterCode": {
+    "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s;\n    cin >> s;\n\n    // write your code here\n\n    return 0;\n}",
+    "python": "# write your code here\n"
+  },
+
+  "sampleTestCases": [
+    { "input": "aba\n", "expectedOutput": "true" },
+    { "input": "abc\n", "expectedOutput": "false" }
+  ],
+
+  "testCases": [
+    { "input": "a\n", "expectedOutput": "true" },
+    { "input": "aa\n", "expectedOutput": "true" },
+    { "input": "abba\n", "expectedOutput": "true" },
+    { "input": "abcd\n", "expectedOutput": "false" },
+    { "input": "racecar\n", "expectedOutput": "true" },
+    { "input": "level\n", "expectedOutput": "true" },
+    { "input": "hello\n", "expectedOutput": "false" },
+    { "input": "z\n", "expectedOutput": "true" }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "binary-search-1",
+  "topicId": "binary-search",
+  "title": "Check If Element Exists",
+  "difficulty": "Easy",
+  "description": "Given a sorted array and a target value, determine whether the target exists in the array.",
+
+  "starterCode": {
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n, target;\n    cin >> n;\n\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n\n    cin >> target;\n\n    // write your code here\n\n    return 0;\n}",
+    "python": "# write your code here\n"
+  },
+
+  "sampleTestCases": [
+    { "input": "5\n1 2 3 4 5\n3\n", "expectedOutput": "true" },
+    { "input": "5\n1 2 3 4 5\n6\n", "expectedOutput": "false" }
+  ],
+
+  "testCases": [
+    { "input": "1\n10\n10\n", "expectedOutput": "true" },
+    { "input": "1\n10\n5\n", "expectedOutput": "false" },
+    { "input": "0\n\n5\n", "expectedOutput": "false" },
+    { "input": "4\n2 4 6 8\n2\n", "expectedOutput": "true" },
+    { "input": "4\n2 4 6 8\n8\n", "expectedOutput": "true" },
+    { "input": "4\n2 4 6 8\n1\n", "expectedOutput": "false" },
+    { "input": "6\n1 3 5 7 9 11\n7\n", "expectedOutput": "true" },
+    { "input": "6\n1 3 5 7 9 11\n4\n", "expectedOutput": "false" }
+  ]
+}
