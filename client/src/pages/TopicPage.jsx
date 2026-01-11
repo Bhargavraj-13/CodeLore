@@ -10,7 +10,6 @@ import { JourneysTab } from '../components/journey';
 function TopicPage() {
   const { topicId } = useParams();
   const navigate = useNavigate();
-
   const [content, setContent] = useState('');
   const [activeTab, setActiveTab] = useState('content');
 
@@ -73,10 +72,10 @@ function TopicPage() {
               </button>
 
               <button
-                onClick={() => setActiveTab('journeys')}
+                onClick={() => setActiveTab('journey')}
                 className={`px-5 py-2 text-sm font-medium rounded-t-xl
                   ${
-                    activeTab === 'journeys'
+                    activeTab === 'journey'
                       ? 'bg-slate-950 text-white border border-white/10 border-b-0'
                       : 'text-slate-400 border border-white/10 hover:text-slate-200'
                   }`}
@@ -95,20 +94,33 @@ function TopicPage() {
                 components={{
                   h1: ({ children }) => (
   <div className="mt-10 mb-8">
-    <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center justify-between gap-4">
       <h1 className="text-3xl font-semibold">{children}</h1>
+
+          <div className="flex items-center gap-3 ml-auto">
+
+      <button
+        onClick={() => navigate(`/coding/${topicId}`)}
+        className="px-4 py-2 text-sm font-medium
+                  bg-teal-500 hover:bg-teal-400
+                  text-slate-900 rounded-md"
+      >
+        Start Coding
+      </button>
 
       <button
         onClick={() => navigate(`/quiz/${topicId}`)}
         className="px-4 py-2 text-sm font-medium
-                   bg-teal-500/90 hover:bg-teal-500
-                   text-slate-900 rounded-md"
+                  bg-teal-500/90 hover:bg-teal-500
+                  text-slate-900 rounded-md"
       >
         Start Quiz
       </button>
+
     </div>
 
-    <hr className="border-white/10 mt-4" />
+    </div>
+
   </div>
 ),
 

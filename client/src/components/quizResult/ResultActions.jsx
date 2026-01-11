@@ -1,6 +1,6 @@
 // Handles quiz navigation actions (backToTopic, reAttempt).
 
-function ResultActions({ onBackToTopic, reAttempt }) {
+function ResultActions({ onBackToTopic, reAttempt, reAttemptLabel }) {
   return (
     <div className="flex justify-center gap-4 pt-4">
       <button
@@ -19,7 +19,7 @@ function ResultActions({ onBackToTopic, reAttempt }) {
                    hover:bg-teal-500
                    text-slate-900"
       >
-        ReAttempt
+        {reAttemptLabel || "ReAttempt"}
       </button>
     </div>
   );

@@ -1,10 +1,14 @@
 // Consists of list of topics started by the user in their profile
 
+import { useNavigate} from 'react-router-dom';
+
 function MyTopics({ topics }) {
+  const navigate = useNavigate();
+
   if (!topics.length) {
     return (
       <p className="text-sm text-slate-400">
-        You haven’t started any topics yet.
+        You haven't started any topics yet.
       </p>
     );
   }
@@ -28,7 +32,10 @@ function MyTopics({ topics }) {
               Write Journey →
             </button>
           ) : (
-            <button className="text-sm font-medium hover:text-teal-300">
+            <button
+              onClick={() => navigate(`/topics/${topic.title}`)}
+              className="text-sm font-medium hover:text-teal-300"
+            >
               Continue →
             </button>
           )}
@@ -39,3 +46,4 @@ function MyTopics({ topics }) {
 }
 
 export default MyTopics;
+

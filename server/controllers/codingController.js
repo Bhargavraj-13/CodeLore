@@ -45,6 +45,7 @@ export const getProblemById = async (req, res) => {
       description: p.description,
       starterCode: p.starterCode,
       sampleTestCases: p.sampleTestCases,
+      previewTestCases: p.testCases.slice(0, 2),
     };
 
     res.status(200).json({

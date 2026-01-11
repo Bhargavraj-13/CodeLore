@@ -24,6 +24,16 @@ function QuizResultPage() {
 
   const { score, correctCount, totalQuestions, results } = state;
 
+  const handlePrimaryAction = () => {
+  if (score >= 8) {
+    navigate(`/coding/${topicId}`);
+  } else {
+    navigate(`/quiz/${topicId}`);
+  }
+};
+
+const primaryActionLabel = score >= 8 ? "Start Coding" : "ReAttempt";
+
   return (
     <div className="min-h-screen bg-slate-950 text-white flex flex-col">
       <AppHeader />
@@ -47,9 +57,12 @@ function QuizResultPage() {
           <ResultBreakdown results={results} />
 
           <ResultActions
-            onBackToTopic={() => navigate(`/topics/${topicId}`)}
-            reAttempt={() => navigate(`/quiz/${topicId}`)}
-          />
+  onBackToTopic={() => navigate(`/topics/${topicId}`)}
+  reAttempt={handlePrimaryAction}
+  reAttemptLabel={primaryActionLabel}
+/>
+
+
 
         </div>
       </main>
