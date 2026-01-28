@@ -5,6 +5,9 @@ import { v4 as uuidv4 } from "uuid";
 
 const TMP_DIR = path.join(process.cwd(), "tmp");
 
+// 🔥 ABSOLUTE PATH TO G++
+const GPP_PATH = `"C:\\msys64\\mingw64\\bin\\g++.exe"`;
+
 if (!fs.existsSync(TMP_DIR)) {
   fs.mkdirSync(TMP_DIR);
 }
@@ -17,75 +20,85 @@ export const runCpp = ({ code, testCases }) => {
 
     fs.writeFileSync(cppPath, code);
 
-    exec(`g++ "${cppPath}" -o "${outPath}"`, (compileErr, _, compileStderr) => {
-      if (compileErr) {
-        fs.unlinkSync(cppPath);
-        return resolve({
-          status: "COMPILE_ERROR",
-          passedCount: 0,
-          totalCount: testCases.length,
-          results: [
-            {
-              error: compileStderr || compileErr.message,
-            },
-          ],
-        });
-      }
+    // ✅ USE ABSOLUTE G++ PATH
+    exec(
+      `${GPP_PATH} "${cppPath}" -o "${outPath}"`,
+      (compileErr, _stdout, compileStderr) => {
+        if (compileErr) {
+          console.log("❌ G++ COMPILATION FAILED");
+          console.log("STDERR:", compileStderr);
+          console.log("ERROR:", compileErr.message);
 
-      const results = [];
-      let passedCount = 0;
-
-      const runTestCase = (index) => {
-        if (index >= testCases.length) {
           fs.unlinkSync(cppPath);
-          fs.unlinkSync(outPath);
+
           return resolve({
-            status:
-              passedCount === testCases.length
-                ? "ACCEPTED"
-                : passedCount > 0
-                ? "PARTIAL"
-                : "FAILED",
-            passedCount,
+            status: "COMPILE_ERROR",
+            passedCount: 0,
             totalCount: testCases.length,
-            results,
+            results: [
+              {
+                error: compileStderr || compileErr.message,
+              },
+            ],
           });
         }
 
-        const { input, expectedOutput } = testCases[index];
+        const results = [];
+        let passedCount = 0;
 
-        const process = exec(
-          `"${outPath}"`,
-          { timeout: 2000 },
-          (error, stdout, stderr) => {
-            const userOutput = stdout.trim();
-            const expected = expectedOutput.trim();
+        const runTestCase = (index) => {
+          if (index >= testCases.length) {
+            fs.unlinkSync(cppPath);
+            fs.unlinkSync(outPath);
 
-            let passed = false;
-
-            if (!error && !stderr && userOutput === expected) {
-              passed = true;
-              passedCount++;
-            }
-
-            results.push({
-              testCaseIndex: index,
-              passed,
-              input,
-              expectedOutput: expected,
-              userOutput,
-              error: stderr || (error ? error.message : null),
+            return resolve({
+              status:
+                passedCount === testCases.length
+                  ? "ACCEPTED"
+                  : passedCount > 0
+                  ? "PARTIAL"
+                  : "FAILED",
+              passedCount,
+              totalCount: testCases.length,
+              results,
             });
-
-            runTestCase(index + 1);
           }
-        );
 
-        process.stdin.write(input);
-        process.stdin.end();
-      };
+          const { input, expectedOutput } = testCases[index];
 
-      runTestCase(0);
-    });
+          const process = exec(
+            `"${outPath}"`,
+            { timeout: 2000 },
+            (error, stdout, stderr) => {
+              const userOutput = stdout.trim();
+              const expected = expectedOutput.trim();
+
+              let passed = false;
+
+              if (!error && !stderr && userOutput === expected) {
+                passed = true;
+                passedCount++;
+              }
+
+              results.push({
+                testCaseIndex: index,
+                passed,
+                input,
+                expectedOutput: expected,
+                userOutput,
+                error: stderr || (error ? error.message : null),
+              });
+
+              runTestCase(index + 1);
+            }
+          );
+
+          process.stdin.write(input);
+          process.stdin.end();
+        };
+
+        runTestCase(0);
+      }
+    );
   });
 };

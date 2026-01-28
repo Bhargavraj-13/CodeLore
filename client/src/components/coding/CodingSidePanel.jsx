@@ -26,7 +26,9 @@ function CodingSidePanel({ sampleTestCases = [], result, problem }) {
         </h3>
 
         {sampleTestCases.slice(0, 2).map((tc, index) => {
-          const exec = result?.testCaseResults?.[index];
+          const exec = Array.isArray(result?.testCaseResults)
+  ? result.testCaseResults[index]
+  : null;
 
           return (
             <div

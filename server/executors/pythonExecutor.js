@@ -16,47 +16,45 @@ export const runPython = ({ code, testCases }) => {
 
     fs.writeFileSync(filePath, code);
 
-    const results = [];
-    let passedCount = 0;
+    let passed = 0;
+    const testCaseResults = [];
 
     const runTestCase = (index) => {
       if (index >= testCases.length) {
         fs.unlinkSync(filePath);
+
         return resolve({
           status:
-            passedCount === testCases.length
+            passed === testCases.length
               ? "ACCEPTED"
-              : passedCount > 0
-              ? "PARTIAL"
-              : "FAILED",
-          passedCount,
-          totalCount: testCases.length,
-          results,
+              : passed > 0
+              ? "WRONG_ANSWER"
+              : "WRONG_ANSWER",
+          passed,
+          total: testCases.length,
+          testCaseResults,
         });
       }
 
       const { input, expectedOutput } = testCases[index];
 
-      const process = exec(
+      const child = exec(
         `python "${filePath}"`,
         { timeout: 2000 },
         (error, stdout, stderr) => {
           const userOutput = stdout.trim();
           const expected = expectedOutput.trim();
 
-          let passed = false;
+          const isCorrect =
+            !error && !stderr && userOutput === expected;
 
-          if (!error && !stderr && userOutput === expected) {
-            passed = true;
-            passedCount++;
-          }
+          if (isCorrect) passed++;
 
-          results.push({
-            testCaseIndex: index,
-            passed,
+          testCaseResults.push({
             input,
             expectedOutput: expected,
-            userOutput,
+            output: userOutput,
+            status: isCorrect ? "correct" : "wrong",
             error: stderr || (error ? error.message : null),
           });
 
@@ -64,8 +62,8 @@ export const runPython = ({ code, testCases }) => {
         }
       );
 
-      process.stdin.write(input);
-      process.stdin.end();
+      child.stdin.write(input);
+      child.stdin.end();
     };
 
     runTestCase(0);
