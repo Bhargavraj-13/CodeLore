@@ -1,3 +1,5 @@
+// server/server.js
+
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
@@ -12,6 +14,7 @@ import journeyRoutes from "./routes/journeyRoutes.js";
 import topicContentRoutes from "./routes/topicContentRoutes.js";
 import quizRoutes from "./routes/quizRoutes.js";
 import codingRoutes from "./routes/codingRoutes.js";
+import codingRunRoutes from "./routes/codingRunRoutes.js";
 import codingSubmitRoutes from "./routes/codingSubmitRoutes.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -48,6 +51,8 @@ app.use("/api/topics", topicContentRoutes);
 app.use("/api/quiz", quizRoutes);
 app.use("/api/coding", codingRoutes);
 app.use("/api/coding-submit", codingSubmitRoutes);
+app.use("/api/coding", codingRunRoutes);
+
 
 // Start the server
 const PORT = process.env.PORT || 3000;

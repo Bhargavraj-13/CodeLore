@@ -1,5 +1,3 @@
-// Component for the landing page header
-
 import Logo from './Logo.jsx';
 import { useNavigate } from 'react-router-dom';
 

@@ -1,4 +1,4 @@
-import Topic from "../models/topic.js";
+import Topic from "../models/Topic.js";
 
 // Search topics (Home Page)
 export const searchTopics = async (req, res) => {

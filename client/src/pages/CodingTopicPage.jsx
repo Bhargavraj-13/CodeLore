@@ -49,56 +49,50 @@ function CodingTopicPage() {
   /* ==============================
      RUN CODE
   ============================== */
-  const runCode = async () => {
-    try {
-      const problemId = problems[currentIndex].id;
+const runCode = async () => {
+  try {
+    const res = await api.post("/api/coding/run", {
+      code,
+      language,
+      testCases: problems[currentIndex].sampleTestCases,
+    });
 
-      const res = await api.post(
-        `/api/coding-submit/${problemId}/submit`,
-        { code, language }
-      );
+    const exec = res.data;
 
-      const exec = res.data.result;
-
-      if (exec.status === "ACCEPTED") {
-        setResult({
-          type: "success",
-          passed: exec.passedCount,
-          total: exec.totalCount,
-          testCaseResults: exec.results,
-        });
-      } else if (exec.status === "PARTIAL" || exec.status === "FAILED") {
-        setResult({
-          type: "logic",
-          passed: exec.passedCount,
-          total: exec.totalCount,
-          testCaseResults: exec.results,
-        });
-      } else if (exec.status === "COMPILE_ERROR") {
-        setResult({
-          type: "syntax",
-          message:
-            exec.results?.[0]?.error ||
-            "Compilation failed",
-        });
-      } else {
-        setResult({
-          type: "syntax",
-          message: "Runtime error occurred",
-        });
-      }
-    } catch (err) {
+    if (exec.status === "ACCEPTED") {
+      setResult({
+        type: "success",
+        passed: exec.passed,
+        total: exec.total,
+        testCaseResults: exec.testCaseResults,
+      });
+    } else if (exec.status === "PARTIAL" || exec.status === "FAILED") {
+      setResult({
+        type: "logic",
+        passed: exec.passed,
+        total: exec.total,
+        testCaseResults: exec.testCaseResults,
+      });
+    } else if (exec.status === "COMPILE_ERROR") {
       setResult({
         type: "syntax",
-        message:
-          err.response?.data?.message ||
-          err.message ||
-          "Failed to execute code",
+        message: exec.error || "Compilation failed",
+      });
+    } else {
+      setResult({
+        type: "syntax",
+        message: "Runtime error occurred",
       });
     }
-  };
+  } catch (error) {
+    setResult({
+      type: "syntax",
+      message: error.message || "An error occurred",
+    });
+  }
+};
 
-  const isLast = currentIndex === problems.length - 1;
+const isLast = currentIndex === problems.length - 1;
 
   return (
     <div className="h-screen bg-slate-950 text-white flex flex-col">

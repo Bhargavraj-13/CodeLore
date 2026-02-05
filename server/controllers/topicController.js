@@ -1,4 +1,4 @@
-import Topic from "../models/topic.js";
+import Topic from "../models/Topic.js";
 
 // Create a new topic (Admin Only)
 export const createTopic = async (req, res) => {

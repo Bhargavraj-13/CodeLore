@@ -5,41 +5,46 @@ import { v4 as uuidv4 } from "uuid";
 
 const TMP_DIR = path.join(process.cwd(), "tmp");
 
-// 🔥 ABSOLUTE PATH TO G++
-const GPP_PATH = `"C:\\msys64\\mingw64\\bin\\g++.exe"`;
+const GPP_PATH =
+  process.platform === "win32"
+    ? `"C:\\msys64\\ucrt64\\bin\\g++.exe"`
+    : "g++";
 
 if (!fs.existsSync(TMP_DIR)) {
-  fs.mkdirSync(TMP_DIR);
+  fs.mkdirSync(TMP_DIR, { recursive: true });
 }
 
 export const runCpp = ({ code, testCases }) => {
+  console.log("🔥 runCpp CALLED");
+
   return new Promise((resolve) => {
     const fileId = uuidv4();
+
     const cppPath = path.join(TMP_DIR, `${fileId}.cpp`);
-    const outPath = path.join(TMP_DIR, `${fileId}.exe`);
+
+    const outPath =
+      process.platform === "win32"
+        ? path.join(TMP_DIR, `${fileId}.exe`)
+        : path.join(TMP_DIR, fileId);
 
     fs.writeFileSync(cppPath, code);
 
-    // ✅ USE ABSOLUTE G++ PATH
+    console.log("CPP PATH:", cppPath);
+    console.log("CPP EXISTS:", fs.existsSync(cppPath));
+    console.log("CPP CONTENT:\n", fs.readFileSync(cppPath, "utf8"));
+
     exec(
       `${GPP_PATH} "${cppPath}" -o "${outPath}"`,
       (compileErr, _stdout, compileStderr) => {
         if (compileErr) {
-          console.log("❌ G++ COMPILATION FAILED");
-          console.log("STDERR:", compileStderr);
-          console.log("ERROR:", compileErr.message);
-
           fs.unlinkSync(cppPath);
 
           return resolve({
             status: "COMPILE_ERROR",
+            output: compileStderr || compileErr.message,
             passedCount: 0,
             totalCount: testCases.length,
-            results: [
-              {
-                error: compileStderr || compileErr.message,
-              },
-            ],
+            results: [],
           });
         }
 
@@ -66,19 +71,25 @@ export const runCpp = ({ code, testCases }) => {
 
           const { input, expectedOutput } = testCases[index];
 
-          const process = exec(
-            `"${outPath}"`,
-            { timeout: 2000 },
+          const runCommand =
+            process.platform === "win32"
+              ? `"${outPath}"`
+              : `./${fileId}`;
+
+          const processExec = exec(
+            runCommand,
+            {
+              cwd: TMP_DIR,
+              timeout: 2000,
+            },
             (error, stdout, stderr) => {
               const userOutput = stdout.trim();
               const expected = expectedOutput.trim();
 
-              let passed = false;
+              const passed =
+                !error && !stderr && userOutput === expected;
 
-              if (!error && !stderr && userOutput === expected) {
-                passed = true;
-                passedCount++;
-              }
+              if (passed) passedCount++;
 
               results.push({
                 testCaseIndex: index,
@@ -93,8 +104,8 @@ export const runCpp = ({ code, testCases }) => {
             }
           );
 
-          process.stdin.write(input);
-          process.stdin.end();
+          processExec.stdin.write(input);
+          processExec.stdin.end();
         };
 
         runTestCase(0);
