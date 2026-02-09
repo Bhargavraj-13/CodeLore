@@ -3,6 +3,28 @@ import fs from "fs";
 import path from "path";
 import { v4 as uuidv4 } from "uuid";
 
+function formatPythonError(stderr) {
+  if (!stderr) return null;
+
+  const lines = stderr.trim().split("\n");
+
+  const errorLine = lines[lines.length - 1];
+  const fileLine = lines.find((l) => l.includes("File"));
+
+  let lineNumber = "unknown";
+
+  if (fileLine) {
+    const match = fileLine.match(/line (\d+)/);
+    if (match) lineNumber = match[1];
+  }
+
+  return ` Runtime Error
+
+Line ${lineNumber}:
+${errorLine}`.trim();
+}
+
+
 const TMP_DIR = path.join(process.cwd(), "tmp");
 
 if (!fs.existsSync(TMP_DIR)) {
@@ -55,7 +77,7 @@ export const runPython = ({ code, testCases }) => {
             expectedOutput: expected,
             output: userOutput,
             status: isCorrect ? "correct" : "wrong",
-            error: stderr || (error ? error.message : null),
+            error: formatPythonError(stderr) || (error ? error.message : null),
           });
 
           runTestCase(index + 1);

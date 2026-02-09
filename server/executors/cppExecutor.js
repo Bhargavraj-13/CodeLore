@@ -3,6 +3,38 @@ import fs from "fs";
 import path from "path";
 import { v4 as uuidv4 } from "uuid";
 
+function formatGccError(stderr) {
+  if (!stderr) return "Compilation failed.";
+
+  const lines = stderr.split("\n");
+
+  const errorIndex = lines.findIndex((line) =>
+    line.includes("error:")
+  );
+
+  if (errorIndex === -1) {
+    return "Compilation failed.";
+  }
+
+  const errorLine = lines[errorIndex];
+
+  const lineMatch = errorLine.match(/:(\d+):\d+:/);
+  const lineNumber = lineMatch ? lineMatch[1] : "unknown";
+
+  const message = errorLine.split("error:")[1]?.trim();
+
+  const context = lines
+    .slice(errorIndex + 1, errorIndex + 6)
+    .join("\n");
+
+  return ` Compilation Error
+
+Line ${lineNumber}:
+${message}
+
+${context}`.trim();
+}
+
 const TMP_DIR = path.join(process.cwd(), "tmp");
 
 const GPP_PATH =
@@ -15,7 +47,6 @@ if (!fs.existsSync(TMP_DIR)) {
 }
 
 export const runCpp = ({ code, testCases }) => {
-  console.log("🔥 runCpp CALLED");
 
   return new Promise((resolve) => {
     const fileId = uuidv4();
@@ -41,7 +72,7 @@ export const runCpp = ({ code, testCases }) => {
 
           return resolve({
             status: "COMPILE_ERROR",
-            output: compileStderr || compileErr.message,
+            output: formatGccError(compileStderr),
             passedCount: 0,
             totalCount: testCases.length,
             results: [],

@@ -1,4 +1,4 @@
-function CodingSidePanel({ sampleTestCases = [], result, problem }) {
+function CodingSidePanel({ sampleTestCases = [], result, problem, isRunning }) {
   return (
     <div
       className="
@@ -46,20 +46,9 @@ function CodingSidePanel({ sampleTestCases = [], result, problem }) {
               </pre>
 
               <p className="text-slate-400 mt-2">Your Output</p>
-
-              <pre
-                className={`whitespace-pre-wrap ${
-                  exec
-                    ? exec.status === "correct"
-                      ? "text-green-400"
-                      : "text-red-400"
-                    : "text-slate-400"
-                }`}
-              >
-                {exec
-                  ? exec.output || result?.message
-                  : "—"}
-              </pre>
+                {isRunning
+    ? "—"
+    : exec?.userOutput ?? "—"}
             </div>
           );
         })}

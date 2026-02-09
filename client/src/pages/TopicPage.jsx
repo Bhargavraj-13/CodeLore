@@ -111,7 +111,7 @@ function TopicPage() {
       <button
         onClick={() => navigate(`/quiz/${topicId}`)}
         className="px-4 py-2 text-sm font-medium
-                  bg-teal-500/90 hover:bg-teal-500
+                  bg-teal-500 hover:bg-teal-400
                   text-slate-900 rounded-md"
       >
         Start Quiz

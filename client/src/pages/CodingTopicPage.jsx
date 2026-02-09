@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import api from "../lib/api.jsx";
+import { SubmitResultModal } from "../components/submitResult";
+import EndExamConfirmModal from "../components/coding/EndExamModal";
 
 import {
   CodingHeader,
@@ -10,94 +12,149 @@ import {
 
 function CodingTopicPage() {
   const { topicId } = useParams();
+  const navigate = useNavigate();
 
   const [problems, setProblems] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [language, setLanguage] = useState("cpp");
-  const [code, setCode] = useState("");
+
+  // ✅ Stores ONLY user-written code
+  const [codeMap, setCodeMap] = useState({});
+
   const [result, setResult] = useState(null);
+  const [isRunning, setIsRunning] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
+  const [submitResult, setSubmitResult] = useState(null);
+  const [submitAttempt, setSubmitAttempt] = useState(0);
+  const [showEndExamConfirm, setShowEndExamConfirm] = useState(false);
 
   /* ==============================
-     Load problems for topic
+     Load problems
   ============================== */
   useEffect(() => {
     const fetchProblems = async () => {
       const res = await api.get(`/api/coding/${topicId}`);
       setProblems(res.data.problems);
-      setCode(res.data.problems[0].starterCode.cpp);
     };
 
     fetchProblems();
   }, [topicId]);
 
-  /* ==============================
-     Update code when question/lang changes
-  ============================== */
-  useEffect(() => {
-    if (problems.length) {
-      setCode(problems[currentIndex].starterCode[language]);
-    }
-  }, [currentIndex, language, problems]);
+  const currentProblem = problems[currentIndex];
 
   /* ==============================
-     Clear result on question change
+     Derive editor content
+     (NO side effects)
+  ============================== */
+  const currentCode =
+    codeMap[currentProblem?.id]?.[language] ??
+    currentProblem?.starterCode?.[language] ??
+    "";
+
+  /* ==============================
+     Save ONLY user edits
+  ============================== */
+  const handleCodeChange = (newCode) => {
+//     console.log("EDITING:", {
+//   problemId: currentProblem.id,
+//   index: currentIndex,
+//   preview: newCode.slice(0, 30),
+// });
+
+    if (!currentProblem) return;
+
+    setCodeMap((prev) => ({
+      ...prev,
+      [currentProblem.id]: {
+        ...prev[currentProblem.id],
+        [language]: newCode,
+      },
+    }));
+  };
+
+  /* ==============================
+     Clear run result on question change
   ============================== */
   useEffect(() => {
     setResult(null);
   }, [currentIndex]);
 
   /* ==============================
-     RUN CODE
+     RUN (sample test cases)
   ============================== */
-const runCode = async () => {
-  try {
-    const res = await api.post("/api/coding/run", {
-      code,
-      language,
-      testCases: problems[currentIndex].sampleTestCases,
-    });
+  const runCode = async () => {
+    if (!currentProblem || isRunning) return;
 
-    const exec = res.data;
+    setIsRunning(true);
 
-    if (exec.status === "ACCEPTED") {
-      setResult({
-        type: "success",
-        passed: exec.passed,
-        total: exec.total,
-        testCaseResults: exec.testCaseResults,
+    try {
+      const res = await api.post("/api/coding/run", {
+        code: currentCode,
+        language,
+        testCases: currentProblem.sampleTestCases,
       });
-    } else if (exec.status === "PARTIAL" || exec.status === "FAILED") {
-      setResult({
-        type: "logic",
-        passed: exec.passed,
-        total: exec.total,
-        testCaseResults: exec.testCaseResults,
-      });
-    } else if (exec.status === "COMPILE_ERROR") {
+
+      const exec = res.data;
+
+      if (exec.status === "ACCEPTED") {
+        setResult({
+          type: "success",
+          passed: exec.passed,
+          total: exec.total,
+          testCaseResults: exec.testCaseResults,
+        });
+      } else if (exec.status === "PARTIAL" || exec.status === "FAILED") {
+        setResult({
+          type: "logic",
+          passed: exec.passed,
+          total: exec.total,
+          testCaseResults: exec.testCaseResults,
+        });
+      } else {
+        setResult({
+          type: "syntax",
+          message: exec.output || "Compilation or runtime error",
+        });
+      }
+    } catch (error) {
       setResult({
         type: "syntax",
-        message: exec.error || "Compilation failed",
+        message: error.message || "An error occurred",
       });
-    } else {
-      setResult({
-        type: "syntax",
-        message: "Runtime error occurred",
-      });
+    } finally {
+      setIsRunning(false);
     }
+  };
+
+  /* ==============================
+     SUBMIT (hidden test cases)
+  ============================== */
+  const onSubmit = async () => {
+  try {
+    const problemId = problems[currentIndex].id;
+
+    const res = await api.post(
+      `/api/coding-submit/${problemId}/submit`,
+      { code: currentCode, language }
+    );
+
+    // ✅ CONNECT BACKEND → UI
+    setSubmitResult(res.data.result);
+    setSubmitAttempt((c) => c + 1);
+    setIsSubmitModalOpen(true);
+
   } catch (error) {
-    setResult({
-      type: "syntax",
-      message: error.message || "An error occurred",
-    });
+    console.error("Submit error:", error);
   }
 };
 
-const isLast = currentIndex === problems.length - 1;
+  const isLast = currentIndex === problems.length - 1;
 
   return (
     <div className="h-screen bg-slate-950 text-white flex flex-col">
       <CodingHeader
-        problem={problems[currentIndex]}
+        problem={currentProblem}
         index={currentIndex}
         total={problems.length}
         language={language}
@@ -107,29 +164,57 @@ const isLast = currentIndex === problems.length - 1;
           setCurrentIndex((i) => Math.max(i - 1, 0))
         }
         onNext={() =>
-          isLast
-            ? alert("Submitted all problems")
-            : setCurrentIndex((i) => i + 1)
+          setCurrentIndex((i) =>
+            Math.min(i + 1, problems.length - 1)
+          )
         }
+        onSubmit={onSubmit}
         isFirst={currentIndex === 0}
         isLast={isLast}
+        isRunning={isRunning}
+        isSubmitting={isSubmitting}
+        onEndExam={() => setShowEndExamConfirm(true)}
       />
 
       {/* Main Area */}
       <div className="flex flex-1 overflow-hidden px-6 py-4 gap-6">
         <CodingEditor
-          code={code}
-          onChange={setCode}
+          key={`${currentProblem?.id}-${language}`}
+          code={currentCode}
+          onChange={handleCodeChange}
         />
 
         <CodingSidePanel
-          sampleTestCases={
-            problems[currentIndex]?.sampleTestCases
-          }
+          sampleTestCases={currentProblem?.sampleTestCases}
           result={result}
-          problem={problems[currentIndex]}
+          problem={currentProblem}
+          isRunning={isRunning}
         />
       </div>
+
+      <SubmitResultModal
+  isOpen={isSubmitModalOpen}
+  result={submitResult}
+  submitAttempt={submitAttempt}
+  onClose={() => setIsSubmitModalOpen(false)}
+  onNext={() => {
+    setIsSubmitModalOpen(false);
+    setSubmitResult(null);
+    setCurrentIndex((i) => i + 1);
+  }}
+  isLast
+/>
+
+    <EndExamConfirmModal
+  isOpen={showEndExamConfirm}
+  onCancel={() => setShowEndExamConfirm(false)}
+  onConfirm={() => {
+    setShowEndExamConfirm(false);
+    navigate("/results"); // or whatever your results route is
+  }}
+/>
+
+
     </div>
   );
 }

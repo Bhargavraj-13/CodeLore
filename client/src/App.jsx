@@ -10,6 +10,7 @@ import TopicPage from './pages/TopicPage.jsx';
 import QuizPage from './pages/QuizPage.jsx';
 import QuizResultPage from './pages/QuizResultPage.jsx';
 import CodingTopicPage from './pages/CodingTopicPage.jsx';
+//import CodingSubmitPage from './pages/CodingSubmitPage.jsx';
 
 function App() {
   return (
@@ -67,6 +68,14 @@ function App() {
           </ProtectedRoute>
         }
       />
+      {/* <Route
+        path="/coding/submit"
+        element={
+          <ProtectedRoute>
+            <CodingSubmitPage />
+          </ProtectedRoute>
+        }
+      /> */}
     </Routes>
   );
 }
