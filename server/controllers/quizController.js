@@ -1,3 +1,5 @@
+// server/controllers/quizController.js
+
 import User from "../models/User.js";
 import { loadQuizByTopic } from "../utils/quizLoader.js";
 
@@ -67,7 +69,8 @@ export const submitQuiz = async (req, res) => {
     });
 
     const totalQuestions = quiz.questions.length;
-    const score = Math.round((correctCount / totalQuestions) * 100);
+    const percentage = Math.round((correctCount / totalQuestions) * 100);
+    const rawScore = correctCount * 2; 
 
     // ---- Update BEST quiz score only ----
     const user = await User.findById(userId);

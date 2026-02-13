@@ -1,3 +1,5 @@
+// server/controllers/quizProgressController.js
+
 import User from "../models/User.js";
 
 export const updateQuizScore = async (req, res) => {

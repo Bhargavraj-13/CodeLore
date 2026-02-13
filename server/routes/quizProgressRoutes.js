@@ -1,3 +1,5 @@
+// server/routes/quizProgressRoutes.js
+
 import express from "express";
 import { updateQuizScore } from "../controllers/quizProgressController.js";
 import { protect } from "../middleware/authMiddleware.js";

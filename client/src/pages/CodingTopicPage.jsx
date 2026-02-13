@@ -18,7 +18,6 @@ function CodingTopicPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [language, setLanguage] = useState("cpp");
 
-  // ✅ Stores ONLY user-written code
   const [codeMap, setCodeMap] = useState({});
 
   const [result, setResult] = useState(null);
@@ -104,7 +103,10 @@ function CodingTopicPage() {
           total: exec.total,
           testCaseResults: exec.testCaseResults,
         });
-      } else if (exec.status === "PARTIAL" || exec.status === "FAILED") {
+      } else if ( exec.status === "PARTIAL" ||
+                  exec.status === "FAILED" ||
+                  exec.status === "WRONG_ANSWER"
+                ) {
         setResult({
           type: "logic",
           passed: exec.passed,
@@ -114,7 +116,7 @@ function CodingTopicPage() {
       } else {
         setResult({
           type: "syntax",
-          message: exec.output || "Compilation or runtime error",
+          message: exec.error || "Compilation or runtime error",
         });
       }
     } catch (error) {

@@ -1,3 +1,5 @@
+// server/routes/quizRoutes.js
+
 import express from "express";
 import { protect } from "../middleware/authMiddleware.js";
 import { getQuizByTopic, submitQuiz } from "../controllers/quizController.js";

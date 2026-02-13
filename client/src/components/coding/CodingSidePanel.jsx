@@ -1,3 +1,5 @@
+// client/src/components/coding/CodingSidePanel.jsx
+
 function CodingSidePanel({ sampleTestCases = [], result, problem, isRunning }) {
   return (
     <div

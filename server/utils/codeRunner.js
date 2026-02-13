@@ -27,11 +27,25 @@ export const runCode = async ({ language, code, testCases }) => {;
   return {
     status: rawResult.status,
 
-    passed: rawResult.passedCount ?? 0,
-    total: rawResult.totalCount ?? testCases.length,
+    passed:
+      rawResult.passed ??
+      rawResult.passedCount ??
+      0,
 
-    testCaseResults: rawResult.results ?? [],
+    total:
+      rawResult.total ??
+      rawResult.totalCount ??
+      testCases.length,
 
-    error: rawResult.output ?? null,
+    testCaseResults:
+      rawResult.testCaseResults ??
+      rawResult.results ??
+      [],
+
+    error:
+      rawResult.error ??
+      rawResult.output ??
+      null,
   };
+
 };

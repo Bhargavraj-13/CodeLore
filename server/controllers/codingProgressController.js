@@ -1,3 +1,5 @@
+// server/controllers/codingProgressController.js
+
 import User from "../models/User.js";
 
 export const updateCodingProgress = async (req, res) => {
