@@ -3,7 +3,7 @@
   "questions": [
     {
       "id": 1,
-      "question": "Aro the Eagle manages information\nfrom the top of a large jungle tree.\n\nEach branch splits into smaller branches.\n\nWhy does Biru the Monkey say\na tree structure fits this situation?",
+      "question": "Aro the Eagle manages information from the top of a large jungle tree.\nEach branch splits into smaller branches.\n\nWhy does Biru the Monkey say a tree structure fits this situation?",
       "options": [
         "Because data is stored in a straight line",
         "Because data follows a hierarchy",
@@ -14,7 +14,7 @@
     },
     {
       "id": 2,
-      "question": "Kaya the Lion looks at a tree\nand wants to identify the topmost node.\n\nWhat is this node called?",
+      "question": "Kaya the Lion looks at a tree and wants to identify the topmost node.\n\nWhat is this node called?",
       "options": [
         "Leaf",
         "Child",
@@ -25,7 +25,7 @@
     },
     {
       "id": 3,
-      "question": "Biru the Monkey explains\nparent–child relationships in trees.\n\nWhat is a leaf node?",
+      "question": "Biru the Monkey explains parent-child relationships in trees.\n\nWhat is a leaf node?",
       "options": [
         "A node with two children",
         "A node with one parent",
@@ -36,7 +36,7 @@
     },
     {
       "id": 4,
-      "question": "Kaya the Lion learns about\nbinary trees.\n\nWhat restriction defines a binary tree?",
+      "question": "Kaya the Lion learns about binary trees.\n\nWhat restriction defines a binary tree?",
       "options": [
         "Each node has exactly two children",
         "Each node has at most two children",
@@ -47,7 +47,7 @@
     },
     {
       "id": 5,
-      "question": "Kaya the Lion wants to visit\nevery node in the tree.\n\nWhy is traversal needed?",
+      "question": "Kaya the Lion wants to visit every node in the tree.\n\nWhy is traversal needed?",
       "options": [
         "Trees are always sorted",
         "Trees do not have a single linear path",
@@ -58,7 +58,7 @@
     },
     {
       "id": 6,
-      "question": "Biru the Monkey explains\ninorder traversal.\n\nWhat is the correct visiting order?",
+      "question": "Biru the Monkey explains inorder traversal.\n\nWhat is the correct visiting order?",
       "options": [
         "Root, Left, Right",
         "Left, Root, Right",
@@ -69,7 +69,7 @@
     },
     {
       "id": 7,
-      "question": "Aro the Eagle checks nodes\nlevel by level.\n\nWhich traversal is this?",
+      "question": "Aro the Eagle checks nodes level by level.\n\nWhich traversal is this?",
       "options": [
         "Inorder traversal",
         "Preorder traversal",
@@ -80,7 +80,7 @@
     },
     {
       "id": 8,
-      "question": "Kaya the Lion writes inorder traversal logic.\n\nOne line is missing.\n\nWhich option completes it?",
+      "question": "Kaya the Lion writes inorder traversal logic.\nOne line is missing.\n\nWhich option completes it?",
       "code": "```\nFUNCTION inorder(node):\n    IF node is null:\n        RETURN\n\n    inorder(node.left)\n    PROCESS node\n    _________\n```",
       "options": [
         "PROCESS node.left",

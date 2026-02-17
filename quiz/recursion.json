@@ -3,10 +3,10 @@
   "questions": [
     {
       "id": 1,
-      "question": "Kaya the Lion faces a tall rock wall.\n\nHe realizes the wall is made of\nmany smaller steps.\n\nWhy does Biru the Monkey say\nrecursion fits this situation?",
+      "question": "Kaya the Lion faces a tall rock wall.\nHe realizes the wall is made of many smaller steps.\n\nWhy does Biru the Monkey say recursion fits this situation?",
       "options": [
         "Because recursion avoids conditions",
-        "Because recursion solves a problem\nby solving smaller versions of it",
+        "Because recursion solves a problem by solving smaller versions of it",
         "Because recursion runs faster than loops",
         "Because recursion works without a base case"
       ],
@@ -14,7 +14,7 @@
     },
     {
       "id": 2,
-      "question": "Biru the Monkey explains that\nevery recursive function must stop.\n\nWhat ensures that recursion\nwill not run forever?",
+      "question": "Biru the Monkey explains that every recursive function must stop.\n\nWhat ensures that recursion will not run forever?",
       "options": [
         "A loop inside the function",
         "A base case",
@@ -25,7 +25,7 @@
     },
     {
       "id": 3,
-      "question": "Kaya the Lion breaks a problem\ninto smaller versions of itself.\n\nWhat is this part of recursion called?",
+      "question": "Kaya the Lion breaks a problem into smaller versions of itself.\n\nWhat is this part of recursion called?",
       "options": [
         "Base case",
         "Recursive case",
@@ -36,7 +36,7 @@
     },
     {
       "id": 4,
-      "question": "Kaya the Lion reaches the\nsimplest version of the problem.\n\nWhat happens at this point?",
+      "question": "Kaya the Lion reaches the simplest version of the problem.\n\nWhat happens at this point?",
       "options": [
         "The function calls itself again",
         "The program crashes",
@@ -47,7 +47,7 @@
     },
     {
       "id": 5,
-      "question": "Biru the Monkey warns Kaya that\nrecursion without reducing the problem\nis dangerous.\n\nWhy?",
+      "question": "Biru the Monkey warns Kaya that recursion without reducing the problem is dangerous.\nWhy?",
       "options": [
         "It may skip useful work",
         "It may never reach the base case",
@@ -58,7 +58,7 @@
     },
     {
       "id": 6,
-      "question": "Kaya the Lion uses recursion\nto count down from a number.\n\nWhen does the recursive call\nstart returning values?",
+      "question": "Kaya the Lion uses recursion to count down from a number.\n\nWhen does the recursive call start returning values?",
       "options": [
         "Before the base case",
         "After the base case is reached",
@@ -69,7 +69,7 @@
     },
     {
       "id": 7,
-      "question": "Biru the Monkey explains that\nrecursion uses extra memory.\n\nWhat structure stores\nrecursive function calls?",
+      "question": "Biru the Monkey explains that recursion uses extra memory.\n\nWhat structure stores recursive function calls?",
       "options": [
         "Queue",
         "Heap",
@@ -80,7 +80,7 @@
     },
     {
       "id": 8,
-      "question": "Kaya the Lion writes a recursive function.\n\nOne line is missing.\n\nWhich option correctly completes it?",
+      "question": "Kaya the Lion writes a recursive function.\nOne line is missing.\n\nWhich option correctly completes it?",
       "code": "```\nFUNCTION countDown(n):\n    IF n == 0:\n        RETURN\n\n    PRINT n\n    _________\n```",
       "options": [
         "countDown(n)",
@@ -92,7 +92,7 @@
     },
     {
       "id": 9,
-      "question": "Kaya the Lion writes a base case.\n\nWhich condition correctly\nrepresents a base case?",
+      "question": "Kaya the Lion writes a base case.\n\nWhich condition correctly represents a base case?",
       "code": "```\nIF _________:\n    RETURN\n```",
       "options": [
         "n > 0",
@@ -104,7 +104,7 @@
     },
     {
       "id": 10,
-      "question": "Biru the Monkey checks Kaya's recursion.\n\nWhich line ensures the problem\nbecomes smaller each time?",
+      "question": "Biru the Monkey checks Kaya's recursion.\n\nWhich line ensures the problem becomes smaller each time?",
       "code": "```\ncountDown( _________ )\n```",
       "options": [
         "n",
@@ -116,5 +116,3 @@
     }
   ]
 }
-
-

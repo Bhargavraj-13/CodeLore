@@ -212,7 +212,9 @@ function CodingTopicPage() {
   onCancel={() => setShowEndExamConfirm(false)}
   onConfirm={() => {
     setShowEndExamConfirm(false);
-    navigate("/results"); // or whatever your results route is
+    navigate(`/coding/${topicId}/results`, {
+  //state: resultData,
+});
   }}
 />
 

@@ -3,7 +3,7 @@
   "questions": [
     {
       "id": 1,
-      "question": "Veko the Wolf manages a patrol route\nwhere points are added and removed often.\n\nKaya the Lion first thinks of using an array.\n\nWhy does Biru the Monkey suggest\na linked list instead?",
+      "question": "Veko the Wolf manages a patrol route where points are added and removed often.\nKaya the Lion first thinks of using an array.\n\nWhy does Biru the Monkey suggest a linked list instead?",
       "options": [
         "Linked lists use less memory",
         "Linked lists allow easy insertion and deletion",
@@ -14,7 +14,7 @@
     },
     {
       "id": 2,
-      "question": "Kaya the Lion learns that\nlinked lists are made of nodes.\n\nWhat does each node usually contain?",
+      "question": "Kaya the Lion learns that linked lists are made of nodes.\n\nWhat does each node usually contain?",
       "options": [
         "Only data",
         "Only an index",
@@ -25,7 +25,7 @@
     },
     {
       "id": 3,
-      "question": "Biru the Monkey explains\nsingly linked lists.\n\nWhat information does each node store?",
+      "question": "Biru the Monkey explains singly linked lists.\n\nWhat information does each node store?",
       "options": [
         "Data and previous node",
         "Data and both next and previous nodes",
@@ -36,7 +36,7 @@
     },
     {
       "id": 4,
-      "question": "Kaya the Lion tries to move backward\nin a singly linked list.\n\nWhy is this not possible?",
+      "question": "Kaya the Lion tries to move backward in a singly linked list.\n\nWhy is this not possible?",
       "options": [
         "The list is circular",
         "Nodes do not store previous links",
@@ -47,7 +47,7 @@
     },
     {
       "id": 5,
-      "question": "Veko the Wolf now needs to\nmove forward and backward\nalong the route.\n\nWhich type of linked list\nsolves this problem?",
+      "question": "Veko the Wolf now needs to move forward and backward along the route.\n\nWhich type of linked list solves this problem?",
       "options": [
         "Singly linked list",
         "Circular linked list",
@@ -58,7 +58,7 @@
     },
     {
       "id": 6,
-      "question": "Biru the Monkey introduces\na circular linked list.\n\nWhat makes it different?",
+      "question": "Biru the Monkey introduces a circular linked list.\n\nWhat makes it different?",
       "options": [
         "The first node points to null",
         "The last node points back to the head",
@@ -69,7 +69,7 @@
     },
     {
       "id": 7,
-      "question": "Kaya the Lion traverses a linked list.\n\nWhen should traversal stop\nin a singly linked list?",
+      "question": "Kaya the Lion traverses a linked list.\n\nWhen should traversal stop in a singly linked list?",
       "options": [
         "When the value is zero",
         "When a node repeats",
@@ -80,7 +80,7 @@
     },
     {
       "id": 8,
-      "question": "Kaya the Lion writes logic\nto traverse a linked list.\n\nOne line is missing.\n\nWhich option completes the logic?",
+      "question": "Kaya the Lion writes logic to traverse a linked list.\nOne line is missing.\n\nWhich option completes the logic?",
       "code": "```\ncurrent = head\n\nWHILE current is not null:\n    PROCESS current.data\n    _________\n```",
       "options": [
         "current = head",
@@ -92,7 +92,7 @@
     },
     {
       "id": 9,
-      "question": "Kaya the Lion inserts a new node\nbetween two existing nodes.\n\nWhich links must be updated?",
+      "question": "Kaya the Lion inserts a new node between two existing nodes.\n\nWhich links must be updated?",
       "code": "```\nnew.next = current.next\n_________\n```",
       "options": [
         "current.next = new",
@@ -104,7 +104,7 @@
     },
     {
       "id": 10,
-      "question": "Biru the Monkey warns about\ncircular linked lists.\n\nWhat mistake can cause\nan infinite loop?",
+      "question": "Biru the Monkey warns about circular linked lists.\n\nWhat mistake can cause an infinite loop?",
       "options": [
         "Using a head pointer",
         "Forgetting a stopping condition",
@@ -115,5 +115,3 @@
     }
   ]
 }
-
-

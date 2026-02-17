@@ -13,6 +13,7 @@ export const getQuizByTopic = async (req, res) => {
     const safeQuestions = quiz.questions.map((q) => ({
       id: q.id,
       question: q.question,
+      code: q.code ?? null,
       options: q.options,
     }));
 
