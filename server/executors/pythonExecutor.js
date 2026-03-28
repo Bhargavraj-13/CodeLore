@@ -1,6 +1,4 @@
-// server/executors/pythonExecutor.js
-
-import { exec } from "child_process";
+import { spawn } from "child_process";
 import fs from "fs";
 import path from "path";
 import { v4 as uuidv4 } from "uuid";
@@ -20,12 +18,11 @@ function formatPythonError(stderr) {
     if (match) lineNumber = match[1];
   }
 
-  return ` Runtime Error
+  return `Runtime Error
 
 Line ${lineNumber}:
 ${errorLine}`.trim();
 }
-
 
 const TMP_DIR = path.join(process.cwd(), "tmp");
 
@@ -36,7 +33,8 @@ if (!fs.existsSync(TMP_DIR)) {
 export const runPython = ({ code, testCases }) => {
   return new Promise((resolve) => {
     const fileId = uuidv4();
-    const filePath = path.join(TMP_DIR, `${fileId}.py`);
+    const fileName = `${fileId}.py`;
+    const filePath = path.join(TMP_DIR, fileName);
 
     fs.writeFileSync(filePath, code);
 
@@ -51,8 +49,6 @@ export const runPython = ({ code, testCases }) => {
           status:
             passed === testCases.length
               ? "ACCEPTED"
-              : passed > 0
-              ? "WRONG_ANSWER"
               : "WRONG_ANSWER",
           passed,
           total: testCases.length,
@@ -62,29 +58,63 @@ export const runPython = ({ code, testCases }) => {
 
       const { input, expectedOutput } = testCases[index];
 
-      const child = exec(
-        `python "${filePath}"`,
-        { timeout: 2000 },
-        (error, stdout, stderr) => {
-          const userOutput = stdout.trim();
-          const expected = expectedOutput.trim();
+          const dockerArgs = [
+            "run",
+            "--rm",
+            "-i",
+            "--memory=128m",
+            "--cpus=0.5",
+            "--pids-limit=64",
+            "--network=none",
+            "--read-only",
+            "--tmpfs",
+            "/tmp",
+            "-v",
+            `${TMP_DIR}:/sandbox`,
+            "codelore-sandbox",
+            "python",
+            `/sandbox/${fileName}`,
+          ];
 
-          const isCorrect =
-            !error && !stderr && userOutput === expected;
 
-          if (isCorrect) passed++;
+      const child = spawn("docker", dockerArgs);
 
-          testCaseResults.push({
-            input,
-            expectedOutput: expected,
-            output: userOutput,
-            status: isCorrect ? "correct" : "wrong",
-            error: formatPythonError(stderr) || (error ? error.message : null),
-          });
+      let stdout = "";
+      let stderr = "";
 
-          runTestCase(index + 1);
-        }
-      );
+      const timeout = setTimeout(() => {
+        child.kill("SIGKILL");
+      }, 2000);
+
+      child.stdout.on("data", (data) => {
+        stdout += data.toString();
+      });
+
+      child.stderr.on("data", (data) => {
+        stderr += data.toString();
+      });
+
+      child.on("close", () => {
+        clearTimeout(timeout);
+
+        const userOutput = stdout.trim();
+        const expected = expectedOutput.trim();
+
+        const isCorrect =
+          !stderr && userOutput === expected;
+
+        if (isCorrect) passed++;
+
+        testCaseResults.push({
+          input,
+          expectedOutput: expected,
+          output: userOutput,
+          status: isCorrect ? "correct" : "wrong",
+          error: formatPythonError(stderr) || null,
+        });
+
+        runTestCase(index + 1);
+      });
 
       child.stdin.write(input);
       child.stdin.end();

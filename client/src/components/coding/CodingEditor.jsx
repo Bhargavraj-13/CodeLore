@@ -14,7 +14,7 @@ function CodingEditor({ code, onChange }) {
           insertSpaces: true,
           autoIndent: "full",
           formatOnType: true,
-          formatOnPaste: false,
+          formatOnPaste: true,
           autoClosingBrackets: "always",
           autoClosingQuotes: "always",
           minimap: { enabled: false },

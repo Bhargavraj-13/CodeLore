@@ -49,8 +49,8 @@ function CodingSidePanel({ sampleTestCases = [], result, problem, isRunning }) {
 
               <p className="text-slate-400 mt-2">Your Output</p>
                 {isRunning
-    ? "—"
-    : exec?.userOutput ?? "—"}
+    ? "-"
+    : exec?.output ?? exec?.userOutput ?? "-"}
             </div>
           );
         })}

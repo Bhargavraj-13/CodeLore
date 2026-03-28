@@ -1,4 +1,4 @@
-import { exec } from "child_process";
+import { spawn } from "child_process";
 import fs from "fs";
 import path from "path";
 import { v4 as uuidv4 } from "uuid";
@@ -27,7 +27,7 @@ function formatGccError(stderr) {
     .slice(errorIndex + 1, errorIndex + 6)
     .join("\n");
 
-  return ` Compilation Error
+  return `Compilation Error
 
 Line ${lineNumber}:
 ${message}
@@ -37,110 +37,157 @@ ${context}`.trim();
 
 const TMP_DIR = path.join(process.cwd(), "tmp");
 
-const GPP_PATH =
-  process.platform === "win32"
-    ? `"C:\\msys64\\ucrt64\\bin\\g++.exe"`
-    : "g++";
-
 if (!fs.existsSync(TMP_DIR)) {
   fs.mkdirSync(TMP_DIR, { recursive: true });
 }
 
 export const runCpp = ({ code, testCases }) => {
-
   return new Promise((resolve) => {
     const fileId = uuidv4();
-
-    const cppPath = path.join(TMP_DIR, `${fileId}.cpp`);
-
-    const outPath =
-      process.platform === "win32"
-        ? path.join(TMP_DIR, `${fileId}.exe`)
-        : path.join(TMP_DIR, fileId);
+    const fileName = `${fileId}.cpp`;
+    const cppPath = path.join(TMP_DIR, fileName);
 
     fs.writeFileSync(cppPath, code);
 
-    console.log("CPP PATH:", cppPath);
-    console.log("CPP EXISTS:", fs.existsSync(cppPath));
-    console.log("CPP CONTENT:\n", fs.readFileSync(cppPath, "utf8"));
+    // 🔹 Step 1: Compile inside Docker
+    const compileArgs = [
+          "run",
+          "--rm",
+          "--memory=128m",
+          "--cpus=0.5",
+          "--pids-limit=64",
+          "--network=none",
+          "--read-only",
+          "--tmpfs",
+          "/tmp",
+          "-v",
+          `${TMP_DIR}:/sandbox`,
+          "codelore-sandbox",
+          "g++",
+          `/sandbox/${fileName}`,
+          "-o",
+          `/sandbox/${fileId}`,
+      ];
 
-    exec(
-      `${GPP_PATH} "${cppPath}" -o "${outPath}"`,
-      (compileErr, _stdout, compileStderr) => {
-        if (compileErr) {
+
+    const compileProcess = spawn("docker", compileArgs);
+
+    let compileStderr = "";
+
+    compileProcess.stderr.on("data", (data) => {
+      compileStderr += data.toString();
+    });
+
+    compileProcess.on("close", (compileCode) => {
+      if (compileCode !== 0) {
+        fs.unlinkSync(cppPath);
+
+        return resolve({
+          status: "COMPILE_ERROR",
+          output: formatGccError(compileStderr),
+          passedCount: 0,
+          totalCount: testCases.length,
+          results: [],
+        });
+      }
+
+      const results = [];
+      let passedCount = 0;
+
+      const runTestCase = (index) => {
+        if (index >= testCases.length) {
           fs.unlinkSync(cppPath);
 
           return resolve({
-            status: "COMPILE_ERROR",
-            output: formatGccError(compileStderr),
-            passedCount: 0,
+            status:
+              passedCount === testCases.length
+                ? "ACCEPTED"
+                : passedCount > 0
+                ? "PARTIAL"
+                : "FAILED",
+            passedCount,
             totalCount: testCases.length,
-            results: [],
+            results,
           });
         }
 
-        const results = [];
-        let passedCount = 0;
+        const { input, expectedOutput } = testCases[index];
 
-        const runTestCase = (index) => {
-          if (index >= testCases.length) {
+        const runArgs = [
+          "run",
+          "--rm",
+          "-i",
+          "--memory=128m",
+          "--cpus=0.5",
+          "--pids-limit=64",
+          "--network=none",
+          "--read-only",
+          "--tmpfs",
+          "/tmp",
+          "-v",
+          `${TMP_DIR}:/sandbox`,
+          "codelore-sandbox",
+          `/sandbox/${fileId}`,
+        ];
+
+
+        const child = spawn("docker", runArgs);
+
+        let stdout = "";
+        let stderr = "";
+        let timedOut = false;
+
+        const timeout = setTimeout(() => {
+          timedOut = true;
+          child.kill("SIGKILL");
+        }, 2000);
+
+        child.stdout.on("data", (data) => {
+          stdout += data.toString();
+        });
+
+        child.stderr.on("data", (data) => {
+          stderr += data.toString();
+        });
+
+        child.on("close", () => {
+          if (timedOut) {
             fs.unlinkSync(cppPath);
-            fs.unlinkSync(outPath);
 
             return resolve({
-              status:
-                passedCount === testCases.length
-                  ? "ACCEPTED"
-                  : passedCount > 0
-                  ? "PARTIAL"
-                  : "FAILED",
+              status: "TIME_LIMIT_EXCEEDED",
               passedCount,
               totalCount: testCases.length,
               results,
             });
           }
+          clearTimeout(timeout);
 
-          const { input, expectedOutput } = testCases[index];
+          const userOutput = stdout.trim();
+          const expected = expectedOutput.trim();
 
-          const runCommand =
-            process.platform === "win32"
-              ? `"${outPath}"`
-              : `./${fileId}`;
+          const passed =
+            !stderr && userOutput === expected;
 
-          const processExec = exec(
-            runCommand,
-            {
-              cwd: TMP_DIR,
-              timeout: 2000,
-            },
-            (error, stdout, stderr) => {
-              const userOutput = stdout.trim();
-              const expected = expectedOutput.trim();
+          if (passed) passedCount++;
 
-              const passed =
-                !error && !stderr && userOutput === expected;
+          results.push({
+            testCaseIndex: index,
+            passed,
+            input,
+            expectedOutput: expected,
+            userOutput,
+            error: stderr || null,
+          });
 
-              if (passed) passedCount++;
+          runTestCase(index + 1);
+        });
 
-              results.push({
-                testCaseIndex: index,
-                passed,
-                input,
-                expectedOutput: expected,
-                userOutput,
-                error: stderr || (error ? error.message : null),
-              });
+        child.stdin.write(input);
+        child.stdin.end();
+      };
 
-              runTestCase(index + 1);
-            }
-          );
-
-          processExec.stdin.write(input);
-          processExec.stdin.end();
-        };
-
-        runTestCase(0);
-      }
-    );
+      runTestCase(0);
+    });
   });
 };
