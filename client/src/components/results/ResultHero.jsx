@@ -1,13 +1,7 @@
 import { useEffect, useState } from "react";
 
-function ResultHero({ quizScore, quizTotal, codingScore, codingTotal }) {
-  const quizPercent = (quizScore / quizTotal) * 100;
-  const codingPercent = (codingScore / codingTotal) * 100;
-
-  // Equal weight combination
-  const overall = Math.round((quizPercent + codingPercent) / 2);
-
-  const isPassed = overall >= 60;
+function ResultHero({ overall }) {
+  const { percent, passed } = overall;
 
   const radius = 90;
   const circumference = 2 * Math.PI * radius;
@@ -17,39 +11,49 @@ function ResultHero({ quizScore, quizTotal, codingScore, codingTotal }) {
 
   useEffect(() => {
     const targetOffset =
-      circumference - (overall / 100) * circumference;
+      circumference - (percent / 100) * circumference;
 
-    requestAnimationFrame(() => {
-      setOffset(targetOffset);
-    });
+    requestAnimationFrame(() => setOffset(targetOffset));
 
-    // count-up animation
     let start = 0;
     const interval = setInterval(() => {
       start += 1;
-      if (start >= overall) {
-        start = overall;
+      if (start >= percent) {
+        start = percent;
         clearInterval(interval);
       }
       setDisplayValue(start);
     }, 15);
 
     return () => clearInterval(interval);
-  }, [overall, circumference]);
+  }, [percent, circumference]);
+
+  const stroke = passed ? "stroke-teal-400" : "stroke-red-500";
+  const text = passed ? "text-teal-400" : "text-red-400";
 
   return (
-    <div className="text-center space-y-6 py-10 relative">
-      {/* Subtle glow if passed */}
-      {isPassed && (
-        <div className="absolute inset-0 flex justify-center">
-          <div className="w-[260px] h-[260px] bg-green-500/10 blur-3xl rounded-full" />
-        </div>
-      )}
+    <div className="text-center space-y-6 py-12 relative">
+      {/* Glow */}
+      <div className="absolute inset-0 flex justify-center">
+        <div
+          className={`w-[300px] h-[300px] rounded-full blur-3xl ${
+            passed ? "bg-teal-500/20" : "bg-red-500/20"
+          }`}
+        />
+      </div>
 
-      <h1 className="text-3xl font-semibold">
-        Results
-      </h1>
+      {/* Status Badge */}
+      <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-slate-700 bg-slate-800/40 text-sm text-slate-300">
+        Assessment Complete
+      </div>
 
+      <h1 className="text-4xl font-semibold">Results</h1>
+
+      <p className="text-slate-400">
+        Here’s how you performed in this assessment.
+      </p>
+
+      {/* Circle */}
       <div className="flex justify-center relative">
         <svg width="220" height="220" className="-rotate-90">
           <circle
@@ -58,7 +62,7 @@ function ResultHero({ quizScore, quizTotal, codingScore, codingTotal }) {
             r={radius}
             strokeWidth="14"
             fill="transparent"
-            className="stroke-slate-700"
+            className="stroke-slate-800"
           />
 
           <circle
@@ -70,30 +74,19 @@ function ResultHero({ quizScore, quizTotal, codingScore, codingTotal }) {
             strokeDasharray={circumference}
             strokeDashoffset={offset}
             strokeLinecap="round"
-            className={
-              isPassed ? "stroke-green-500" : "stroke-red-500"
-            }
-            style={{
-              transition: "stroke-dashoffset 1s ease-out",
-            }}
+            className={stroke}
+            style={{ transition: "stroke-dashoffset 1s ease-out" }}
           />
         </svg>
 
-        <div className="absolute inset-0 flex items-center justify-center text-4xl font-bold">
+        <div className={`absolute inset-0 flex items-center justify-center text-5xl font-bold ${text}`}>
           {displayValue}%
         </div>
       </div>
 
-      <div>
-        <h2 className={`text-xl font-semibold ${isPassed ? "text-green-400" : "text-red-400"}`}>
-          {isPassed ? "You Passed!" : "Almost There"}
-        </h2>
-        <p className="text-slate-400 text-sm mt-1">
-          {isPassed
-            ? "You've demonstrated strong fundamentals."
-            : "Review weak areas and try again."}
-        </p>
-      </div>
+      <h2 className={`text-xl font-semibold ${text}`}>
+        {passed ? "You Passed!" : "Keep Improving"}
+      </h2>
     </div>
   );
 }

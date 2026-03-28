@@ -210,12 +210,27 @@ function CodingTopicPage() {
     <EndExamConfirmModal
   isOpen={showEndExamConfirm}
   onCancel={() => setShowEndExamConfirm(false)}
-  onConfirm={() => {
-    setShowEndExamConfirm(false);
-    navigate(`/coding/${topicId}/results`, {
-  //state: resultData,
-});
-  }}
+  onConfirm={ () => {
+  // async () => {
+  // try {
+    setShowEndExamConfirm(false)
+    navigate(`/coding/${topicId}/results`);
+
+    // const res = await api.post(
+    //   `/api/lesson/${topicId}/finalize`
+    // );
+
+    // navigate(`/coding/${topicId}/results`, {
+    //   state: {
+    //     quizResults: res.data.quizResults,
+    //     codingResult: res.data.codingResult,
+    //   },
+    // });
+  // } catch (err) {
+  //   console.error("Finalize error:", err);
+  // }}
+}}
+
 />
 
 

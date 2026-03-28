@@ -1,43 +1,79 @@
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { mockResultFail, mockResultPass } from "../mock/resultMock";
+import AppHeader from '../components/layout/AppHeader.jsx';
+
 import {
   ResultHero,
   ResultBreakdown,
   ResultCTA,
 } from "../components/results";
-import AppHeader from '../components/layout/AppHeader.jsx';
 
 function ResultPage() {
-  // Example backend response
-  const quizScore = 18;
-  const quizTotal = 20;
+  const { topicId } = useParams();
+  const navigate = useNavigate();
 
-  const codingScore = 16;
-  const codingTotal = 20;
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const overall =
-    (quizScore / quizTotal + codingScore / codingTotal) / 2;
+  useEffect(() => {
+    const fetchResults = async () => {
+      try {
+        await new Promise((res) => setTimeout(res, 500)); // simulate API
+        setData(mockResultFail);
+      } catch (err) {
+        console.error("Result fetch error:", err);
+        setError("Failed to load results");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const passed = overall >= 0.6;
+    fetchResults();
+  }, [topicId]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-slate-400">
+        Loading results...
+      </div>
+    );
+  }
+
+  if (error || !data) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center space-y-4">
+        <AppHeader />
+        <p className="text-red-400">{error || "No results found"}</p>
+        <button
+          onClick={() => navigate(`/coding/${topicId}`)}
+          className="px-4 py-2 bg-slate-700 rounded-md"
+        >
+          Back to Lesson
+        </button>
+      </div>
+    );
+  }
+
+  const { quiz, coding, overall } = data;
+
+  const quizPassed = quiz.percent >= 60;
+  const codingPassed = coding.percent >= 60;
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
       <AppHeader />
-      <ResultHero
-        quizScore={quizScore}
-        quizTotal={quizTotal}
-        codingScore={codingScore}
-        codingTotal={codingTotal}
-      />
+      <ResultHero overall={overall} />
 
-      <ResultBreakdown
-        quizScore={quizScore}
-        quizTotal={quizTotal}
-        codingScore={codingScore}
-        codingTotal={codingTotal}
-      />
+      <ResultBreakdown quiz={quiz} coding={coding} />
 
       <ResultCTA
-        passed={passed}
-        onJourney={() => console.log("Navigate to journey page")}
+        overall={overall}
+        quizPassed={quizPassed}
+        codingPassed={codingPassed}
+        topicId={topicId}
+        contentKey={data.contentKey}
       />
     </div>
   );

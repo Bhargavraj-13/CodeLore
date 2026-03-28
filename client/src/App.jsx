@@ -19,64 +19,13 @@ function App() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route
-        path="/home"
-        element={
-          <ProtectedRoute>
-            <AppLayout>
-              <HomePage />
-            </AppLayout>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/profile"
-        element={
-          <ProtectedRoute>
-            <ProfilePage />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/topics/:topicId"
-        element={
-          <ProtectedRoute>
-            <TopicPage />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/quiz/:topicId"
-        element={
-          <ProtectedRoute>
-            <QuizPage />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/quiz/:topicId/result"
-        element={
-          <ProtectedRoute>
-            <QuizResultPage />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/coding/:topicId"
-        element={
-          <ProtectedRoute>
-            <CodingTopicPage />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/coding/:topicId/results"
-        element={
-          <ProtectedRoute>
-            <ResultPage />
-          </ProtectedRoute>
-        }
-      />
+      <Route path="/home" element={<ProtectedRoute><AppLayout><HomePage /></AppLayout></ProtectedRoute>} />
+      <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+      <Route path="/topics/:topicId" element={<ProtectedRoute><TopicPage /></ProtectedRoute>}/>
+      <Route path="/quiz/:topicId" element={<ProtectedRoute><QuizPage /></ProtectedRoute>}/>
+      <Route path="/quiz/:topicId/result" element={<ProtectedRoute><QuizResultPage /></ProtectedRoute>}/>
+      <Route path="/coding/:topicId" element={<ProtectedRoute><CodingTopicPage /></ProtectedRoute>}/>
+      <Route path="/coding/:topicId/results" element={<ProtectedRoute><ResultPage /></ProtectedRoute>}/>
     </Routes>
   );
 }

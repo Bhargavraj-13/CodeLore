@@ -11,7 +11,6 @@ function LoginPage() {
   const [formError, setFormError] = useState(null);
 
   const handleSubmit = async ({ email, password }) => {
-    console.log("Submitting Login:", email, password);
     setFormError(null);
     const res = await auth.login({ email, password });
     if (res.ok) {

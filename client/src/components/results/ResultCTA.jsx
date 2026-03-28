@@ -1,28 +1,62 @@
-function ResultCTA({ passed, onJourney }) {
-  if (!passed) return null;
+import { useNavigate } from "react-router-dom";
+
+function ResultCTA({ overall, quizPassed, codingPassed, topicId, contentKey}) {
+  const navigate = useNavigate();
+
+  if (overall.passed) {
+    return (
+      <div className="text-center space-y-5 py-12">
+        <h3 className="text-2xl font-semibold">
+          Capture Your Learning
+        </h3>
+
+        <p className="text-slate-400 max-w-xl mx-auto">
+          Writing your journey reinforces what you’ve learned and builds a visible track of your growth.
+        </p>
+
+        <button
+          onClick={() => navigate(`/coding/${topicId}/journey`)}
+          className="px-6 py-3 rounded-lg bg-teal-400 text-slate-900 font-medium hover:bg-teal-300 transition"
+        >
+          Write Your Journey →
+        </button>
+      </div>
+    );
+  }
+
+  let message = "";
+  let actionText = "";
+  let actionPath = "";
+
+  if (!quizPassed && !codingPassed) {
+    message = "Go back, strengthen your fundamentals, and come back stronger.";
+    actionText = "Go to Topic";
+    actionPath = `/topics/${contentKey}`;
+  } else if (!quizPassed) {
+    message = "Concepts need a bit more clarity. You’re close.";
+    actionText = "Retry Quiz";
+    actionPath = `/quiz/${topicId}`;
+  } else {
+    message = "Logic is there. Refine your implementation.";
+    actionText = "Retry Coding";
+    actionPath = `/coding/${topicId}`;
+  }
 
   return (
-    <div className="text-center space-y-4 py-10">
-      <h3 className="text-2xl font-semibold">
-        Capture Your Learning
+    <div className="text-center space-y-5 py-12">
+      <h3 className="text-2xl font-semibold text-red-400">
+        Keep Improving!
       </h3>
 
       <p className="text-slate-400 max-w-xl mx-auto">
-        Writing your journey helps reinforce concepts and
-        builds a visible track record of growth.
+        {message}
       </p>
 
       <button
-        onClick={onJourney}
-        className="
-          px-6 py-3 rounded-md
-          bg-green-500 text-slate-900
-          font-medium
-          transition-all duration-200
-          hover:bg-green-600
-        "
+        onClick={() => navigate(actionPath)}
+        className="px-6 py-3 rounded-lg bg-red-500 text-white font-medium hover:bg-red-600 transition"
       >
-        Write Your Journey
+        {actionText}
       </button>
     </div>
   );

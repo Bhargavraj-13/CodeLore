@@ -1,49 +1,45 @@
-function ResultCard({ title, score, total }) {
-  const percent = Math.round((score / total) * 100);
-  const passed = percent >= 60;
-
+function ResultCard({ title, score, total, percent, passed }) {
   return (
-    <div className="bg-slate-800 rounded-lg p-6 space-y-4 shadow-md">
-      <h3 className="text-lg font-semibold">{title}</h3>
+    <div className="bg-slate-800/40 backdrop-blur border border-slate-700 rounded-2xl p-6 space-y-5">
+      <div className="flex justify-between items-center">
+        <h3 className="text-slate-300 text-lg">{title}</h3>
+        <span className={`text-sm ${passed ? "text-teal-400" : "text-red-400"}`}>
+          {passed ? "Passed" : "Failed"}
+        </span>
+      </div>
 
-      <p className="text-2xl font-bold">
-        {score} / {total}
-      </p>
+      <div className="text-3xl font-semibold">
+        {score} <span className="text-slate-500 text-lg">/ {total}</span>
+      </div>
 
       <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
         <div
-          className={`h-full ${passed ? "bg-green-500" : "bg-red-500"}`}
-          style={{
-            width: `${percent}%`,
-            transition: "width 800ms ease-out",
-          }}
+          className={`h-full ${
+            passed ? "bg-teal-400" : "bg-red-500"
+          }`}
+          style={{ width: `${percent}%` }}
         />
       </div>
 
-      <p className={`text-sm ${passed ? "text-green-400" : "text-red-400"}`}>
-        {passed ? "Passed" : "Needs Improvement"}
-      </p>
+      <div className="text-right text-sm text-slate-400">
+        {percent}%
+      </div>
     </div>
   );
 }
 
-function ResultBreakdown({
-  quizScore,
-  quizTotal,
-  codingScore,
-  codingTotal,
-}) {
+function ResultBreakdown({ quiz, coding }) {
   return (
-    <div className="grid md:grid-cols-2 gap-6 px-6 py-8 max-w-4xl mx-auto">
+    <div className="grid md:grid-cols-2 gap-6 px-6 py-10 max-w-5xl mx-auto">
       <ResultCard
         title="Quiz Score"
-        score={quizScore}
-        total={quizTotal}
+        {...quiz}
+        passed={quiz.percent >= 60}
       />
       <ResultCard
         title="Coding Score"
-        score={codingScore}
-        total={codingTotal}
+        {...coding}
+        passed={coding.percent >= 60}
       />
     </div>
   );

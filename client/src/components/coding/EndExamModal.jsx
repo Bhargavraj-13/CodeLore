@@ -1,5 +1,3 @@
-// client/src/components/coding/EndExamModal.jsx
-
 function EndExamConfirmModal({ isOpen, onCancel, onConfirm }) {
   if (!isOpen) return null;
 
