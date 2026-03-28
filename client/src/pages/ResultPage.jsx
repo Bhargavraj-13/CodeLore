@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { mockResultFail, mockResultPass } from "../mock/resultMock";
+import { mockResultFail} from "../mock/resultMock";
 import AppHeader from '../components/layout/AppHeader.jsx';
 
 import {
@@ -20,7 +20,7 @@ function ResultPage() {
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        await new Promise((res) => setTimeout(res, 500)); // simulate API
+        await new Promise((res) => setTimeout(res, 500)); 
         setData(mockResultFail);
       } catch (err) {
         console.error("Result fetch error:", err);
