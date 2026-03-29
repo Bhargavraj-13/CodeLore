@@ -9,12 +9,13 @@ export const getQuizByTopic = async (req, res) => {
 
     const quiz = loadQuizByTopic(topicId);
 
-    // Remove correct answers before sending to frontend
+    // Strip correct answers before sending to frontend
     const safeQuestions = quiz.questions.map((q) => ({
       id: q.id,
       question: q.question,
       code: q.code ?? null,
       options: q.options,
+      ...(q.code ? { code: q.code } : {}), // include code block if present
     }));
 
     res.status(200).json({
@@ -27,11 +28,9 @@ export const getQuizByTopic = async (req, res) => {
     if (err.message === "QUIZ_NOT_FOUND") {
       return res.status(404).json({ message: "Quiz not found for this topic" });
     }
-
     if (err.message === "QUIZ_FILE_MISSING") {
       return res.status(500).json({ message: "Quiz file missing on server" });
     }
-
     console.error("Get Quiz Error:", err);
     res.status(500).json({ message: "Failed to load quiz" });
   }
@@ -53,8 +52,7 @@ export const submitQuiz = async (req, res) => {
 
     const results = quiz.questions.map((q) => {
       const selected = answers[q.id];
-      const hasAnswered = answers.hasOwnProperty(q.id);
-
+      const hasAnswered = Object.prototype.hasOwnProperty.call(answers, q.id);
       const isCorrect = hasAnswered && answers[q.id] === q.correctOption;
 
       if (isCorrect) correctCount++;
@@ -70,21 +68,26 @@ export const submitQuiz = async (req, res) => {
     });
 
     const totalQuestions = quiz.questions.length;
-    const percentage = Math.round((correctCount / totalQuestions) * 100);
-    const rawScore = correctCount * 2; 
 
-    // ---- Update BEST quiz score only ----
+    // FIX: define score consistently as correctCount (out of totalQuestions)
+    const score = correctCount;
+    const percent = Math.round((correctCount / totalQuestions) * 100);
+
+    // FIX: save to per-topic subdocument, not top-level
     const user = await User.findById(userId);
 
-    const topicProgress = user.topics.find((t) =>
-      t.topicId.equals(topicId)
-    );
+    const topicEntry = user.topics.find((t) => t.topicId.equals(topicId));
 
-    if (topicProgress) {
-      topicProgress.quizScore = Math.max(
-        topicProgress.quizScore ?? 0,
-        score
-      );
+    if (topicEntry) {
+      // Best-score-only rule
+      if (topicEntry.quizScore === null || score > topicEntry.quizScore) {
+        topicEntry.quizScore = score;
+      }
+
+      // Mark completed if both thresholds met
+      if (topicEntry.quizScore >= 8 && topicEntry.codingSolvedCount >= 2) {
+        topicEntry.completed = true;
+      }
     }
 
     await user.save();
@@ -92,6 +95,7 @@ export const submitQuiz = async (req, res) => {
     res.status(200).json({
       success: true,
       score,
+      percent,
       correctCount,
       totalQuestions,
       results,

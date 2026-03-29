@@ -25,7 +25,6 @@ const userSchema = new mongoose.Schema(
       select: false,
     },
 
-    // ✅ MULTIPLE TOPICS
     topics: [
       {
         topicId: {
@@ -33,36 +32,33 @@ const userSchema = new mongoose.Schema(
           ref: "Topic",
           required: true,
         },
-        progress: {
+
+        quizScore: {
+          type: Number,
+          default: null,
+        },
+
+        codingSolvedCount: {
           type: Number,
           default: 0,
         },
+
+        solvedProblems: {
+          type: [String],
+          default: [],
+        },
+
         completed: {
           type: Boolean,
           default: false,
         },
+
+        lastAccessedAt: {
+          type: Date,
+          default: Date.now,
+        },
       },
     ],
-
-    quizScore: {
-      type: Number,
-      default: null,
-    },
-
-    codingSolvedCount: {
-      type: Number,
-      default: 0,
-    },
-
-    solvedProblems: {
-      type: [String],
-      default: [],
-    },
-
-    lastAccessedAt: {
-      type: Date,
-      default: Date.now,
-    },
 
     profilePic: {
       type: String,

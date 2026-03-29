@@ -1,5 +1,3 @@
-// server/controllers/quizProgressController.js
-
 import User from "../models/User.js";
 
 export const updateQuizScore = async (req, res) => {
@@ -17,12 +15,11 @@ export const updateQuizScore = async (req, res) => {
 
     const user = await User.findById(userId);
 
-    // Find topic entry
+    // FIX: find on subdocument
     const topicEntry = user.topics.find(
       (t) => t.topicId.toString() === topicId
     );
 
-    // Topic must be started first (opened)
     if (!topicEntry) {
       return res.status(400).json({
         message: "Topic not started. Open the topic before submitting quiz score.",
@@ -32,6 +29,11 @@ export const updateQuizScore = async (req, res) => {
     // Best-score-only rule
     if (topicEntry.quizScore === null || score > topicEntry.quizScore) {
       topicEntry.quizScore = score;
+    }
+
+    // Mark completed if both thresholds met
+    if (topicEntry.quizScore >= 8 && topicEntry.codingSolvedCount >= 2) {
+      topicEntry.completed = true;
     }
 
     await user.save();
