@@ -7,27 +7,22 @@ function formatPythonError(stderr) {
   if (!stderr) return null;
 
   const lines = stderr.trim().split("\n");
-
   const errorLine = lines[lines.length - 1];
   const fileLine = lines.find((l) => l.includes("File"));
 
   let lineNumber = "unknown";
-
   if (fileLine) {
     const match = fileLine.match(/line (\d+)/);
     if (match) lineNumber = match[1];
   }
 
-  return `Runtime Error
-
-Line ${lineNumber}:
-${errorLine}`.trim();
+  return `Runtime Error\n\nLine ${lineNumber}:\n${errorLine}`.trim();
 }
 
 const TMP_DIR = path.join(process.cwd(), "tmp");
 
 if (!fs.existsSync(TMP_DIR)) {
-  fs.mkdirSync(TMP_DIR);
+  fs.mkdirSync(TMP_DIR, { recursive: true });
 }
 
 export const runPython = ({ code, testCases }) => {
@@ -43,13 +38,11 @@ export const runPython = ({ code, testCases }) => {
 
     const runTestCase = (index) => {
       if (index >= testCases.length) {
-        fs.unlinkSync(filePath);
+        // Clean up -> best effort
+        try { fs.unlinkSync(filePath); } catch {}
 
         return resolve({
-          status:
-            passed === testCases.length
-              ? "ACCEPTED"
-              : "WRONG_ANSWER",
+          status: passed === testCases.length ? "ACCEPTED" : "WRONG_ANSWER",
           passed,
           total: testCases.length,
           testCaseResults,
@@ -58,50 +51,52 @@ export const runPython = ({ code, testCases }) => {
 
       const { input, expectedOutput } = testCases[index];
 
-          const dockerArgs = [
-            "run",
-            "--rm",
-            "-i",
-            "--memory=128m",
-            "--cpus=0.5",
-            "--pids-limit=64",
-            "--network=none",
-            "--read-only",
-            "--tmpfs",
-            "/tmp",
-            "-v",
-            `${TMP_DIR}:/sandbox`,
-            "codelore-sandbox",
-            "python",
-            `/sandbox/${fileName}`,
-          ];
-
+      const dockerArgs = [
+        "run", "--rm", "-i",
+        "--memory=128m",
+        "--cpus=0.5",
+        "--pids-limit=64",
+        "--network=none",
+        "--read-only",
+        "--tmpfs", "/tmp",
+        "-v", `${TMP_DIR}:/sandbox`,
+        "codelore-sandbox",
+        "python", `/sandbox/${fileName}`,
+      ];
 
       const child = spawn("docker", dockerArgs);
 
       let stdout = "";
       let stderr = "";
 
+      // FIX: track whether timeout fired
+      let timedOut = false;
+
       const timeout = setTimeout(() => {
+        timedOut = true;
         child.kill("SIGKILL");
       }, 2000);
 
-      child.stdout.on("data", (data) => {
-        stdout += data.toString();
-      });
-
-      child.stderr.on("data", (data) => {
-        stderr += data.toString();
-      });
+      child.stdout.on("data", (data) => { stdout += data.toString(); });
+      child.stderr.on("data", (data) => { stderr += data.toString(); });
 
       child.on("close", () => {
+        // FIX: resolve TLE immediately, don't continue test cases
+        if (timedOut) {
+          try { fs.unlinkSync(filePath); } catch {}
+          return resolve({
+            status: "TIME_LIMIT_EXCEEDED",
+            passed,
+            total: testCases.length,
+            testCaseResults,
+          });
+        }
+
         clearTimeout(timeout);
 
         const userOutput = stdout.trim();
         const expected = expectedOutput.trim();
-
-        const isCorrect =
-          !stderr && userOutput === expected;
+        const isCorrect = !stderr && userOutput === expected;
 
         if (isCorrect) passed++;
 

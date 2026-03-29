@@ -94,7 +94,7 @@ export const deleteTopicById = async (req, res) => {
     if (!topic) {
       return res.status(404).json({ message: "Topic not found." });
     }
-    await topic.remove();
+    await Topic.findByIdAndDelete(req.params.id);
     return res.status(200).json({ message: "Topic deleted successfully." });
   } catch (err) {
     console.error("Delete Topic Error:", err);
