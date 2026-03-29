@@ -19,6 +19,7 @@ function HomePage() {
       setLoading(true);
       const res = await api.get("/api/topics");
       setTopics(res.data || []);
+      //console.log("TOPICS API:", res.data);
     } catch (err) {
       console.error("Error fetching topics:", err);
     } finally {

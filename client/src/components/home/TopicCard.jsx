@@ -54,8 +54,8 @@ function TopicCard({ topic }) {
         </span>
 
     <Link
-        to={`/topics/${topic.contentKey}`}
-        className="text-sm font-medium text-teal-300 hover:text-teal-200">
+        to={`/topics/${topic.contentKey}`} 
+        onClick={() => console.log("CLICKED TOPIC:", topic)}>
         Start Learning →
       </Link>
       </div>
