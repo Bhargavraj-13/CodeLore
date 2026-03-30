@@ -3,7 +3,6 @@ import path from "path";
 
 const CODING_ROOT = path.join(process.cwd(), "..", "coding");
 
-// Load all coding problems for a given topic
 export const loadProblemsByTopic = (topicId) => {
   const topicPath = path.join(CODING_ROOT, topicId);
 
@@ -22,7 +21,6 @@ export const loadProblemsByTopic = (topicId) => {
   });
 };
 
-// Load a specific coding problem by its ID
 export const loadProblemById = (problemId) => {
   const topics = fs.readdirSync(CODING_ROOT);
 

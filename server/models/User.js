@@ -4,54 +4,63 @@ const userSchema = new mongoose.Schema(
   {
     username: {
       type: String,
-      required: [true, "Username is required"],
+      required: true,
       trim: true,
       unique: true,
-      minlength: [3, "Username must be at least 3 characters long"],
+      minlength: 3,
     },
 
     email: {
       type: String,
-      required: [true, "Email is required"],
+      required: true,
       unique: true,
       lowercase: true,
-      match: [/\S+@\S+\.\S+/, "Please enter a valid email address"],
+      match: /\S+@\S+\.\S+/,
     },
 
-password: {
-  type: String,
-  required: [true, "Password is required"],
-  minlength: [6, "Password must be at least 6 characters long"],
-  select: false,
-},
+    password: {
+      type: String,
+      required: true,
+      minlength: 6,
+      select: false,
+    },
 
-topicId: {
-  type: mongoose.Schema.Types.ObjectId,
-  ref: "Topic",
-  required: true,
-},
+    topics: [
+      {
+        topicId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Topic",
+          required: true,
+        },
 
-quizScore: {
-  type: Number,
-  default: null,
-},
+        quizScore: {
+          type: Number,
+          default: null,
+        },
 
-codingSolvedCount: {
-  type: Number,
-  default: 0,
-},
+        codingSolvedCount: {
+          type: Number,
+          default: 0,
+        },
 
-solvedProblems: {
-  type: [String], // store problemId
-  default: [],
-},
+        solvedProblems: {
+          type: [String],
+          default: [],
+        },
 
-lastAccessedAt: {
-  type: Date,
-  default: Date.now,
-},
+        completed: {
+          type: Boolean,
+          default: false,
+        },
 
-profilePic: {
+        lastAccessedAt: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
+
+    profilePic: {
       type: String,
       default: null,
     },

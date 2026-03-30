@@ -1,14 +1,51 @@
 import { runPython } from "../executors/pythonExecutor.js";
 import { runCpp } from "../executors/cppExecutor.js";
 
-export const runCode = async ({ language, code, testCases }) => {
+
+export const runCode = async ({ language, code, testCases }) => {;
+
+  if (!Array.isArray(testCases)) {
+    return {
+      status: "RUNTIME_ERROR",
+      passed: 0,
+      total: 0,
+      testCaseResults: [],
+      error: "No test cases provided",
+    };
+  }
+
+  let rawResult;
+
   if (language === "python") {
-    return runPython({ code, testCases });
+    rawResult = await runPython({ code, testCases });
+  } else if (language === "cpp") {
+    rawResult = await runCpp({ code, testCases });
+  } else {
+    throw new Error("UNSUPPORTED_LANGUAGE");
   }
 
-  if (language === "cpp") {
-    return runCpp({ code, testCases });
-  }
+  return {
+    status: rawResult.status,
 
-  throw new Error("UNSUPPORTED_LANGUAGE");
+    passed:
+      rawResult.passed ??
+      rawResult.passedCount ??
+      0,
+
+    total:
+      rawResult.total ??
+      rawResult.totalCount ??
+      testCases.length,
+
+    testCaseResults:
+      rawResult.testCaseResults ??
+      rawResult.results ??
+      [],
+
+    error:
+      rawResult.error ??
+      rawResult.output ??
+      null,
+  };
+
 };

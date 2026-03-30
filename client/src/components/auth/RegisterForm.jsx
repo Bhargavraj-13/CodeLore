@@ -1,12 +1,11 @@
-// Code for the registration form 
-
-import { useState } from "react";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function RegisterForm({ onSubmit, loading, serverError }) {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirm, setConfirm] = useState("");
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
   const [localError, setLocalError] = useState(null);
 
   async function handleSubmit(e) {
@@ -14,31 +13,27 @@ function RegisterForm({ onSubmit, loading, serverError }) {
     setLocalError(null);
 
     if (!username.trim() || !email.trim() || !password) {
-      setLocalError("Please complete all required fields.");
+      setLocalError('Please complete all required fields.');
       return;
     }
 
     const validEmail = /^\S+@\S+\.\S+$/;
     if (!validEmail.test(email)) {
-      setLocalError("Please provide a valid email address.");
+      setLocalError('Please provide a valid email address.');
       return;
     }
 
     if (password.length < 6) {
-      setLocalError("Password should be at least 6 characters.");
+      setLocalError('Password should be at least 6 characters.');
       return;
     }
 
     if (password !== confirm) {
-      setLocalError("Passwords do not match.");
+      setLocalError('Passwords do not match.');
       return;
     }
 
-    await onSubmit({
-      username: username.trim(),
-      email: email.trim(),
-      password,
-    });
+    await onSubmit({ username: username.trim(), email: email.trim(), password });
   }
 
   const errorMessage = localError || serverError;
@@ -107,16 +102,17 @@ function RegisterForm({ onSubmit, loading, serverError }) {
 
         <button
           type="submit"
+          disabled={loading}
           className="w-full inline-flex items-center justify-center rounded-lg bg-teal-400 px-4 py-2 text-sm font-semibold text-slate-950 shadow-sm hover:bg-teal-300 transition-colors disabled:opacity-60"
         >
-          Create account
+          {loading ? 'Creating account…' : 'Create account'}
         </button>
 
         <div className="mt-6 text-xs text-slate-400">
-          Already have an account?{" "}
-          <a href="/login" className="text-teal-300 hover:underline">
+          Already have an account?{' '}
+          <Link to="/login" className="text-teal-300 hover:underline">
             Sign in
-          </a>
+          </Link>
         </div>
       </div>
     </form>

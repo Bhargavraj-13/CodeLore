@@ -1,10 +1,9 @@
-// Code for the login form
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import { useState } from "react";
-
-function LoginForm({ onSubmit, serverError }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+function LoginForm({ onSubmit, loading, serverError }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [localError, setLocalError] = useState(null);
 
   async function handleSubmit(e) {
@@ -12,13 +11,13 @@ function LoginForm({ onSubmit, serverError }) {
     setLocalError(null);
 
     if (!email.trim() || !password) {
-      setLocalError("Please enter both email and password.");
+      setLocalError('Please enter both email and password.');
       return;
     }
 
     const validEmail = /^\S+@\S+\.\S+$/;
     if (!validEmail.test(email)) {
-      setLocalError("Please provide a valid email address.");
+      setLocalError('Please provide a valid email address.');
       return;
     }
 
@@ -61,16 +60,12 @@ function LoginForm({ onSubmit, serverError }) {
           />
         </label>
 
-        {/* For future implementation */}
         <div className="flex items-center justify-between text-xs">
           <label className="inline-flex items-center gap-2 text-slate-300">
             <input type="checkbox" className="h-4 w-4 rounded bg-slate-800" />
             Remember me
           </label>
-
-          <a href="/forgot-password" className="text-slate-300 hover:text-teal-300">
-            Forgot password?
-          </a>
+          <span className="text-slate-300">Forgot password?</span>
         </div>
 
         {errorMessage && (
@@ -79,16 +74,17 @@ function LoginForm({ onSubmit, serverError }) {
 
         <button
           type="submit"
+          disabled={loading}
           className="w-full inline-flex items-center justify-center rounded-lg bg-teal-400 px-4 py-2 text-sm font-semibold text-slate-950 shadow-sm hover:bg-teal-300 transition-colors disabled:opacity-60"
         >
-          Sign in
+          {loading ? 'Signing in…' : 'Sign in'}
         </button>
 
         <div className="mt-6 text-xs text-slate-400">
-          Don't have an account?{" "}
-          <a href="/register" className="text-teal-300 hover:underline">
+          Don't have an account?{' '}
+          <Link to="/register" className="text-teal-300 hover:underline">
             Sign up
-          </a>
+          </Link>
         </div>
       </div>
     </form>

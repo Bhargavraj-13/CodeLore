@@ -13,7 +13,7 @@ This topic covers:
     - do-while
     - for
 
-# Why Loops Exist
+## Why Loops Exist
 
 Kaya the Lion is asked to check stones on a path.
 He starts doing it manually:

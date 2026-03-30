@@ -3,7 +3,7 @@
   "questions": [
     {
       "id": 1,
-      "question": "Mala the Elephant stacks wooden crates\none on top of another.\n\nWhen she needs a crate,\nshe always takes the top one.\n\nWhat concept does this represent?",
+      "question": "Mala the Elephant stacks wooden crates one on top of another.\nWhen she needs a crate, she always takes the top one.\n\nWhat concept does this represent?",
       "options": [
         "Queue (FIFO)",
         "Stack (LIFO)",
@@ -14,7 +14,7 @@
     },
     {
       "id": 2,
-      "question": "Kaya the Lion notices that\nthe last crate placed\nis the first one removed.\n\nWhich rule describes this behavior?",
+      "question": "Kaya the Lion notices that the last crate placed is the first one removed.\n\nWhich rule describes this behavior?",
       "options": [
         "FIFO",
         "LILO",
@@ -25,7 +25,7 @@
     },
     {
       "id": 3,
-      "question": "Kurma the Tortoise manages\na line of animals waiting for water.\n\nThe first animal in line\ndrinks first.\n\nWhat data structure matches this?",
+      "question": "Kurma the Tortoise manages a line of animals waiting for water.\nThe first animal in line drinks first.\n\nWhat data structure matches this?",
       "options": [
         "Stack",
         "Queue",
@@ -36,7 +36,7 @@
     },
     {
       "id": 4,
-      "question": "Biru the Monkey explains\nthat stacks are useful\nfor undo operations.\n\nWhy is a stack suitable here?",
+      "question": "Biru the Monkey explains that stacks are useful for undo operations.\n\nWhy is a stack suitable here?",
       "options": [
         "Because the first action is undone first",
         "Because the latest action is undone first",
@@ -47,7 +47,7 @@
     },
     {
       "id": 5,
-      "question": "Kaya the Lion compares\nstacks and queues.\n\nWhat is the key difference?",
+      "question": "Kaya the Lion compares stacks and queues.\n\nWhat is the key difference?",
       "options": [
         "Stacks use more memory",
         "Queues allow random access",
@@ -58,7 +58,7 @@
     },
     {
       "id": 6,
-      "question": "Biru the Monkey warns Kaya\nabout popping from an empty stack.\n\nWhat is this situation called?",
+      "question": "Biru the Monkey warns Kaya about popping from an empty stack.\n\nWhat is this situation called?",
       "options": [
         "Overflow",
         "Underflow",
@@ -69,7 +69,7 @@
     },
     {
       "id": 7,
-      "question": "Kurma the Tortoise removes\nan animal from the front of the line.\n\nWhat queue operation is this?",
+      "question": "Kurma the Tortoise removes an animal from the front of the line.\n\nWhat queue operation is this?",
       "options": [
         "Enqueue",
         "Push",
@@ -80,7 +80,7 @@
     },
     {
       "id": 8,
-      "question": "Kaya the Lion writes stack logic.\n\nOne line is missing.\n\nWhich option completes it?",
+      "question": "Kaya the Lion writes stack logic. \nOne line is missing.\n\nWhich option completes it?",
       "code": "```\nPUSH(10)\nPUSH(20)\n\nvalue = _________\n```",
       "options": [
         "POP()",
@@ -92,7 +92,7 @@
     },
     {
       "id": 9,
-      "question": "Kaya the Lion writes queue logic.\n\nOne line is missing.\n\nWhich option completes it?",
+      "question": "Kaya the Lion writes queue logic.\nOne line is missing.\n\nWhich option completes it?",
       "code": "```\nENQUEUE(10)\nENQUEUE(20)\n\nvalue = _________\n```",
       "options": [
         "POP()",
@@ -104,7 +104,7 @@
     },
     {
       "id": 10,
-      "question": "Biru the Monkey reviews usage cases.\n\nWhich problem is best solved\nusing a queue?",
+      "question": "Biru the Monkey reviews usage cases.\n\nWhich problem is best solved using a queue?",
       "options": [
         "Undo last action",
         "Function call tracking",

@@ -1,4 +1,4 @@
-import Topic from "../models/topic.js";
+import Topic from "../models/Topic.js";
 
 // Create a new topic (Admin Only)
 export const createTopic = async (req, res) => {
@@ -94,7 +94,7 @@ export const deleteTopicById = async (req, res) => {
     if (!topic) {
       return res.status(404).json({ message: "Topic not found." });
     }
-    await topic.remove();
+    await Topic.findByIdAndDelete(req.params.id);
     return res.status(200).json({ message: "Topic deleted successfully." });
   } catch (err) {
     console.error("Delete Topic Error:", err);

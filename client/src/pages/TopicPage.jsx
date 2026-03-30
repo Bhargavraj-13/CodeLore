@@ -1,35 +1,37 @@
-// Displays topic content along with related quizzes and journeys.
-
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import AppHeader from '../components/layout/AppHeader.jsx';
 import api from '../lib/api.jsx';
-import ReactMarkdown from 'react-markdown';
-import { JourneysTab } from '../components/journey';
+import TopicTabs from '../components/topic/TopicTabs.jsx';
+import TopicContent from '../components/topic/TopicContent.jsx';
+import JourneySection from '../components/journey';
 
 function TopicPage() {
   const { topicId } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
+  // Allow incoming navigation state to pre-select a tab (e.g. from ResultCTA)
+  const [activeTab, setActiveTab] = useState(location.state?.tab || 'content');
   const [content, setContent] = useState('');
-  const [activeTab, setActiveTab] = useState('content');
-
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Load topic content
   useEffect(() => {
     async function loadContent() {
       try {
+        // topicContentController now handles _id directly
         const res = await api.get(`/api/topics/${topicId}/content`);
         setContent(res.data.content);
+
+        // Mark topic as accessed (best effort, non-blocking)
+        api.post('/api/user-topics/access', { topicId }).catch(() => {});
       } catch {
         setError('Unable to load topic content.');
       } finally {
         setLoading(false);
       }
     }
-
     loadContent();
   }, [topicId]);
 
@@ -52,100 +54,20 @@ function TopicPage() {
   return (
     <div className="min-h-screen bg-slate-950 text-white flex flex-col">
       <AppHeader />
-
       <main className="flex-1 px-6 md:px-10 py-10">
         <div className="max-w-5xl mx-auto">
-
-          {/* ===== Chrome-style Tabs ===== */}
-          <div className="flex justify-center">
-            <div className="flex gap-2 w-fit relative z-10">
-
-              <button
-                onClick={() => setActiveTab('content')}
-                className={`px-5 py-2 text-sm font-medium rounded-t-xl
-                  ${
-                    activeTab === 'content'
-                      ? 'bg-slate-950 text-white border border-white/10 border-b-0'
-                      : 'text-slate-400 border border-white/10 hover:text-slate-200'
-                  }`}
-              >
-                Content
-              </button>
-
-              <button
-                onClick={() => setActiveTab('journeys')}
-                className={`px-5 py-2 text-sm font-medium rounded-t-xl
-                  ${
-                    activeTab === 'journeys'
-                      ? 'bg-slate-950 text-white border border-white/10 border-b-0'
-                      : 'text-slate-400 border border-white/10 hover:text-slate-200'
-                  }`}
-              >
-                Journeys
-              </button>
-
-            </div>
-          </div>
-
-          {/* ===== Content Box ===== */}
+          <TopicTabs activeTab={activeTab} setActiveTab={setActiveTab} />
           <div className="border border-white/10 rounded-xl rounded-t-none p-6 bg-slate-950">
-
             {activeTab === 'content' && (
-              <ReactMarkdown
-                components={{
-                  h1: ({ children }) => (
-  <div className="mt-10 mb-8">
-    <div className="flex items-center justify-between gap-4">
-      <h1 className="text-3xl font-semibold">{children}</h1>
-
-      <button
-        onClick={() => navigate(`/quiz/${topicId}`)}
-        className="px-4 py-2 text-sm font-medium
-                   bg-teal-500/90 hover:bg-teal-500
-                   text-slate-900 rounded-md"
-      >
-        Start Quiz
-      </button>
-    </div>
-
-    <hr className="border-white/10 mt-4" />
-  </div>
-),
-
-                  h2: ({ children }) => (
-                    <div className="mt-8 mb-6">
-                      <h2 className="text-2xl font-semibold mb-3">
-                        {children}
-                      </h2>
-                      <hr className="border-white/10" />
-                    </div>
-                  ),
-                  p: ({ children }) => (
-                    <p className="text-slate-300 leading-relaxed mb-4">
-                      {children}
-                    </p>
-                  ),
-                  ul: ({ children }) => (
-                    <ul className="list-disc ml-6 space-y-2 text-slate-300">
-                      {children}
-                    </ul>
-                  ),
-                  li: ({ children }) => (
-                    <li className="ml-2">{children}</li>
-                  ),
-                }}
-              >
-                {content}
-              </ReactMarkdown>
-            )}
-
-            {activeTab === 'journeys' && (
-              <JourneysTab
-                topicId={topicId}
-                active={activeTab === 'journeys'}
+              <TopicContent
+                content={content}
+                onStartQuiz={() => navigate(`/quiz/${topicId}`)}
+                onStartCoding={() => navigate(`/coding/${topicId}`)}
               />
             )}
-
+            {activeTab === 'journeys' && (
+              <JourneySection topicId={topicId} />
+            )}
           </div>
         </div>
       </main>

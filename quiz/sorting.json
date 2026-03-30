@@ -3,7 +3,7 @@
   "questions": [
     {
       "id": 1,
-      "question": "Mala the Elephant keeps supply sacks\nwith different weights.\n\nThey are all mixed up.\n\nWhy does Biru the Monkey suggest\nsorting them first?",
+      "question": "Mala the Elephant keeps supply sacks with different weights.\nThey are all mixed up.\n\nWhy does Biru the Monkey suggest sorting them first?",
       "options": [
         "So the sacks disappear automatically",
         "So searching and picking becomes easier",
@@ -14,7 +14,7 @@
     },
     {
       "id": 2,
-      "question": "Kaya the Lion compares neighboring sacks\nand swaps them if they are out of order.\n\nWhich sorting method is this?",
+      "question": "Kaya the Lion compares neighboring sacks and swaps them if they are out of order.\n\nWhich sorting method is this?",
       "options": [
         "Selection sort",
         "Insertion sort",
@@ -25,7 +25,7 @@
     },
     {
       "id": 3,
-      "question": "Biru the Monkey tells Kaya to\npick the lightest sack first\nand place it at the front.\n\nWhich sorting method matches this idea?",
+      "question": "Biru the Monkey tells Kaya to\npick the lightest sack first and place it at the front.\n\nWhich sorting method matches this idea?",
       "options": [
         "Bubble sort",
         "Selection sort",
@@ -36,7 +36,7 @@
     },
     {
       "id": 4,
-      "question": "Kaya the Lion watches Neel the Eagle\ninsert feathers one by one\ninto the correct position.\n\nWhich sorting method does this describe?",
+      "question": "Kaya the Lion watches Neel the Eagle insert feathers one by one into the correct position.\n\nWhich sorting method does this describe?",
       "options": [
         "Bubble sort",
         "Selection sort",
@@ -47,7 +47,7 @@
     },
     {
       "id": 5,
-      "question": "Kaya the Lion feels the sorting is slow.\n\nBiru the Monkey suggests\nbreaking the list into smaller parts\nand combining them later.\n\nWhich sort is this?",
+      "question": "Kaya the Lion feels the sorting is slow.\nBiru the Monkey suggests breaking the list into smaller parts and combining them later.\n\nWhich sort is this?",
       "options": [
         "Bubble sort",
         "Selection sort",
@@ -58,7 +58,7 @@
     },
     {
       "id": 6,
-      "question": "Biru the Monkey warns Kaya\nthat merge sort needs\nanother idea to work properly.\n\nWhich idea is required?",
+      "question": "Biru the Monkey warns Kaya that merge sort needs another idea to work properly.\n\nWhich idea is required?",
       "options": [
         "Loops",
         "Recursion",
@@ -69,7 +69,7 @@
     },
     {
       "id": 7,
-      "question": "Kaya the Lion asks which sorting method\nis best for large data sets.\n\nWhich option is usually preferred?",
+      "question": "Kaya the Lion asks which sorting method is best for large data sets.\n\nWhich option is usually preferred?",
       "options": [
         "Bubble sort",
         "Selection sort",
@@ -80,7 +80,7 @@
     },
     {
       "id": 8,
-      "question": "Kaya the Lion writes bubble sort logic.\n\nOne line is missing.\n\nWhich option completes the logic?",
+      "question": "Kaya the Lion writes bubble sort logic.\nOne line is missing.\n\nWhich option completes the logic?",
       "code": "```\nFOR i from 0 to n-1:\n    FOR j from 0 to n-i-2:\n        IF array[j] > array[j+1]:\n            _________\n```",
       "options": [
         "array[j] = array[j+1]",
@@ -92,7 +92,7 @@
     },
     {
       "id": 9,
-      "question": "Kaya the Lion writes selection sort logic.\n\nOne line is missing.\n\nWhich option completes the logic?",
+      "question": "Kaya the Lion writes selection sort logic.\nOne line is missing.\n\nWhich option completes the logic?",
       "code": "```\nminIndex = i\nFOR j from i+1 to n-1:\n    IF array[j] < array[minIndex]:\n        _________\n```",
       "options": [
         "swap array[i] and array[j]",
@@ -104,7 +104,7 @@
     },
     {
       "id": 10,
-      "question": "Kaya the Lion writes merge logic.\n\nOne line is missing.\n\nWhich option correctly completes it?",
+      "question": "Kaya the Lion writes merge logic.\nOne line is missing.\n\nWhich option correctly completes it?",
       "code": "```\nWHILE left < leftSize AND right < rightSize:\n    IF leftArray[left] <= rightArray[right]:\n        result[k] = leftArray[left]\n        left = left + 1\n    ELSE:\n        result[k] = rightArray[right]\n        _________\n    k = k + 1\n```",
       "options": [
         "left = left + 1",

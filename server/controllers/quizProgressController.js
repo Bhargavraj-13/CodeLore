@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import Topic from "../models/Topic.js";
 
 export const updateQuizScore = async (req, res) => {
   try {
@@ -13,14 +14,18 @@ export const updateQuizScore = async (req, res) => {
       return res.status(400).json({ message: "Score must be between 0 and 10" });
     }
 
+    const topic = await Topic.findOne({ contentKey: topicId }).select("_id");
+    if (!topic) {
+      return res.status(404).json({ message: "Topic not found" });
+    }
+
     const user = await User.findById(userId);
 
-    // Find topic entry
+    // FIX: find on subdocument
     const topicEntry = user.topics.find(
       (t) => t.topicId.toString() === topicId
     );
 
-    // Topic must be started first (opened)
     if (!topicEntry) {
       return res.status(400).json({
         message: "Topic not started. Open the topic before submitting quiz score.",
@@ -30,6 +35,11 @@ export const updateQuizScore = async (req, res) => {
     // Best-score-only rule
     if (topicEntry.quizScore === null || score > topicEntry.quizScore) {
       topicEntry.quizScore = score;
+    }
+
+    // Mark completed if both thresholds met
+    if (topicEntry.quizScore >= 8 && topicEntry.codingSolvedCount >= 2) {
+      topicEntry.completed = true;
     }
 
     await user.save();

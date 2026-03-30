@@ -1,1 +1,1 @@
-export { default as JourneysTab } from './JourneysTab';
+export { default } from './JourneySection.jsx';

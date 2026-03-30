@@ -14,7 +14,7 @@ This topic covers:
 - string traversal
 - basic string operations
 
-## Why Strings Exist)
+## Why Strings Exist
 
 Kaya the Lion and Biru the Monkey are helping Neel the Eagle, who delivers messages across the jungle.
 Neel the Eagle says:

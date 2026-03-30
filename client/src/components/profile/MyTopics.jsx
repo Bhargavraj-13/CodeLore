@@ -1,17 +1,19 @@
-// Consists of list of topics started by the user in their profile
+import { useNavigate } from 'react-router-dom';
 
 function MyTopics({ topics }) {
-  if (!topics.length) {
+  const navigate = useNavigate();
+
+  if (!topics || !topics.length) {
     return (
       <p className="text-sm text-slate-400">
-        You haven’t started any topics yet.
+        You haven't started any topics yet.
       </p>
     );
   }
 
   return (
     <div className="space-y-4">
-      {topics.map(topic => (
+      {topics.map((topic) => (
         <div
           key={topic.topicId}
           className="flex items-center justify-between p-5 rounded-xl bg-slate-900/60 border border-white/10"
@@ -24,11 +26,26 @@ function MyTopics({ topics }) {
           </div>
 
           {topic.status === 'COMPLETED' ? (
-            <button className="text-sm font-medium text-teal-300 hover:text-teal-200">
+            <div className="flex gap-3">
+            <button
+                onClick={() => navigate(`/exam/${topic.contentKey}/results`)}
+                className="text-sm font-medium text-slate-400 hover:text-white"
+              >
+                View Results →
+              </button>
+            <button
+              onClick={() => navigate(`/topics/${topic.contentKey}`)}
+              className="text-sm font-medium text-teal-300 hover:text-teal-200"
+            >
               Write Journey →
             </button>
+            </div>
           ) : (
-            <button className="text-sm font-medium hover:text-teal-300">
+            // ✅ Was using topic.title — now uses topicId (_id)
+            <button
+              onClick={() => navigate(`/topics/${topic.contentKey}`)}
+              className="text-sm font-medium hover:text-teal-300"
+            >
               Continue →
             </button>
           )}

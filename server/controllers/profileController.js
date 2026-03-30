@@ -1,9 +1,10 @@
 import User from "../models/User.js";
 
+// Single source of truth for completion logic
 const getTopicStatus = (topic) => {
   if (
     topic.quizScore !== null &&
-    topic.quizScore >= 80 &&
+    topic.quizScore >= 8 &&
     topic.codingSolvedCount >= 2
   ) {
     return "COMPLETED";
@@ -14,15 +15,17 @@ const getTopicStatus = (topic) => {
 export const getProfile = async (req, res) => {
   try {
     const user = await User.findById(req.user._id)
-      .select("username email topics")
-      .populate("topics.topicId", "title difficulty");
+      .select("username email profilePic topics")
+      .populate("topics.topicId", "title difficulty contentKey");
 
+    // FIX: sort by lastAccessedAt on the subdocument (where it actually lives)
     const myTopics = user.topics
-      .sort((a, b) => b.lastAccessedAt - a.lastAccessedAt)
+      .sort((a, b) => new Date(b.lastAccessedAt) - new Date(a.lastAccessedAt))
       .map((t) => ({
         topicId: t.topicId._id,
         title: t.topicId.title,
         difficulty: t.topicId.difficulty,
+        contentKey: t.topicId.contentKey,
         status: getTopicStatus(t),
         quizScore: t.quizScore,
         codingSolvedCount: t.codingSolvedCount,
@@ -47,20 +50,18 @@ export const getProfile = async (req, res) => {
 export const updateProfile = async (req, res) => {
   try {
     const { username, profilePic } = req.body;
-
     const user = await User.findById(req.user._id);
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Update only if provided
     if (username) {
       user.username = username.trim();
     }
 
     if (profilePic !== undefined) {
-      user.profilePic = profilePic; // can be null or string
+      user.profilePic = profilePic;
     }
 
     await user.save();
@@ -79,4 +80,3 @@ export const updateProfile = async (req, res) => {
     res.status(500).json({ message: "Failed to update profile" });
   }
 };
-

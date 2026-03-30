@@ -3,7 +3,7 @@
   "questions": [
     {
       "id": 1,
-      "question": "Tavi the Pigeon places three different chillies\non the ground.\n\nHe wants to eat them in every possible order.\n\nWhy does Biru the Monkey say\nbacktracking is needed here?",
+      "question": "Tavi the Pigeon places three different chillies on the ground.\nHe wants to eat them in every possible order.\n\nWhy does Biru the Monkey say backtracking is needed here?",
       "options": [
         "Because only one order is required",
         "Because all possible choices must be explored",
@@ -14,7 +14,7 @@
     },
     {
       "id": 2,
-      "question": "Kaya the Lion starts forming one order\nof chillies.\n\nAfter finishing it, Biru asks him\nto undo the last choice.\n\nWhy is undoing important in backtracking?",
+      "question": "Kaya the Lion starts forming one order of chillies.\nAfter finishing it, Biru asks him to undo the last choice.\n\nWhy is undoing important in backtracking?",
       "options": [
         "To reduce memory usage",
         "To try a different choice",
@@ -25,10 +25,10 @@
     },
     {
       "id": 3,
-      "question": "Biru the Monkey explains that\nbacktracking depends on recursion.\n\nWhat role does recursion play here?",
+      "question": "Biru the Monkey explains that backtracking depends on recursion.\n\nWhat role does recursion play here?",
       "options": [
         "It removes the need for choices",
-        "It handles breaking the problem\ninto smaller parts",
+        "It handles breaking the problem into smaller parts",
         "It sorts the options automatically",
         "It replaces loops completely"
       ],
@@ -36,7 +36,7 @@
     },
     {
       "id": 4,
-      "question": "Kaya the Lion notices that\na complete chilli order is formed.\n\nWhat should happen at this point?",
+      "question": "Kaya the Lion notices that a complete chilli order is formed.\n\nWhat should happen at this point?",
       "options": [
         "Undo the last choice immediately",
         "Output the current order",
@@ -47,7 +47,7 @@
     },
     {
       "id": 5,
-      "question": "Biru the Monkey warns Kaya that\nforgetting to backtrack causes errors.\n\nWhat kind of problem may occur?",
+      "question": "Biru the Monkey warns Kaya that forgetting to backtrack causes errors.\n\nWhat kind of problem may occur?",
       "options": [
         "Faster execution",
         "Missing valid solutions",
@@ -58,9 +58,9 @@
     },
     {
       "id": 6,
-      "question": "Kaya the Lion compares recursion\nand backtracking.\n\nWhat is the key difference?",
+      "question": "Kaya the Lion compares recursion and backtracking.\n\nWhat is the key difference?",
       "options": [
-        "Recursion breaks problems,\nbacktracking undoes choices",
+        "Recursion breaks problems, backtracking undoes choices",
         "Backtracking avoids recursion",
         "Recursion always uses loops",
         "Backtracking works without base cases"
@@ -69,7 +69,7 @@
     },
     {
       "id": 7,
-      "question": "Tavi the Pigeon asks when\nbacktracking should be used.\n\nWhich situation fits best?",
+      "question": "Tavi the Pigeon asks when backtracking should be used.\n\nWhich situation fits best?",
       "options": [
         "When only one solution is needed",
         "When all possible solutions are required",
@@ -80,7 +80,7 @@
     },
     {
       "id": 8,
-      "question": "Kaya the Lion writes backtracking logic.\n\nOne line is missing.\n\nWhich option completes it?",
+      "question": "Kaya the Lion writes backtracking logic.\nOne line is missing.\nWhich option completes it?",
       "code": "```\nFOR each choice in options:\n    ADD choice to current\n    solve(remaining options)\n    _________\n```",
       "options": [
         "BREAK",
@@ -92,7 +92,7 @@
     },
     {
       "id": 9,
-      "question": "Kaya the Lion reaches a point\nwhere no options remain.\n\nWhat does this indicate?",
+      "question": "Kaya the Lion reaches a point where no options remain.\n\nWhat does this indicate?",
       "code": "```\nIF remaining is empty:\n    _________\n```",
       "options": [
         "CALL solve again",
@@ -104,7 +104,7 @@
     },
     {
       "id": 10,
-      "question": "Biru the Monkey reviews the logic.\n\nWhich line represents\nthe backtracking step?",
+      "question": "Biru the Monkey reviews the logic.\n\nWhich line represents the backtracking step?",
       "code": "```\n_________\n```",
       "options": [
         "ADD choice to current",
@@ -116,5 +116,3 @@
     }
   ]
 }
-
-

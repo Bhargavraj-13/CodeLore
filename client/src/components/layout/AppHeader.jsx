@@ -1,9 +1,7 @@
-// Component for the header section of the application
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from './Logo.jsx';
-import logoutIcon from '../../assets/images/Logout.png';
+import logoutIcon from '../../assets/images/LogOut.png';
 import menuIcon from '../../assets/images/Menu.png';
 import homeIcon from '../../assets/images/Home.png';
 import profileIcon from '../../assets/images/Profile.png';

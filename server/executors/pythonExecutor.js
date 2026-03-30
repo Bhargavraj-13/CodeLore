@@ -1,71 +1,118 @@
-import { exec } from "child_process";
+import { spawn } from "child_process";
 import fs from "fs";
 import path from "path";
 import { v4 as uuidv4 } from "uuid";
 
+function formatPythonError(stderr) {
+  if (!stderr) return null;
+
+  const lines = stderr.trim().split("\n");
+  const errorLine = lines[lines.length - 1];
+  const fileLine = lines.find((l) => l.includes("File"));
+
+  let lineNumber = "unknown";
+  if (fileLine) {
+    const match = fileLine.match(/line (\d+)/);
+    if (match) lineNumber = match[1];
+  }
+
+  return `Runtime Error\n\nLine ${lineNumber}:\n${errorLine}`.trim();
+}
+
 const TMP_DIR = path.join(process.cwd(), "tmp");
 
 if (!fs.existsSync(TMP_DIR)) {
-  fs.mkdirSync(TMP_DIR);
+  fs.mkdirSync(TMP_DIR, { recursive: true });
 }
 
 export const runPython = ({ code, testCases }) => {
   return new Promise((resolve) => {
     const fileId = uuidv4();
-    const filePath = path.join(TMP_DIR, `${fileId}.py`);
+    const fileName = `${fileId}.py`;
+    const filePath = path.join(TMP_DIR, fileName);
 
     fs.writeFileSync(filePath, code);
 
-    const results = [];
-    let passedCount = 0;
+    let passed = 0;
+    const testCaseResults = [];
 
     const runTestCase = (index) => {
       if (index >= testCases.length) {
-        fs.unlinkSync(filePath);
+        // Clean up -> best effort
+        try { fs.unlinkSync(filePath); } catch {}
+
         return resolve({
-          status:
-            passedCount === testCases.length
-              ? "ACCEPTED"
-              : passedCount > 0
-              ? "PARTIAL"
-              : "FAILED",
-          passedCount,
-          totalCount: testCases.length,
-          results,
+          status: passed === testCases.length ? "ACCEPTED" : "WRONG_ANSWER",
+          passed,
+          total: testCases.length,
+          testCaseResults,
         });
       }
 
       const { input, expectedOutput } = testCases[index];
 
-      const process = exec(
-        `python "${filePath}"`,
-        { timeout: 2000 },
-        (error, stdout, stderr) => {
-          const userOutput = stdout.trim();
-          const expected = expectedOutput.trim();
+      const dockerArgs = [
+        "run", "--rm", "-i",
+        "--memory=128m",
+        "--cpus=0.5",
+        "--pids-limit=64",
+        "--network=none",
+        "--read-only",
+        "--tmpfs", "/tmp",
+        "-v", `${TMP_DIR}:/sandbox`,
+        "codelore-sandbox",
+        "python", `/sandbox/${fileName}`,
+      ];
 
-          let passed = false;
+      const child = spawn("docker", dockerArgs);
 
-          if (!error && !stderr && userOutput === expected) {
-            passed = true;
-            passedCount++;
-          }
+      let stdout = "";
+      let stderr = "";
 
-          results.push({
-            testCaseIndex: index,
+      // FIX: track whether timeout fired
+      let timedOut = false;
+
+      const timeout = setTimeout(() => {
+        timedOut = true;
+        child.kill("SIGKILL");
+      }, 2000);
+
+      child.stdout.on("data", (data) => { stdout += data.toString(); });
+      child.stderr.on("data", (data) => { stderr += data.toString(); });
+
+      child.on("close", () => {
+        // FIX: resolve TLE immediately, don't continue test cases
+        if (timedOut) {
+          try { fs.unlinkSync(filePath); } catch {}
+          return resolve({
+            status: "TIME_LIMIT_EXCEEDED",
             passed,
-            input,
-            expectedOutput: expected,
-            userOutput,
-            error: stderr || (error ? error.message : null),
+            total: testCases.length,
+            testCaseResults,
           });
-
-          runTestCase(index + 1);
         }
-      );
 
-      process.stdin.write(input);
-      process.stdin.end();
+        clearTimeout(timeout);
+
+        const userOutput = stdout.trim();
+        const expected = expectedOutput.trim();
+        const isCorrect = !stderr && userOutput === expected;
+
+        if (isCorrect) passed++;
+
+        testCaseResults.push({
+          input,
+          expectedOutput: expected,
+          output: userOutput,
+          status: isCorrect ? "correct" : "wrong",
+          error: formatPythonError(stderr) || null,
+        });
+
+        runTestCase(index + 1);
+      });
+
+      child.stdin.write(input);
+      child.stdin.end();
     };
 
     runTestCase(0);
