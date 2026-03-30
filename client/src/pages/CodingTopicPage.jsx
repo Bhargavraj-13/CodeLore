@@ -3,12 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import api from "../lib/api.jsx";
 import { SubmitResultModal } from "../components/submitResult";
 import EndExamConfirmModal from "../components/coding/EndExamModal";
-
-import {
-  CodingHeader,
-  CodingEditor,
-  CodingSidePanel,
-} from "../components/coding";
+import { CodingHeader, CodingEditor, CodingSidePanel } from "../components/coding";
 
 function CodingTopicPage() {
   const { topicId } = useParams();
@@ -17,9 +12,7 @@ function CodingTopicPage() {
   const [problems, setProblems] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [language, setLanguage] = useState("cpp");
-
   const [codeMap, setCodeMap] = useState({});
-
   const [result, setResult] = useState(null);
   const [isRunning, setIsRunning] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -27,42 +20,29 @@ function CodingTopicPage() {
   const [submitResult, setSubmitResult] = useState(null);
   const [submitAttempt, setSubmitAttempt] = useState(0);
   const [showEndExamConfirm, setShowEndExamConfirm] = useState(false);
+  const [fetchError, setFetchError] = useState(null);
 
-  /* ==============================
-     Load problems
-  ============================== */
   useEffect(() => {
     const fetchProblems = async () => {
-      const res = await api.get(`/api/coding/${topicId}`);
-      setProblems(res.data.problems);
+      try {
+        const res = await api.get(`/api/coding/${topicId}`);
+        setProblems(res.data.problems);
+      } catch (err) {
+        setFetchError("Failed to load problems. Please refresh.");
+      }
     };
-
     fetchProblems();
   }, [topicId]);
 
   const currentProblem = problems[currentIndex];
 
-  /* ==============================
-     Derive editor content
-     (NO side effects)
-  ============================== */
   const currentCode =
     codeMap[currentProblem?.id]?.[language] ??
     currentProblem?.starterCode?.[language] ??
     "";
 
-  /* ==============================
-     Save ONLY user edits
-  ============================== */
   const handleCodeChange = (newCode) => {
-//     console.log("EDITING:", {
-//   problemId: currentProblem.id,
-//   index: currentIndex,
-//   preview: newCode.slice(0, 30),
-// });
-
     if (!currentProblem) return;
-
     setCodeMap((prev) => ({
       ...prev,
       [currentProblem.id]: {
@@ -72,21 +52,13 @@ function CodingTopicPage() {
     }));
   };
 
-  /* ==============================
-     Clear run result on question change
-  ============================== */
   useEffect(() => {
     setResult(null);
   }, [currentIndex]);
 
-  /* ==============================
-     RUN (sample test cases)
-  ============================== */
   const runCode = async () => {
     if (!currentProblem || isRunning) return;
-
     setIsRunning(true);
-
     try {
       const res = await api.post("/api/coding/run", {
         code: currentCode,
@@ -97,61 +69,55 @@ function CodingTopicPage() {
       const exec = res.data;
 
       if (exec.status === "ACCEPTED") {
-        setResult({
-          type: "success",
-          passed: exec.passed,
-          total: exec.total,
-          testCaseResults: exec.testCaseResults,
-        });
-      } else if ( exec.status === "PARTIAL" ||
-                  exec.status === "FAILED" ||
-                  exec.status === "WRONG_ANSWER"
-                ) {
-        setResult({
-          type: "logic",
-          passed: exec.passed,
-          total: exec.total,
-          testCaseResults: exec.testCaseResults,
-        });
+        setResult({ type: "success", passed: exec.passed, total: exec.total, testCaseResults: exec.testCaseResults });
+      } else if (
+        exec.status === "PARTIAL" ||
+        exec.status === "FAILED" ||
+        exec.status === "WRONG_ANSWER"
+      ) {
+        setResult({ type: "logic", passed: exec.passed, total: exec.total, testCaseResults: exec.testCaseResults });
       } else {
+        // FIX: COMPILE_ERROR returns output field, not error field
         setResult({
           type: "syntax",
-          message: exec.error || "Compilation or runtime error",
+          message: exec.output ?? exec.error ?? "Compilation or runtime error",
         });
       }
     } catch (error) {
-      setResult({
-        type: "syntax",
-        message: error.message || "An error occurred",
-      });
+      setResult({ type: "syntax", message: error.message || "An error occurred" });
     } finally {
       setIsRunning(false);
     }
   };
 
-  /* ==============================
-     SUBMIT (hidden test cases)
-  ============================== */
   const onSubmit = async () => {
-  try {
-    const problemId = problems[currentIndex].id;
+    try {
+      setIsSubmitting(true);
+      const problemId = problems[currentIndex].id;
+      const res = await api.post(`/api/coding-submit/${problemId}/submit`, {
+        code: currentCode,
+        language,
+      });
+      setSubmitResult(res.data.result);
+      setSubmitAttempt((c) => c + 1);
+      setIsSubmitModalOpen(true);
+    } catch (error) {
+      console.error("Submit error:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
-    const res = await api.post(
-      `/api/coding-submit/${problemId}/submit`,
-      { code: currentCode, language }
-    );
-
-    // ✅ CONNECT BACKEND → UI
-    setSubmitResult(res.data.result);
-    setSubmitAttempt((c) => c + 1);
-    setIsSubmitModalOpen(true);
-
-  } catch (error) {
-    console.error("Submit error:", error);
-  }
-};
-
+  // FIX: isLast was hardcoded true, now computed correctly
   const isLast = currentIndex === problems.length - 1;
+
+  if (fetchError) {
+    return (
+      <div className="h-screen bg-slate-950 text-red-400 flex items-center justify-center">
+        {fetchError}
+      </div>
+    );
+  }
 
   return (
     <div className="h-screen bg-slate-950 text-white flex flex-col">
@@ -162,14 +128,8 @@ function CodingTopicPage() {
         language={language}
         setLanguage={setLanguage}
         onRun={runCode}
-        onPrev={() =>
-          setCurrentIndex((i) => Math.max(i - 1, 0))
-        }
-        onNext={() =>
-          setCurrentIndex((i) =>
-            Math.min(i + 1, problems.length - 1)
-          )
-        }
+        onPrev={() => setCurrentIndex((i) => Math.max(i - 1, 0))}
+        onNext={() => setCurrentIndex((i) => Math.min(i + 1, problems.length - 1))}
         onSubmit={onSubmit}
         isFirst={currentIndex === 0}
         isLast={isLast}
@@ -178,14 +138,14 @@ function CodingTopicPage() {
         onEndExam={() => setShowEndExamConfirm(true)}
       />
 
-      {/* Main Area */}
       <div className="flex flex-1 overflow-hidden px-6 py-4 gap-6">
+        {/* FIX: pass language prop so Monaco highlights correctly */}
         <CodingEditor
           key={`${currentProblem?.id}-${language}`}
           code={currentCode}
+          language={language}
           onChange={handleCodeChange}
         />
-
         <CodingSidePanel
           sampleTestCases={currentProblem?.sampleTestCases}
           result={result}
@@ -194,46 +154,28 @@ function CodingTopicPage() {
         />
       </div>
 
+      {/* FIX: isLast={isLast} not isLast (which was always true) */}
       <SubmitResultModal
-  isOpen={isSubmitModalOpen}
-  result={submitResult}
-  submitAttempt={submitAttempt}
-  onClose={() => setIsSubmitModalOpen(false)}
-  onNext={() => {
-    setIsSubmitModalOpen(false);
-    setSubmitResult(null);
-    setCurrentIndex((i) => i + 1);
-  }}
-  isLast
-/>
+        isOpen={isSubmitModalOpen}
+        result={submitResult}
+        submitAttempt={submitAttempt}
+        onClose={() => setIsSubmitModalOpen(false)}
+        onNext={() => {
+          setIsSubmitModalOpen(false);
+          setSubmitResult(null);
+          setCurrentIndex((i) => i + 1);
+        }}
+        isLast={isLast}
+      />
 
-    <EndExamConfirmModal
-  isOpen={showEndExamConfirm}
-  onCancel={() => setShowEndExamConfirm(false)}
-  onConfirm={ () => {
-  // async () => {
-  // try {
-    setShowEndExamConfirm(false)
-    navigate(`/coding/${topicId}/results`);
-
-    // const res = await api.post(
-    //   `/api/lesson/${topicId}/finalize`
-    // );
-
-    // navigate(`/coding/${topicId}/results`, {
-    //   state: {
-    //     quizResults: res.data.quizResults,
-    //     codingResult: res.data.codingResult,
-    //   },
-    // });
-  // } catch (err) {
-  //   console.error("Finalize error:", err);
-  // }}
-}}
-
-/>
-
-
+      <EndExamConfirmModal
+        isOpen={showEndExamConfirm}
+        onCancel={() => setShowEndExamConfirm(false)}
+        onConfirm={() => {
+          setShowEndExamConfirm(false);
+          navigate(`/coding/${topicId}/results`);
+        }}
+      />
     </div>
   );
 }

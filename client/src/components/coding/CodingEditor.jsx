@@ -1,11 +1,17 @@
 import Editor from "@monaco-editor/react";
 
-function CodingEditor({ code, onChange }) {
+// Monaco language mapping
+const LANGUAGE_MAP = {
+  cpp: "cpp",
+  python: "python",
+};
+
+function CodingEditor({ code, onChange, language = "cpp" }) {
   return (
     <div className="w-2/3 h-full border border-white/10 rounded-lg overflow-hidden">
       <Editor
         height="100%"
-        language="python"
+        language={LANGUAGE_MAP[language] ?? "cpp"}
         theme="vs-dark"
         value={code}
         onChange={(value) => onChange(value ?? "")}

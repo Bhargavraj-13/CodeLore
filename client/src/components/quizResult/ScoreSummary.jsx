@@ -1,8 +1,8 @@
 // Shows the overall quiz score and correctness summary.
 
 function ScoreSummary({ score, correctCount, totalQuestions }) {
-  const isPerfect = score === 100;
-  const isPass = score >= 80;
+  const isPerfect = score === 10;
+  const isPass = score >= 8;
 
   return (
     <div className="text-center space-y-3">
@@ -26,7 +26,7 @@ function ScoreSummary({ score, correctCount, totalQuestions }) {
 
       {/* Score */}
       <p className="text-4xl font-bold text-teal-400">
-        {score}%
+        {score*10}%
       </p>
 
       {/* Correctness summary */}

@@ -23,9 +23,18 @@ import examResultRoutes from "./routes/examResultRoutes.js";
 
 dotenv.config();
 
+// -> Keep server alive if Docker or any other subprocess crashes
+process.on("uncaughtException", (err) => {
+  console.error(`[uncaughtException] ${err.message}`);
+});
+
+process.on("unhandledRejection", (reason) => {
+  console.error(`[unhandledRejection] ${reason}`);
+});
+
 const app = express();
 
-// -> Middleware 
+// -> Middleware
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
@@ -36,10 +45,10 @@ app.use(cors({
 // -> Database
 connectDB();
 
-// -> Health check
+// -> Health check 
 app.get("/", (req, res) => res.send("CodeLore API is running."));
 
-// -> Routes
+// -> Routes 
 app.use("/api/auth",            authRoute);
 app.use("/api/topics",          topicRoute);
 app.use("/api/topics",          topicContentRoutes);
@@ -55,7 +64,7 @@ app.use("/api/coding",          codingRunRoutes);
 app.use("/api/coding-submit",   codingSubmitRoutes);
 app.use("/api/exam",            examResultRoutes);
 
-// -> Error handling 
+// -> Error handling
 app.use(notFound);
 app.use(errorHandler);
 

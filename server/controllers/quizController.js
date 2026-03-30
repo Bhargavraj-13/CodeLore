@@ -1,21 +1,24 @@
-// server/controllers/quizController.js
-
 import User from "../models/User.js";
+import Topic from "../models/Topic.js";
 import { loadQuizByTopic } from "../utils/quizLoader.js";
 
 export const getQuizByTopic = async (req, res) => {
   try {
     const { topicId } = req.params;
 
-    const quiz = loadQuizByTopic(topicId);
+    // FIX: topicId is MongoDB _id — resolve to contentKey for file lookup
+    const topic = await Topic.findById(topicId).select("contentKey");
+    if (!topic) {
+      return res.status(404).json({ message: "Topic not found" });
+    }
 
-    // Strip correct answers before sending to frontend
+    const quiz = loadQuizByTopic(topic.contentKey);
+
     const safeQuestions = quiz.questions.map((q) => ({
       id: q.id,
       question: q.question,
-      code: q.code ?? null,
       options: q.options,
-      ...(q.code ? { code: q.code } : {}), // include code block if present
+      ...(q.code ? { code: q.code } : {}),
     }));
 
     res.status(200).json({
@@ -46,45 +49,43 @@ export const submitQuiz = async (req, res) => {
       return res.status(400).json({ message: "Answers are required" });
     }
 
-    const quiz = loadQuizByTopic(topicId);
+    // FIX: resolve contentKey for file lookup
+    const topic = await Topic.findById(topicId).select("contentKey");
+    if (!topic) {
+      return res.status(404).json({ message: "Topic not found" });
+    }
+
+    const quiz = loadQuizByTopic(topic.contentKey);
 
     let correctCount = 0;
 
     const results = quiz.questions.map((q) => {
-      const selected = answers[q.id];
       const hasAnswered = Object.prototype.hasOwnProperty.call(answers, q.id);
       const isCorrect = hasAnswered && answers[q.id] === q.correctOption;
-
       if (isCorrect) correctCount++;
 
       return {
         questionId: q.id,
         question: q.question,
         options: q.options,
-        selectedOptionIndex: selected ?? null,
+        selectedOptionIndex: answers[q.id] ?? null,
         correctOption: q.correctOption,
         isCorrect,
       };
     });
 
     const totalQuestions = quiz.questions.length;
-
-    // FIX: define score consistently as correctCount (out of totalQuestions)
     const score = correctCount;
     const percent = Math.round((correctCount / totalQuestions) * 100);
 
-    // FIX: save to per-topic subdocument, not top-level
+    // Save best score to per-topic subdocument
     const user = await User.findById(userId);
-
     const topicEntry = user.topics.find((t) => t.topicId.equals(topicId));
 
     if (topicEntry) {
-      // Best-score-only rule
       if (topicEntry.quizScore === null || score > topicEntry.quizScore) {
         topicEntry.quizScore = score;
       }
-
-      // Mark completed if both thresholds met
       if (topicEntry.quizScore >= 8 && topicEntry.codingSolvedCount >= 2) {
         topicEntry.completed = true;
       }

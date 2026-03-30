@@ -1,4 +1,7 @@
+// server/controllers/codingSubmitController.js
+
 import User from "../models/User.js";
+import Topic from "../models/Topic.js";
 import { loadProblemById } from "../utils/codingProblemLoader.js";
 import { runCode } from "../utils/codeRunner.js";
 
@@ -11,50 +14,45 @@ export const submitCodingSolution = async (req, res) => {
     if (!code || !language) {
       return res.status(400).json({ message: "Code and language are required" });
     }
-
     if (!["cpp", "python"].includes(language)) {
       return res.status(400).json({ message: "Unsupported language" });
     }
-
     if (code.length > 10000) {
       return res.status(400).json({ message: "Code too long" });
     }
 
-    // 1. Load problem
+    // 1. Load problem — problem.topicId is a contentKey string e.g. "arrays"
     const problem = loadProblemById(problemId);
 
     // 2. Execute against hidden test cases
-    const executionResult = await runCode({
-      language,
-      code,
-      testCases: problem.testCases,
-    });
+    const executionResult = await runCode({ language, code, testCases: problem.testCases });
 
-    // 3. FIX: update per-topic subdocument fields
+    // 3. If accepted, update progress
     if (executionResult.status === "ACCEPTED") {
       const user = await User.findById(userId);
 
-      const topicEntry = user.topics.find((t) =>
-        t.topicId.equals(problem.topicId)
-      );
+      // ✅ FIX: problem.topicId is contentKey ("arrays"), not ObjectId
+      // Resolve it to get the real _id for subdocument lookup
+      const topic = await Topic.findOne({ contentKey: problem.topicId }).select("_id");
 
-      if (topicEntry) {
-        // Only count each problem once
-        if (!topicEntry.solvedProblems.includes(problem.id)) {
-          topicEntry.solvedProblems.push(problem.id);
-          topicEntry.codingSolvedCount += 1;
+      if (topic) {
+        const topicEntry = user.topics.find((t) => t.topicId.equals(topic._id));
+
+        if (topicEntry) {
+          if (!topicEntry.solvedProblems.includes(problem.id)) {
+            topicEntry.solvedProblems.push(problem.id);
+            topicEntry.codingSolvedCount += 1;
+          }
+          if (topicEntry.quizScore >= 8 && topicEntry.codingSolvedCount >= 2) {
+            topicEntry.completed = true;
+          }
         }
 
-        // Mark completed if both thresholds met
-        if (topicEntry.quizScore >= 8 && topicEntry.codingSolvedCount >= 2) {
-          topicEntry.completed = true;
-        }
+        await user.save();
       }
-
-      await user.save();
     }
 
-    // 4. Send result back to frontend
+    // 4. Return result
     res.status(200).json({
       success: true,
       problemId,

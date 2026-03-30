@@ -1,5 +1,4 @@
-// server/controllers/codingController.js
-
+import Topic from "../models/Topic.js";
 import { loadProblemsByTopic, loadProblemById } from "../utils/codingProblemLoader.js";
 
 // Get coding problems by topic
@@ -7,7 +6,13 @@ export const getProblemsByTopic = async (req, res) => {
   try {
     const { topicId } = req.params;
 
-    const problems = loadProblemsByTopic(topicId);
+    // FIX: topicId is MongoDB _id — resolve to contentKey for file lookup
+    const topic = await Topic.findById(topicId).select("contentKey");
+    if (!topic) {
+      return res.status(404).json({ message: "Topic not found" });
+    }
+
+    const problems = loadProblemsByTopic(topic.contentKey);
 
     const safeProblems = problems.map((p) => ({
       id: p.id,
@@ -27,7 +32,6 @@ export const getProblemsByTopic = async (req, res) => {
     if (err.message === "TOPIC_NOT_FOUND") {
       return res.status(404).json({ message: "Topic not found" });
     }
-
     console.error("Get Coding Problems Error:", err);
     res.status(500).json({ message: "Failed to load coding problems" });
   }
@@ -50,15 +54,11 @@ export const getProblemById = async (req, res) => {
       previewTestCases: p.testCases.slice(0, 2),
     };
 
-    res.status(200).json({
-      success: true,
-      problem: safeProblem,
-    });
+    res.status(200).json({ success: true, problem: safeProblem });
   } catch (err) {
     if (err.message === "PROBLEM_NOT_FOUND") {
       return res.status(404).json({ message: "Problem not found" });
     }
-
     console.error("Get Coding Problem Error:", err);
     res.status(500).json({ message: "Failed to load problem" });
   }

@@ -1,16 +1,10 @@
-// Consists of list of topics started by the user in their profile
-
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function MyTopics({ topics }) {
   const navigate = useNavigate();
 
-  if (!topics.length) {
-    return (
-      <p className="text-sm text-slate-400">
-        You haven't started any topics yet.
-      </p>
-    );
+  if (!topics || !topics.length) {
+    return <p className="text-sm text-slate-400">You haven't started any topics yet.</p>;
   }
 
   return (
@@ -28,12 +22,17 @@ function MyTopics({ topics }) {
           </div>
 
           {topic.status === 'COMPLETED' ? (
-            <button className="text-sm font-medium text-teal-300 hover:text-teal-200">
-              Write Journey →
+            // ✅ Navigate using topicId (_id)
+            <button
+              onClick={() => navigate(`/coding/${topic.topicId}/results`)}
+              className="text-sm font-medium text-teal-300 hover:text-teal-200"
+            >
+              View Results →
             </button>
           ) : (
+            // ✅ Was using topic.title — now uses topicId (_id)
             <button
-              onClick={() => navigate(`/topics/${topic.title}`)}
+              onClick={() => navigate(`/topics/${topic.topicId}`)}
               className="text-sm font-medium hover:text-teal-300"
             >
               Continue →
@@ -46,4 +45,3 @@ function MyTopics({ topics }) {
 }
 
 export default MyTopics;
-

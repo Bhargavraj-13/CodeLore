@@ -1,13 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { mockResultFail} from "../mock/resultMock";
+import api from "../lib/api.jsx";
 import AppHeader from '../components/layout/AppHeader.jsx';
-
-import {
-  ResultHero,
-  ResultBreakdown,
-  ResultCTA,
-} from "../components/results";
+import { ResultHero, ResultBreakdown, ResultCTA } from "../components/results";
 
 function ResultPage() {
   const { topicId } = useParams();
@@ -20,8 +15,9 @@ function ResultPage() {
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        await new Promise((res) => setTimeout(res, 500)); 
-        setData(mockResultFail);
+        // FIX: call real API instead of mock
+        const res = await api.get(`/api/exam/${topicId}/results`);
+        setData(res.data);
       } catch (err) {
         console.error("Result fetch error:", err);
         setError("Failed to load results");
@@ -35,7 +31,7 @@ function ResultPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-slate-400">
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-400">
         Loading results...
       </div>
     );
@@ -43,7 +39,7 @@ function ResultPage() {
 
   if (error || !data) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center space-y-4">
+      <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center space-y-4">
         <AppHeader />
         <p className="text-red-400">{error || "No results found"}</p>
         <button
@@ -58,16 +54,14 @@ function ResultPage() {
 
   const { quiz, coding, overall } = data;
 
-  const quizPassed = quiz.percent >= 60;
-  const codingPassed = coding.percent >= 60;
+  const quizPassed = quiz.passed;
+  const codingPassed = coding.passed;
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
       <AppHeader />
       <ResultHero overall={overall} />
-
       <ResultBreakdown quiz={quiz} coding={coding} />
-
       <ResultCTA
         overall={overall}
         quizPassed={quizPassed}
