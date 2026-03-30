@@ -1,8 +1,13 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import api from "../lib/api.jsx";
+import { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import api from '../lib/api.jsx';
 import AppHeader from '../components/layout/AppHeader.jsx';
-import { ResultHero, ResultBreakdown, ResultCTA } from "../components/results";
+
+import {
+  ResultHero,
+  ResultBreakdown,
+  ResultCTA,
+} from '../components/results';
 
 function ResultPage() {
   const { topicId } = useParams();
@@ -15,23 +20,21 @@ function ResultPage() {
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        // FIX: call real API instead of mock
         const res = await api.get(`/api/exam/${topicId}/results`);
         setData(res.data);
       } catch (err) {
-        console.error("Result fetch error:", err);
-        setError("Failed to load results");
+        console.error('Result fetch error:', err);
+        setError('Failed to load results. Please try again.');
       } finally {
         setLoading(false);
       }
     };
-
     fetchResults();
   }, [topicId]);
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-400">
+      <div className="min-h-screen bg-slate-950 text-white flex items-center justify-center">
         Loading results...
       </div>
     );
@@ -39,21 +42,24 @@ function ResultPage() {
 
   if (error || !data) {
     return (
-      <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center space-y-4">
+      <div className="min-h-screen bg-slate-950 text-white flex flex-col">
         <AppHeader />
-        <p className="text-red-400">{error || "No results found"}</p>
-        <button
-          onClick={() => navigate(`/coding/${topicId}`)}
-          className="px-4 py-2 bg-slate-700 rounded-md"
-        >
-          Back to Lesson
-        </button>
+        <div className="flex-1 flex flex-col items-center justify-center gap-4">
+          <p className="text-red-400">{error || 'No results found'}</p>
+          <button
+            onClick={() => navigate(`/coding/${topicId}`)}
+            className="px-4 py-2 bg-slate-700 rounded-md hover:bg-slate-600"
+          >
+            Back to Lesson
+          </button>
+        </div>
       </div>
     );
   }
 
   const { quiz, coding, overall } = data;
 
+  // Match backend thresholds: quiz passes at 8/10, coding at 2/3
   const quizPassed = quiz.passed;
   const codingPassed = coding.passed;
 

@@ -25,7 +25,7 @@ function App() {
       <Route path="/quiz/:topicId" element={<ProtectedRoute><QuizPage /></ProtectedRoute>}/>
       <Route path="/quiz/:topicId/result" element={<ProtectedRoute><QuizResultPage /></ProtectedRoute>}/>
       <Route path="/coding/:topicId" element={<ProtectedRoute><CodingTopicPage /></ProtectedRoute>}/>
-      <Route path="/coding/:topicId/results" element={<ProtectedRoute><ResultPage /></ProtectedRoute>}/>
+      <Route path="/exam/:topicId/results" element={<ProtectedRoute><ResultPage /></ProtectedRoute>}/>
     </Routes>
   );
 }

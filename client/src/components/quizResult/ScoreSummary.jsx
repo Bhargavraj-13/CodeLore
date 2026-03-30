@@ -26,7 +26,7 @@ function ScoreSummary({ score, correctCount, totalQuestions }) {
 
       {/* Score */}
       <p className="text-4xl font-bold text-teal-400">
-        {score*10}%
+        {Math.round((score / totalQuestions) * 100)}%
       </p>
 
       {/* Correctness summary */}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import AppHeader from '../components/layout/AppHeader.jsx';
 import api from '../lib/api.jsx';
 import TopicTabs from '../components/topic/TopicTabs.jsx';
@@ -7,11 +7,13 @@ import TopicContent from '../components/topic/TopicContent.jsx';
 import JourneySection from '../components/journey';
 
 function TopicPage() {
-  const { topicId } = useParams(); // now always _id thanks to TopicCard fix
+  const { topicId } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
+  // Allow incoming navigation state to pre-select a tab (e.g. from ResultCTA)
+  const [activeTab, setActiveTab] = useState(location.state?.tab || 'content');
   const [content, setContent] = useState('');
-  const [activeTab, setActiveTab] = useState('content');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 

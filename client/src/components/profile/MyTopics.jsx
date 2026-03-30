@@ -4,12 +4,16 @@ function MyTopics({ topics }) {
   const navigate = useNavigate();
 
   if (!topics || !topics.length) {
-    return <p className="text-sm text-slate-400">You haven't started any topics yet.</p>;
+    return (
+      <p className="text-sm text-slate-400">
+        You haven't started any topics yet.
+      </p>
+    );
   }
 
   return (
     <div className="space-y-4">
-      {topics.map(topic => (
+      {topics.map((topic) => (
         <div
           key={topic.topicId}
           className="flex items-center justify-between p-5 rounded-xl bg-slate-900/60 border border-white/10"
@@ -22,17 +26,24 @@ function MyTopics({ topics }) {
           </div>
 
           {topic.status === 'COMPLETED' ? (
-            // ✅ Navigate using topicId (_id)
+            <div className="flex gap-3">
             <button
-              onClick={() => navigate(`/coding/${topic.topicId}/results`)}
+                onClick={() => navigate(`/exam/${topic.contentKey}/results`)}
+                className="text-sm font-medium text-slate-400 hover:text-white"
+              >
+                View Results →
+              </button>
+            <button
+              onClick={() => navigate(`/topics/${topic.contentKey}`)}
               className="text-sm font-medium text-teal-300 hover:text-teal-200"
             >
-              View Results →
+              Write Journey →
             </button>
+            </div>
           ) : (
             // ✅ Was using topic.title — now uses topicId (_id)
             <button
-              onClick={() => navigate(`/topics/${topic.topicId}`)}
+              onClick={() => navigate(`/topics/${topic.contentKey}`)}
               className="text-sm font-medium hover:text-teal-300"
             >
               Continue →

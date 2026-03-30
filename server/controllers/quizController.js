@@ -7,7 +7,7 @@ export const getQuizByTopic = async (req, res) => {
     const { topicId } = req.params;
 
     // FIX: topicId is MongoDB _id — resolve to contentKey for file lookup
-    const topic = await Topic.findById(topicId).select("contentKey");
+    const topic = await Topic.findOne({ contentKey: topicId }).select("contentKey _id");
     if (!topic) {
       return res.status(404).json({ message: "Topic not found" });
     }
@@ -50,7 +50,7 @@ export const submitQuiz = async (req, res) => {
     }
 
     // FIX: resolve contentKey for file lookup
-    const topic = await Topic.findById(topicId).select("contentKey");
+    const topic = await Topic.findOne({ contentKey: topicId }).select("contentKey _id");
     if (!topic) {
       return res.status(404).json({ message: "Topic not found" });
     }
@@ -80,8 +80,7 @@ export const submitQuiz = async (req, res) => {
 
     // Save best score to per-topic subdocument
     const user = await User.findById(userId);
-    const topicEntry = user.topics.find((t) => t.topicId.equals(topicId));
-
+    const topicEntry = user.topics.find((t) => t.topicId.equals(topic._id));
     if (topicEntry) {
       if (topicEntry.quizScore === null || score > topicEntry.quizScore) {
         topicEntry.quizScore = score;

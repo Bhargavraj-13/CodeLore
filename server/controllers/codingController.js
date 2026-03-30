@@ -7,7 +7,7 @@ export const getProblemsByTopic = async (req, res) => {
     const { topicId } = req.params;
 
     // FIX: topicId is MongoDB _id — resolve to contentKey for file lookup
-    const topic = await Topic.findById(topicId).select("contentKey");
+    const topic = await Topic.findOne({ contentKey: topicId }).select("contentKey");
     if (!topic) {
       return res.status(404).json({ message: "Topic not found" });
     }

@@ -9,10 +9,11 @@ const CODING_PASS_THRESHOLD = 2;
 export const getExamResults = async (req, res) => {
   try {
     const { topicId } = req.params;
+    console.log("getExamResults called with:", topicId);
     const userId = req.user._id;
 
-    // ✅ FIX: topicId is always MongoDB _id — use findById
-    const topic = await Topic.findById(topicId).select("title contentKey _id");
+    const topic = await Topic.findOne({ contentKey: topicId }).select("title contentKey _id"); // ✅
+     console.log("Resolved topic:", topic);
     if (!topic) {
       return res.status(404).json({ message: "Topic not found" });
     }

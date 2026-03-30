@@ -34,12 +34,10 @@ function ResultBreakdown({ quiz, coding }) {
       <ResultCard
         title="Quiz Score"
         {...quiz}
-        passed={quiz.percent >= 60}
       />
       <ResultCard
         title="Coding Score"
         {...coding}
-        passed={coding.percent >= 60}
       />
     </div>
   );
