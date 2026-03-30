@@ -12,9 +12,10 @@ export const getExamResults = async (req, res) => {
     const userId = req.user._id;
 
     // 1. Resolve the topic -> need contentKey for frontend routing
-    const topic = await Topic.findById(topicId).select("title contentKey");
+    // With this:
+    const topic = await Topic.findOne({ contentKey: topicId }).select("title contentKey _id");
     if (!topic) {
-      return res.status(404).json({ message: "Topic not found" });
+        return res.status(404).json({ message: "Topic not found" });
     }
 
     // 2. Load totals from source files
@@ -38,7 +39,7 @@ export const getExamResults = async (req, res) => {
     // 3. Load user's saved progress for this topic
     const user = await User.findById(userId).select("topics");
 
-    const topicEntry = user.topics.find((t) => t.topicId.equals(topicId));
+    const topicEntry = user.topics.find((t) => t.topicId.equals(topic._id));
 
     // If they haven't started the topic yet, return zeroed result
     const quizScore = topicEntry?.quizScore ?? 0;
@@ -59,7 +60,7 @@ export const getExamResults = async (req, res) => {
     // 6. Respond
     res.status(200).json({
       success: true,
-      topicId,
+      topicId: topic._id,
       contentKey: topic.contentKey,
       topicTitle: topic.title,
       quiz: {

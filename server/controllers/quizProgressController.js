@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import Topic from "../models/Topic.js";
 
 export const updateQuizScore = async (req, res) => {
   try {
@@ -11,6 +12,11 @@ export const updateQuizScore = async (req, res) => {
 
     if (score < 0 || score > 10) {
       return res.status(400).json({ message: "Score must be between 0 and 10" });
+    }
+
+    const topic = await Topic.findOne({ contentKey: topicId }).select("_id");
+    if (!topic) {
+      return res.status(404).json({ message: "Topic not found" });
     }
 
     const user = await User.findById(userId);
