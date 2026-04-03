@@ -1,7 +1,11 @@
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 
-const CODING_ROOT = path.join(process.cwd(), "..", "coding");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const CODING_ROOT = path.resolve(__dirname, "../../coding");
 
 export const loadProblemsByTopic = (topicId) => {
   const topicPath = path.join(CODING_ROOT, topicId);
