@@ -73,7 +73,7 @@ function AuthProvider({ children }) {
 
   // Logout
   const logout = async () => {
-    await api.get("/api/auth/logout");
+    await api.post("/api/auth/logout");
     setUser(null);
   };
 

@@ -23,7 +23,7 @@ export const updateQuizScore = async (req, res) => {
 
     // FIX: find on subdocument
     const topicEntry = user.topics.find(
-      (t) => t.topicId.toString() === topicId
+      (t) => t.topicId.toString() === topic._id.toString()
     );
 
     if (!topicEntry) {

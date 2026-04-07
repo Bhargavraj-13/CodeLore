@@ -1,5 +1,6 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import AppHeader from '../components/layout/AppHeader.jsx';
+import api from "../lib/api.jsx";
 import {
   ResultHeader,
   ScoreSummary,
@@ -23,10 +24,10 @@ function QuizResultPage() {
     );
   }
 
-  const { score, correctCount, totalQuestions, results } = state;
+  const { score, percent, correctCount, totalQuestions, results } = state;
 
   const handlePrimaryAction = async () => {
-  if (score >= PASS_THRESHOLD) {
+  if (percent >= PASS_THRESHOLD) {
     try {
       await api.post('/api/quiz-progress/score', {
         topicId,          // contentKey from useParams()
@@ -41,7 +42,7 @@ function QuizResultPage() {
   }
 };
 
-  const primaryActionLabel = score >= PASS_THRESHOLD ? 'Start Coding' : 'Retry Quiz';
+  const primaryActionLabel = percent >= PASS_THRESHOLD ? 'Start Coding' : 'Retry Quiz';
 
   return (
     <div className="min-h-screen bg-slate-950 text-white flex flex-col">
