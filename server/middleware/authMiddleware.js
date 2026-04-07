@@ -23,8 +23,15 @@ export const protect = async (req, res, next) => {
     // 3️⃣ Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // 4️⃣ Attach user to request
-    req.user = await User.findById(decoded.id).select("-password");
+    // 4️⃣ Fetch user
+    const user = await User.findById(decoded.id).select("-password");
+
+    // ✅ 5️⃣ Check if user still exists
+    if (!user) {
+      return res.status(401).json({ message: "User no longer exists" });
+    }
+
+    req.user = user;
 
     next();
   } catch (error) {
